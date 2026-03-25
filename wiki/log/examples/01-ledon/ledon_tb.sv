@@ -14,7 +14,7 @@ module ledon_tb;
     //-- Proceso de simulacion
     initial begin
         //-- Generacion del volcado de ondas
-        $dumpfile("ledon_sim.vcd");
+        $dumpfile("ledon_sim.fst");
         $dumpvars(0, ledon_tb);
 
         //-- Indicar comienzo simmulacion

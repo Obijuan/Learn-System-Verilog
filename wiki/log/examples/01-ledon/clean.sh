@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-rm *.vcd *.out
+rm -f *.vcd *.out *.fst
+rm -f -r obj_dir
+
+
