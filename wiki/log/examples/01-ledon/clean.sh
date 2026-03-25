@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rm *.vcd ledon
+rm *.vcd *.out
