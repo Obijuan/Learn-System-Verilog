@@ -1,4 +1,4 @@
-`timescale 1ms / 1us  // Unidad de tiempo: 1ms, Precisión: 1us
+//`timescale 1ms / 1us  // Unidad de tiempo: 1ms, Precisión: 1us
 //-- ledon: Ejemplo hola mundo
 //-- Encender el LED0
 module ledon_tb;
@@ -15,7 +15,7 @@ module ledon_tb;
     initial begin
         //-- Generacion del volcado de ondas
         $dumpfile("ledon_sim.fst");
-        $dumpvars(0, ledon_tb);
+        $dumpvars;
 
         //-- Indicar comienzo simmulacion
         $display("Inicio: %t", $time);
