@@ -8,7 +8,7 @@ module ledon_tb;
 
     //-- Instanciar modulo
     ledon UUT (
-        .led0(led)
+        .LED0(led)
     );
 
     //-- Proceso de simulacion

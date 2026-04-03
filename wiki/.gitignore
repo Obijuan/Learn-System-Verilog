@@ -1,3 +1,4 @@
 *.vcd
 *.out 
 obj_dir/
+_build/

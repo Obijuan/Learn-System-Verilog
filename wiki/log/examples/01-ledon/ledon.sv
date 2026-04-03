@@ -2,9 +2,9 @@
 //-- Encender el LED0
 
 module ledon(
-    output logic led0
+    output logic LED0
 );
 
-assign led0 = 1;
+assign LED0 = 1;
 
 endmodule
