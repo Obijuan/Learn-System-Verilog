@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Sun Apr  5 08:36:57 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/02-leds-port/_build/default/leds_port_tb.vcd"
+[dumpfile_mtime] "Sun Apr  5 08:33:56 2026"
+[dumpfile_size] 40034
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/02-leds-port/leds_port_tb.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-17.576210 53000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TB.
+[sst_width] 297
+[signals_width] 154
+[sst_expanded] 1
+[sst_vpaned_height] 158
+@28
+TB.UUT.clk
+TB.UUT.rst
+@22
+TB.UUT.data_in[7:0]
+@28
+TB.UUT.wen
+@23
+TB.UUT.led[7:0]
+[pattern_trace] 1
+[pattern_trace] 0
