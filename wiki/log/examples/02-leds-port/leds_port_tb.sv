@@ -45,7 +45,7 @@ leds_port UUT(
 //-- Proceso de simulacion
 initial begin
     //-- Generacion del volcado de ondas
-    //$_dumpfile("sim.fst");
+    $dumpfile("sim.fst");
     $dumpvars;
 
     //-- Indicar comienzo simmulacion
