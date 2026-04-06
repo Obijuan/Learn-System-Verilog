@@ -1,0 +1,27 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Mon Apr  6 18:49:43 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/04-simple-bus2/sim.fst"
+[dumpfile_mtime] "Mon Apr  6 18:48:44 2026"
+[dumpfile_size] 638
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/04-simple-bus2/sim.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-2.841417 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.TB.
+[sst_width] 278
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 157
+@28
+TOP.TB.clk
+@22
+TOP.TB.led[7:0]
+TOP.TB.mi_bus.data[7:0]
+@29
+TOP.TB.mi_bus.valid
+[pattern_trace] 1
+[pattern_trace] 0
