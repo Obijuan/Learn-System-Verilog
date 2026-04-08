@@ -26,12 +26,12 @@ module wishbone_interconnect #(
     logic [1:0] select;
     logic invalid_address;
 
-    //-- slave = 0
+    //-- slave = 1
     assign select[1] = master.cyc &&
                        master.adr >= SLAVE_ADDRESS[31:0] &&
                        master.adr < SLAVE_ADDRESS[31:0] + SLAVE_SIZE[31:0];
 
-    //-- slave = 1
+    //-- slave = 0
     assign select[0] = master.cyc &&
                        master.adr >= SLAVE_ADDRESS[63:32] &&
                        master.adr <  SLAVE_ADDRESS[63:32] + SLAVE_SIZE[63:32];
@@ -75,24 +75,19 @@ module wishbone_interconnect #(
     assign masked_err[0] = select[0] && slaves[0].err;
 
 
-    for (genvar slave = 1; slave < 2; slave++) begin : gen_1
-        assign masked_dat_miso[slave] = 
-                 select[slave] ? slaves[slave].dat_miso : 0;
-        assign masked_ack[slave] = select[slave] && slaves[slave].ack;
-        assign masked_err[slave] = select[slave] && slaves[slave].err;
-    end
+    //-- slave = 1
+    assign masked_dat_miso[1] = 
+                 select[1] ? slaves[1].dat_miso : 0;
+    assign masked_ack[1] = select[1] && slaves[1].ack;
+    assign masked_err[1] = select[1] && slaves[1].err;
 
 
 
 
-    // Signals to master
+    //------------ Signals to master
     integer slave_i;
     always_comb begin
-        dat_miso = 0;
-
-        for (slave_i = 0; slave_i < 2; slave_i++) begin
-            dat_miso |= masked_dat_miso[slave_i];
-        end
+        dat_miso = masked_dat_miso[0] | masked_dat_miso[1];
     end
 
     assign ack = |masked_ack;
