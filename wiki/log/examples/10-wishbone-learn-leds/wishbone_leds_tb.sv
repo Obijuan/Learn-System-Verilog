@@ -33,7 +33,8 @@ wishbone_interface mem_bus();
 //------------- PERIFERICOS
 
 //-- Dos puertos de leds de 8 bits
-wishbone_interface mem_bus_slaves[2]();
+wishbone_interface mem_bus_slaves0();
+wishbone_interface mem_bus_slaves1();
 
 localparam bit [31:0] LEDS0_START = 32'h0008_0000;
 localparam bit [31:0] LEDS1_START = 32'h0008_0001;
@@ -48,8 +49,8 @@ wishbone_interconnect2 #(
         .clk(clk),
         .rst(rst),
         .master(mem_bus),
-        .slaves0(mem_bus_slaves[0]),
-        .slaves1(mem_bus_slaves[1])
+        .slaves0(mem_bus_slaves0),
+        .slaves1(mem_bus_slaves1)
     );
 
 //-- Instanciar los perifericos de LEDs
@@ -66,7 +67,7 @@ wishbone_leds #(
 
     .leds(leds0),
 
-    .wishbone(mem_bus_slaves[0])
+    .wishbone(mem_bus_slaves0)
 );
 
 //-- Instanciar modulo de LEDs
@@ -79,7 +80,7 @@ wishbone_leds #(
 
     .leds(leds1),
 
-    .wishbone(mem_bus_slaves[1])
+    .wishbone(mem_bus_slaves1)
 );
 
 //-- Proceso de simulacion
