@@ -7,7 +7,7 @@
 
 
 
-module wishbone_interconnect #(
+module wishbone_interconnect2 #(
     parameter bit [63:0] SLAVE_ADDRESS,
     parameter bit [63:0] SLAVE_SIZE
 ) (
@@ -15,7 +15,8 @@ module wishbone_interconnect #(
     input logic rst,
 
     wishbone_interface.slave master,
-    wishbone_interface.master slaves [2]
+    wishbone_interface.master slaves0,
+    wishbone_interface.master slaves1
 );
     // Signals to master
     logic [31:0] dat_miso;
@@ -23,20 +24,23 @@ module wishbone_interconnect #(
 
     //--------------- Address decoding
     //-- Esclavo actual esta seleccionado
-    logic [1:0] select;
+    //logic [1:0] select;
+    logic select1;
+    logic select0;
     logic invalid_address;
 
     //-- slave = 1
-    assign select[1] = master.cyc &&
+    assign select1 = master.cyc &&
                        master.adr >= SLAVE_ADDRESS[31:0] &&
                        master.adr < SLAVE_ADDRESS[31:0] + SLAVE_SIZE[31:0];
 
     //-- slave = 0
-    assign select[0] = master.cyc &&
+    assign select0 = master.cyc &&
                        master.adr >= SLAVE_ADDRESS[63:32] &&
                        master.adr <  SLAVE_ADDRESS[63:32] + SLAVE_SIZE[63:32];
 
-    assign invalid_address = master.cyc && master.stb && select == 0;
+    assign invalid_address = master.cyc && master.stb && 
+                            (select1 == 0) && (select0 == 0);
 
     // Bus monitor (timeout)
     logic [7:0] count;
@@ -64,31 +68,36 @@ module wishbone_interconnect #(
 
 
     //------------- Signals from slave
-    logic [1:0] masked_ack, masked_err;
-    logic [1:0] [31:0] masked_dat_miso;
+    //logic [1:0] masked_ack, masked_err;
+    logic [31:0] masked_dat_miso0;
+    logic [31:0] masked_dat_miso1;
+    logic masked_ack0;
+    logic masked_ack1;
+    logic masked_err0;
+    logic masked_err1;
 
 
     //-- slave = 0
-    assign masked_dat_miso[0] = 
-                 select[0] ? slaves[0].dat_miso : 0;
-    assign masked_ack[0] = select[0] && slaves[0].ack;
-    assign masked_err[0] = select[0] && slaves[0].err;
+    assign masked_dat_miso0 = 
+                 select0 ? slaves0.dat_miso : 0;
+    assign masked_ack0 = select0 && slaves0.ack;
+    assign masked_err0 = select0 && slaves0.err;
 
 
     //-- slave = 1
-    assign masked_dat_miso[1] = 
-                 select[1] ? slaves[1].dat_miso : 0;
-    assign masked_ack[1] = select[1] && slaves[1].ack;
-    assign masked_err[1] = select[1] && slaves[1].err;
+    assign masked_dat_miso1 = 
+                 select1 ? slaves1.dat_miso : 0;
+    assign masked_ack1 = select1 && slaves1.ack;
+    assign masked_err1 = select1 && slaves1.err;
 
 
 
 
     //------------ Signals to master
-    assign dat_miso = masked_dat_miso[0] | masked_dat_miso[1];
+    assign dat_miso = masked_dat_miso0 | masked_dat_miso1;
 
-    assign ack = |masked_ack;
-    assign err = |masked_err || invalid_address || timeout;
+    assign ack = masked_ack0 | masked_ack1;
+    assign err = (masked_err0 | masked_err1) || invalid_address || timeout;
 
     assign master.dat_miso = dat_miso;
     assign master.ack = ack;
@@ -100,20 +109,20 @@ module wishbone_interconnect #(
 
     //------- Signals from master to slave
     //-- Puerto 0
-    assign slaves[0].cyc = master.cyc;
-    assign slaves[0].stb = master.stb && select[0];
-    assign slaves[0].adr = master.adr;
-    assign slaves[0].sel = master.sel;
-    assign slaves[0].we = master.we;
-    assign slaves[0].dat_mosi = master.dat_mosi;
+    assign slaves0.cyc = master.cyc;
+    assign slaves0.stb = master.stb && select0;
+    assign slaves0.adr = master.adr;
+    assign slaves0.sel = master.sel;
+    assign slaves0.we = master.we;
+    assign slaves0.dat_mosi = master.dat_mosi;
 
     //-- Puerto 1
-    assign slaves[1].cyc = master.cyc;
-    assign slaves[1].stb = master.stb && select[1];
-    assign slaves[1].adr = master.adr;
-    assign slaves[1].sel = master.sel;
-    assign slaves[1].we = master.we;
-    assign slaves[1].dat_mosi = master.dat_mosi;
+    assign slaves1.cyc = master.cyc;
+    assign slaves1.stb = master.stb && select1;
+    assign slaves1.adr = master.adr;
+    assign slaves1.sel = master.sel;
+    assign slaves1.we = master.we;
+    assign slaves1.dat_mosi = master.dat_mosi;
 
 
 endmodule
