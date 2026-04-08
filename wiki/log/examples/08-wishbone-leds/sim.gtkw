@@ -1,0 +1,40 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Wed Apr  8 08:15:18 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/08-wishbone-leds/sim.fst"
+[dumpfile_mtime] "Wed Apr  8 08:14:20 2026"
+[dumpfile_size] 1485
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/08-wishbone-leds/sim.gtkw"
+[timestart] 0
+[size] 1866 1001
+[pos] -1 -1
+*-16.382055 249996 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.TB.
+[sst_width] 278
+[signals_width] 211
+[sst_expanded] 1
+[sst_vpaned_height] 280
+@28
+TOP.TB.clk
+TOP.TB.rst
+@22
+TOP.TB.leds0[7:0]
+TOP.TB.leds1[7:0]
+@28
+TOP.TB.mem_bus.cyc
+TOP.TB.mem_bus.stb
+@22
+TOP.TB.mem_bus.sel[3:0]
+@28
+TOP.TB.mem_bus.we
+@22
+TOP.TB.mem_bus.adr[31:0]
+TOP.TB.mem_bus.dat_mosi[31:0]
+@28
+TOP.TB.mem_bus.ack
+@29
+TOP.TB.mem_bus.err
+[pattern_trace] 1
+[pattern_trace] 0
