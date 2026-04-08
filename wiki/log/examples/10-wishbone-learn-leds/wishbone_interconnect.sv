@@ -85,10 +85,7 @@ module wishbone_interconnect #(
 
 
     //------------ Signals to master
-    integer slave_i;
-    always_comb begin
-        dat_miso = masked_dat_miso[0] | masked_dat_miso[1];
-    end
+    assign dat_miso = masked_dat_miso[0] | masked_dat_miso[1];
 
     assign ack = |masked_ack;
     assign err = |masked_err || invalid_address || timeout;
