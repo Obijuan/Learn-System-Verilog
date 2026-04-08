@@ -33,13 +33,13 @@ module wishbone_interconnect2 #(
 
     //-- slave = 1
     assign select1 = master.cyc &&
-                       master.adr >= SLAVE0_ADDRESS[31:0] &&
-                       master.adr < SLAVE0_ADDRESS[31:0] + SLAVE_SIZE[31:0];
+                       master.adr >= SLAVE0_ADDRESS &&
+                       master.adr < SLAVE0_ADDRESS + SLAVE_SIZE[31:0];
 
     //-- slave = 0
     assign select0 = master.cyc &&
-                       master.adr >= SLAVE1_ADDRESS[31:0] &&
-                       master.adr <  SLAVE1_ADDRESS[31:0] + SLAVE_SIZE[63:32];
+                       master.adr >= SLAVE1_ADDRESS &&
+                       master.adr <  SLAVE1_ADDRESS + SLAVE_SIZE[63:32];
 
     assign invalid_address = master.cyc && master.stb && 
                             (select1 == 0) && (select0 == 0);
