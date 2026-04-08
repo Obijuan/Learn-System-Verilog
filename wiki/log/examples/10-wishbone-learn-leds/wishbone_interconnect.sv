@@ -60,16 +60,30 @@ module wishbone_interconnect #(
 
     assign timeout = (count == 255);
     
-    // Signals from slave
-    logic [2-1:0] masked_ack, masked_err;
-    logic [2-1:0] [31:0] masked_dat_miso;
 
-    for (genvar slave = 0; slave < 2; slave++) begin : gen_1
+
+
+    //------------- Signals from slave
+    logic [1:0] masked_ack, masked_err;
+    logic [1:0] [31:0] masked_dat_miso;
+
+
+    //-- slave = 0
+    assign masked_dat_miso[0] = 
+                 select[0] ? slaves[0].dat_miso : 0;
+    assign masked_ack[0] = select[0] && slaves[0].ack;
+    assign masked_err[0] = select[0] && slaves[0].err;
+
+
+    for (genvar slave = 1; slave < 2; slave++) begin : gen_1
         assign masked_dat_miso[slave] = 
                  select[slave] ? slaves[slave].dat_miso : 0;
         assign masked_ack[slave] = select[slave] && slaves[slave].ack;
         assign masked_err[slave] = select[slave] && slaves[slave].err;
     end
+
+
+
 
     // Signals to master
     integer slave_i;
