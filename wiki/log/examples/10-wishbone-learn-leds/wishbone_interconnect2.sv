@@ -8,9 +8,13 @@
 
 
 module wishbone_interconnect2 #(
+    //-- Esclavo 0
     parameter bit [31:0] SLAVE0_ADDRESS,
+    parameter bit [31:0] SLAVE0_SIZE,
+
+    //-- Esclavo 1
     parameter bit [31:0] SLAVE1_ADDRESS,
-    parameter bit [63:0] SLAVE_SIZE
+    parameter bit [31:0] SLAVE1_SIZE
 ) (
     input logic clk,
     input logic rst,
@@ -33,12 +37,12 @@ module wishbone_interconnect2 #(
     //-- slave = 1
     assign select1 = master.cyc &&
                        master.adr >= SLAVE0_ADDRESS &&
-                       master.adr < SLAVE0_ADDRESS + SLAVE_SIZE[31:0];
+                       master.adr < SLAVE0_ADDRESS + SLAVE0_SIZE;
 
     //-- slave = 0
     assign select0 = master.cyc &&
                        master.adr >= SLAVE1_ADDRESS &&
-                       master.adr <  SLAVE1_ADDRESS + SLAVE_SIZE[63:32];
+                       master.adr <  SLAVE1_ADDRESS + SLAVE1_SIZE;
 
     assign invalid_address = master.cyc && master.stb && 
                             (select1 == 0) && (select0 == 0);
