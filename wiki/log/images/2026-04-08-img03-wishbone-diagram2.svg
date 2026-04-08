@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160.05273mm"
+   height="57.954754mm"
+   viewBox="0 0 160.05273 57.954754"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (09a318534d, 2026-04-06)"
+   sodipodi:docname="2026-04-08-img03-wishbone-diagram2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.98646753"
+     inkscape:cx="365.44538"
+     inkscape:cy="102.89239"
+     inkscape:window-width="1866"
+     inkscape:window-height="1011"
+     inkscape:window-x="54"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="true" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="back"
+     transform="translate(-8.5828142,-28.678017)">
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
+       id="rect16"
+       width="160.05273"
+       height="57.954754"
+       x="8.5828142"
+       y="28.678017" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-8.5828142,-28.678017)">
+    <g
+       id="g12"
+       transform="translate(0,3.2522138)">
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:3.70417px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:0.79375;stroke-linecap:round"
+         x="36.306637"
+         y="53.293102"
+         id="text1"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           style="fill:#000000;stroke-width:0.79375"
+           x="36.306637"
+           y="53.293102">WISHBONE</tspan><tspan
+           sodipodi:role="line"
+           style="fill:#000000;stroke-width:0.79375"
+           x="36.306637"
+           y="56.997272"
+           id="tspan2">MASTER</tspan><tspan
+           sodipodi:role="line"
+           style="fill:#000000;stroke-width:0.79375"
+           x="36.306637"
+           y="60.701443"
+           id="tspan3">(CPU)</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
+         id="rect3"
+         width="33.536751"
+         height="27.629196"
+         x="19.516037"
+         y="42.212181" />
+    </g>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
+       id="rect4"
+       width="33.536751"
+       height="27.629196"
+       x="83.638184"
+       y="45.464394" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.70417px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:0.79375;stroke-linecap:round"
+       x="100.29173"
+       y="37.946861"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="fill:#000000;stroke-width:0.79375"
+         x="100.29173"
+         y="37.946861">WISHBONE</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;stroke-width:0.79375"
+         x="100.29173"
+         y="41.651031"
+         id="tspan6">INTERCONNECT</tspan></text>
+    <g
+       id="g14"
+       transform="translate(-2.1436958,0.40660994)">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
+         id="rect12"
+         width="20.004545"
+         height="11.218125"
+         x="136.12735"
+         y="45.057785" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:3.70417px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:0.79375;stroke-linecap:round"
+         x="146.04813"
+         y="51.954044"
+         id="text13"><tspan
+           sodipodi:role="line"
+           style="fill:#000000;stroke-width:0.79375"
+           x="146.04813"
+           y="51.954044"
+           id="tspan13">LEDS0</tspan></text>
+    </g>
+    <g
+       id="g15"
+       transform="translate(-2.1436958,3.2522138)">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
+         id="rect14"
+         width="20.004545"
+         height="11.218125"
+         x="136.12735"
+         y="58.623253" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:3.70417px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:0.79375;stroke-linecap:round"
+         x="146.04813"
+         y="65.519508"
+         id="text14"><tspan
+           sodipodi:role="line"
+           style="fill:#000000;stroke-width:0.79375"
+           x="146.04813"
+           y="65.519508"
+           id="tspan14">LEDS1</tspan></text>
+    </g>
+    <path
+       style="fill:#000080;stroke:#000080;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="M 53.052788,54.459237 H 81.494485"
+       id="path17" />
+    <path
+       style="fill:#000080;stroke:#000080;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="m 117.56688,48.860701 h 14.36864"
+       id="path18" />
+    <path
+       style="fill:none;stroke:#000080;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="m 83.520943,54.459237 h 16.885617 v -5.598536 h 14.68972"
+       id="path19"
+       sodipodi:nodetypes="cccc" />
+    <circle
+       style="fill:#000080;stroke:#000080;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
+       id="path20"
+       cx="100.40656"
+       cy="54.459236"
+       r="0.57277864" />
+    <path
+       style="fill:none;stroke:#000080;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="m 100.40656,54.459237 v 10.057617 h 14.68972"
+       id="path21"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:#000080;stroke:#000080;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="m 117.56688,64.516854 h 14.36864"
+       id="path22" />
+    <rect
+       style="fill:none;stroke:#008000;stroke-width:0.529166;stroke-linecap:round;stroke-dasharray:none"
+       id="rect22"
+       width="9.2532635"
+       height="13.193747"
+       x="87.502853"
+       y="57.919975" />
+    <path
+       style="fill:none;stroke:#008000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="m 133.59615,52.117928 h -25.03747 v 8.734717 h -9.76377"
+       id="path23"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000080;stroke:#008000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="M 133.4702,68.249196 H 98.850108"
+       id="path25" />
+    <path
+       style="fill:#000080;stroke:#008000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="M 87.502853,64.51685 H 55.196483"
+       id="path26" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:2.84922px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#008000;stroke-width:0.793753;stroke-linecap:round"
+       x="92.059677"
+       y="65.484161"
+       id="text27"><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:0.793753"
+         x="92.059677"
+         y="65.484161"
+         id="tspan27">MUX</tspan></text>
+  </g>
+</svg>
