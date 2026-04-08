@@ -21,7 +21,8 @@ module wishbone_interconnect #(
     logic [31:0] dat_miso;
     logic ack, err;
 
-    // Address decoding
+    //--------------- Address decoding
+    //-- Esclavo actual esta seleccionado
     logic [1:0] select;
     logic invalid_address;
 
@@ -86,7 +87,12 @@ module wishbone_interconnect #(
     assign master.ack = ack;
     assign master.err = err;
 
+
+
+
+
     //------- Signals from master to slave
+    //-- Puerto 0
     assign slaves[0].cyc = master.cyc;
     assign slaves[0].stb = master.stb && select[0];
     assign slaves[0].adr = master.adr;
@@ -94,7 +100,7 @@ module wishbone_interconnect #(
     assign slaves[0].we = master.we;
     assign slaves[0].dat_mosi = master.dat_mosi;
 
-
+    //-- Puerto 1
     assign slaves[1].cyc = master.cyc;
     assign slaves[1].stb = master.stb && select[1];
     assign slaves[1].adr = master.adr;
