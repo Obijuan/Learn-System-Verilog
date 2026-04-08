@@ -41,6 +41,7 @@ localparam bit [31:0] LEDS_SIZE  = 32'h0000_0001;
 
 wishbone_interconnect2 #(
         .SLAVE0_ADDRESS(LEDS1_START),
+        .SLAVE1_ADDRESS(LEDS0_START),
         .SLAVE_ADDRESS({
             LEDS0_START,
             LEDS1_START

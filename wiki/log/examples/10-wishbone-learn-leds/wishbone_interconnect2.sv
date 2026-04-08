@@ -9,6 +9,7 @@
 
 module wishbone_interconnect2 #(
     parameter bit [31:0] SLAVE0_ADDRESS,
+    parameter bit [31:0] SLAVE1_ADDRESS,
     parameter bit [63:0] SLAVE_ADDRESS,
     parameter bit [63:0] SLAVE_SIZE
 ) (
@@ -37,8 +38,8 @@ module wishbone_interconnect2 #(
 
     //-- slave = 0
     assign select0 = master.cyc &&
-                       master.adr >= SLAVE_ADDRESS[63:32] &&
-                       master.adr <  SLAVE_ADDRESS[63:32] + SLAVE_SIZE[63:32];
+                       master.adr >= SLAVE1_ADDRESS[31:0] &&
+                       master.adr <  SLAVE1_ADDRESS[31:0] + SLAVE_SIZE[63:32];
 
     assign invalid_address = master.cyc && master.stb && 
                             (select1 == 0) && (select0 == 0);
