@@ -26,14 +26,15 @@ module wishbone_interconnect #(
     logic [1:0] select;
     logic invalid_address;
 
-    for (genvar slave = 0; slave < 2; slave++) begin : gen_0
-        assign select[2 - slave - 1] = &{
-            master.cyc,
-            master.adr >= SLAVE_ADDRESS[31 + slave * 32 : slave * 32],
-            master.adr < SLAVE_ADDRESS[31 + slave * 32 : slave * 32] + 
-                         SLAVE_SIZE[31 + slave * 32 : slave * 32]
-        };
-    end
+    //-- slave = 0
+    assign select[1] = master.cyc &&
+                       master.adr >= SLAVE_ADDRESS[31:0] &&
+                       master.adr < SLAVE_ADDRESS[31:0] + SLAVE_SIZE[31:0];
+
+    //-- slave = 1
+    assign select[0] = master.cyc &&
+                       master.adr >= SLAVE_ADDRESS[63:32] &&
+                       master.adr <  SLAVE_ADDRESS[63:32] + SLAVE_SIZE[63:32];
 
     assign invalid_address = master.cyc && master.stb && select == 0;
 
