@@ -1,0 +1,46 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Wed Apr  8 09:57:31 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/09-wishbone-leds-counter/sim.fst"
+[dumpfile_mtime] "Wed Apr  8 09:57:21 2026"
+[dumpfile_size] 1587
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/09-wishbone-leds-counter/sim.gtkw"
+[timestart] 0
+[size] 1866 1001
+[pos] -1 -1
+*-17.838556 499992 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.TB.
+[treeopen] TOP.TB.u_wishbone_leds0.
+[sst_width] 278
+[signals_width] 211
+[sst_expanded] 1
+[sst_vpaned_height] 208
+@28
+TOP.TB.clk
+TOP.TB.rst
+@22
+TOP.TB.leds0[7:0]
+TOP.TB.leds1[7:0]
+@28
+TOP.TB.mem_bus.cyc
+TOP.TB.mem_bus.stb
+@22
+TOP.TB.mem_bus.sel[3:0]
+@28
+TOP.TB.mem_bus.we
+@22
+TOP.TB.mem_bus.adr[31:0]
+TOP.TB.mem_bus.dat_mosi[31:0]
+TOP.TB.mem_bus.dat_miso[31:0]
+@28
+TOP.TB.sw1
+TOP.TB.mem_bus.ack
+TOP.TB.mem_bus.err
+@22
+TOP.TB.u_wishbone_leds0.leds_reg[7:0]
+@23
+TOP.TB.read_led0[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
