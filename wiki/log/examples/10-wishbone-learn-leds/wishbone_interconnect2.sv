@@ -10,7 +10,6 @@
 module wishbone_interconnect2 #(
     parameter bit [31:0] SLAVE0_ADDRESS,
     parameter bit [31:0] SLAVE1_ADDRESS,
-    parameter bit [63:0] SLAVE_ADDRESS,
     parameter bit [63:0] SLAVE_SIZE
 ) (
     input logic clk,
