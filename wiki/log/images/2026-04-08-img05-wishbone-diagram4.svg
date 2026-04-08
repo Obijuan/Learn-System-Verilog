@@ -24,14 +24,14 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="0.78547839"
-     inkscape:cx="340.55679"
-     inkscape:cy="257.80467"
+     inkscape:cx="466.59463"
+     inkscape:cy="368.5652"
      inkscape:window-width="1866"
      inkscape:window-height="1011"
      inkscape:window-x="54"
      inkscape:window-y="32"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showguides="true" />
   <defs
      id="defs1" />
@@ -39,7 +39,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="back"
-     transform="translate(9.1192389,-8.7692404)">
+     transform="translate(9.1192389,-8.7692404)"
+     sodipodi:insensitive="true">
     <rect
        style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none"
        id="rect16"
@@ -1828,5 +1829,37 @@
          x="113.93615"
          y="18.808344"
          id="tspan169">WISHBONE INTERCONNECT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.70417px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:0.79375;stroke-linecap:round"
+       x="142.68918"
+       y="165.41689"
+       id="text170"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#000000;stroke-width:0.79375"
+         x="142.68918"
+         y="165.41689"
+         id="tspan170">Ningún periférico</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#000000;stroke-width:0.79375"
+         x="142.68918"
+         y="169.12105"
+         id="tspan171">seleccionado</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.70417px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';text-align:center;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:0.79375;stroke-linecap:round"
+       x="177.38406"
+       y="109.8377"
+       id="text173"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#000000;stroke-width:0.79375"
+         x="177.38406"
+         y="109.8377"
+         id="tspan172">Contador que se incrementa</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#000000;stroke-width:0.79375"
+         x="177.38406"
+         y="113.54187"
+         id="tspan173">al comienzo de cada operación</tspan></text>
   </g>
 </svg>
