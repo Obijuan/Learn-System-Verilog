@@ -86,13 +86,21 @@ module wishbone_interconnect #(
     assign master.ack = ack;
     assign master.err = err;
 
-    // Signals from master to slave
-    for (genvar slave = 0; slave < 2; slave++) begin : gen_2
-        assign slaves[slave].cyc = master.cyc;
-        assign slaves[slave].stb = master.stb && select[slave];
-        assign slaves[slave].adr = master.adr;
-        assign slaves[slave].sel = master.sel;
-        assign slaves[slave].we = master.we;
-        assign slaves[slave].dat_mosi = master.dat_mosi;
-    end
+    //------- Signals from master to slave
+    assign slaves[0].cyc = master.cyc;
+    assign slaves[0].stb = master.stb && select[0];
+    assign slaves[0].adr = master.adr;
+    assign slaves[0].sel = master.sel;
+    assign slaves[0].we = master.we;
+    assign slaves[0].dat_mosi = master.dat_mosi;
+
+
+    assign slaves[1].cyc = master.cyc;
+    assign slaves[1].stb = master.stb && select[1];
+    assign slaves[1].adr = master.adr;
+    assign slaves[1].sel = master.sel;
+    assign slaves[1].we = master.we;
+    assign slaves[1].dat_mosi = master.dat_mosi;
+
+
 endmodule
