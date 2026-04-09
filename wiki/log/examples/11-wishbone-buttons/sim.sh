@@ -6,6 +6,6 @@
 
 #-- Simulacion con verilator
 verilator --binary  --trace-fst -sv --top-module TB \
-wishbone_interface.sv top_tb.sv wishbone_leds.sv \
+wishbone_interface.sv top2_tb.sv wishbone_leds.sv \
 wishbone_buttons.sv &&
  ./obj_dir/VTB

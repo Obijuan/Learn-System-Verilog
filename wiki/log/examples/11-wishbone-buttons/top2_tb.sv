@@ -1,45 +1,29 @@
-module top(
-    input logic CLK,
+module TB;
 
-    //-- LEDs
-    output logic LED7,
-    output logic LED6,
-    output logic LED5,
-    output logic LED4,
-    output logic LED3,
-    output logic LED2,
-    output logic LED1,
-    output logic LED0,
+//-- Parametros del reloj
+localparam real SYS_CLK_FREQ_MHZ = 12;
+localparam real SYS_CLK_PERIOD_PS = (1 / SYS_CLK_FREQ_MHZ)*1000*1000;
+localparam int  SIM_CLK_PERIOD = int'(SYS_CLK_PERIOD_PS);
 
-    //-- Pulsadores
-    input logic SW1,
-    input logic SW2,
-
-    //-- Aux
-    output logic D7,
-    output logic D6,
-
-    output logic D3,
-    output logic D2,
-    output logic D1,
-    output logic D0
-);
-
-logic [7:0] leds;
-
-assign {LED7, LED6, LED5, LED4, 
-        LED3, LED2, LED1, LED0} = leds;
-
-logic [4:0] buttons;
-assign buttons = {3'b0, SW1, SW2};
-
-//-- Reloj del sistema
+//-- Proceso de reloj
 logic clk;
-assign clk = CLK;
+initial begin
+    clk = 1;
+    forever begin
+        #(SIM_CLK_PERIOD / 2);
+        clk = ~clk;
+    end
+end
 
-//-- Pulsador de reset
+//-- Proceso de reset
 logic rst;
-assign rst = 0;
+initial begin
+    rst = 1;
+    @(posedge clk);
+    #(SIM_CLK_PERIOD/8);
+    rst = 0;
+end
+
 
 //----------- Conexion de perifericos a traves del wishbone
 
@@ -48,7 +32,7 @@ wishbone_interface mem_bus();
 
 //------------- PERIFERICOS
 
-//-- Dos puertos
+//-- Dos puertos de leds de 8 bits
 wishbone_interface mem_bus_slaves[2]();
 
 //-- Puerto de LEDs
@@ -76,6 +60,11 @@ wishbone_interconnect #(
         .slaves(mem_bus_slaves)
     );
 
+//-- Instanciar los perifericos de LEDs
+logic [7:0] leds;
+logic [4:0] buttons;
+
+
 //-- Instanciar modulo de LEDs
 wishbone_leds #(
     .ADDRESS(LEDS_START),
@@ -89,7 +78,7 @@ wishbone_leds #(
     .wishbone(mem_bus_slaves[0])
 );
 
-//-- Instanciar modulo de LEDs
+//-- Instanciar modulo de pulsadores
 wishbone_buttons #(
     .ADDRESS(BUTTONS_START),
     .SIZE(BUTTONS_SIZE)
@@ -101,7 +90,6 @@ wishbone_buttons #(
 
     .wishbone(mem_bus_slaves[1])
 );
-
 
 //-- AUTOMATA para leer pulsadores y mostrar su valor en los LEDs
 logic E0 = 1;  //-- Estado inicial: Lectura botones
@@ -191,10 +179,50 @@ always_comb begin
 end
 
 
-assign {D7, D6} = btn_reg[1:0];
 
-//-- Debug: Mostrar el estado actual en los leds
-assign {D3, D2, D1, D0} = {E0, E1, E2, E3};
+//-- Proceso de simulacion
+initial begin
+    //-- Generacion del volcado de ondas
+    $dumpfile("sim.fst");
+    $dumpvars;
+
+    //-- Indicar comienzo simmulacion
+    $display("Inicio: %t", $time);
+
+    buttons = 5'b00001;
+
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+
+    //-- Valor para los pulsadores;
+    buttons = 5'b00010;
+
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+
+    buttons = 5'b00011;
+
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+
+
+    //-- Indicar fin simulacion
+    $display("Fin: %t", $time);
+    $display("Valor de los pulsadores: %b", buttons);
+    $finish();
+end
 
 endmodule
 
