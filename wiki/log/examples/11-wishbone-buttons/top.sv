@@ -13,16 +13,7 @@ module top(
 
     //-- Pulsadores
     input logic SW1,
-    input logic SW2,
-
-    //-- Aux
-    output logic D7,
-    output logic D6,
-
-    output logic D3,
-    output logic D2,
-    output logic D1,
-    output logic D0
+    input logic SW2
 );
 
 logic [7:0] leds;
@@ -103,24 +94,24 @@ wishbone_buttons #(
 );
 
 
-//-- AUTOMATA para leer pulsadores y mostrar su valor en los LEDs
+//----------------------------------------------------------------------
+//------- AUTOMATA para leer pulsadores y mostrar su valor en los LEDs
+//----------------------------------------------------------------------
+//-- ESTADOS
 logic E0 = 1;  //-- Estado inicial: Lectura botones
-logic E1 = 0;  //-- Lectura completada!
-logic E2 = 0;  //-- Inicio escritura en leds
-logic E3 = 0;  //-- Escritura compeltada!
-logic next;
+logic E1 = 0;  //-- Escritura en LEDs
 
+//-- TRANSICIONES
 logic T01;
 assign T01 = E0 && mem_bus.ack;
 
 logic T12;
-assign T12 = E1;
+assign T12 = E1 && mem_bus.ack;
 
-logic T23;
-assign T23 = E2 && mem_bus.ack;
+//-- Logica para pasar al siguiente estado
+logic next;
+assign next = T01 || T12;
 
-logic T31;
-assign T31 = E3;
 
 //-- Registro intermedio con el valor de los botones
 logic [4:0] btn_reg;
@@ -130,31 +121,16 @@ always_ff @( posedge clk ) begin
         btn_reg <= mem_bus.dat_miso[4:0];
 end
 
-
-
+//-- BIESTABLES DE ESTADO
 always_ff @( posedge clk ) begin 
     if (next) begin
-        E0 <= E3;
+        E0 <= E1;
         E1 <= E0;
-        E2 <= E1;
-        E3 <= E2;
     end
 end
 
 
-
-//-- Calculo del siguiente estado
-always_comb begin
-    if (T01 || T12 || T23 || T31) begin
-        next = 1;
-    end
-    else
-        next = 0;
-    
-end
-
-
-//-- Valor de las señales en el estado actual
+//-- SALIDAS: Valor de las señales en cada estado
 always_comb begin
 
     //-- Valor por defecto de las señales
@@ -165,19 +141,19 @@ always_comb begin
     mem_bus.dat_mosi = 32'h0;
     mem_bus.we = 0;
 
-    //-- E0: Inicio lectura de botones
+    //-- Lectura de botones
     if (E0) begin
         mem_bus.cyc = 1;
         mem_bus.sel = 4'b0001;
         mem_bus.stb = 1;
         mem_bus.adr = BUTTONS_START;
         mem_bus.we = 0;
+        //-- Se leen en la transicion en el 
+        //-- registro btn_reg
     end
+
+    //-- Escritura en LEDs
     else if (E1) begin
-        //-- wait...
-    end
-    else if (E2) begin
-        //-- E2: Escritura en los leds
         mem_bus.cyc = 1;
         mem_bus.sel = 4'b0001;
         mem_bus.stb = 1;
@@ -185,16 +161,8 @@ always_comb begin
         mem_bus.we = 1;
         mem_bus.dat_mosi = {27'b0, btn_reg};
     end
-    else if (E3) begin
-       //-- wait...
-    end
 end
 
-
-assign {D7, D6} = btn_reg[1:0];
-
-//-- Debug: Mostrar el estado actual en los leds
-assign {D3, D2, D1, D0} = {E0, E1, E2, E3};
 
 endmodule
 

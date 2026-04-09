@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Thu Apr  9 15:35:42 2026
+[*] Thu Apr  9 15:54:27 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/11-wishbone-buttons/sim.fst"
-[dumpfile_mtime] "Thu Apr  9 15:35:08 2026"
-[dumpfile_size] 1830
+[dumpfile_mtime] "Thu Apr  9 15:51:48 2026"
+[dumpfile_size] 1768
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/11-wishbone-buttons/sim.gtkw"
 [timestart] 0
 [size] 1866 1001
 [pos] -1 -1
-*-17.780987 916652 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.780987 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.TB.
 [sst_width] 278
 [signals_width] 230
 [sst_expanded] 1
-[sst_vpaned_height] 177
+[sst_vpaned_height] 232
 @28
 TOP.TB.clk
 TOP.TB.rst
@@ -34,19 +34,13 @@ TOP.TB.mem_bus.ack
 TOP.TB.mem_bus.err
 @22
 TOP.TB.leds[7:0]
+TOP.TB.btn_reg[4:0]
 TOP.TB.buttons[4:0]
 @28
 TOP.TB.E0
 TOP.TB.E1
-TOP.TB.E2
-TOP.TB.E3
 TOP.TB.T01
-@29
 TOP.TB.T12
-@28
 TOP.TB.next
-TOP.TB.capture
-@22
-TOP.TB.btn_reg[4:0]
 [pattern_trace] 1
 [pattern_trace] 0
