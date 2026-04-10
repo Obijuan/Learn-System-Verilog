@@ -17,8 +17,24 @@ module top(
 
     //-- Switches
     input logic D0,
-    input logic D1
+    input logic D1,
+
+    //-- SERIAL PORT
+    output logic TX
 );
+
+//-- Parametros del reloj
+localparam real SYS_CLK_FREQ_MHZ = 12;
+localparam real SYS_CLK_PERIOD_PS = (1 / SYS_CLK_FREQ_MHZ)*1000*1000;
+localparam int  SIM_CLK_PERIOD = int'(SYS_CLK_PERIOD_PS);
+localparam real CLK_FREQUENCY_MHZ = SYS_CLK_FREQ_MHZ;
+
+//-- Parametros para la UART
+localparam int BAUD_RATE = 115200;
+localparam int CLKS_PER_BIT =int'(CLK_FREQUENCY_MHZ*1_000_000.0/BAUD_RATE);
+
+
+
 
 logic [7:0] leds;
 
@@ -151,8 +167,6 @@ synchronizer u_sync4 (
     .sync_out(switches[1])
 );
 
-
-
 //----------------------------------------------------------------------
 //------- AUTOMATA para leer pulsadores y mostrar su valor en los LEDs
 //----------------------------------------------------------------------
@@ -246,6 +260,38 @@ always_comb begin
             2'b0, btn_reg[1:0]};
     end
 end
+
+
+//------------ Instanciar el transmisor de la UART
+logic tx_start;
+logic [7:0] tx_byte;
+logic tx_serial_out;
+logic tx_done;
+logic tx_active;
+
+uart_tx #(
+   .CLKS_PER_BIT(CLKS_PER_BIT)
+) u_tx (
+    .clk(clk),
+    .rst(rst),
+
+    // Input signals
+    .tx_start_in(tx_start),
+    .tx_byte_in(tx_byte),
+
+    // Output signals
+    .tx_serial_out(tx_serial_out),
+    .tx_done_out(tx_done),
+    .tx_active_out(tx_active)
+);
+
+
+//-- Pruebas de transmisión
+assign tx_byte = "A";
+assign tx_start = 1;
+
+//-- Drive the serial tx pin
+assign TX = tx_serial_out;
 
 
 endmodule
