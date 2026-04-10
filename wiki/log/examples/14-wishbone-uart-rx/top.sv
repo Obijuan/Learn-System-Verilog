@@ -16,11 +16,23 @@ module top(
     input logic SW2,
 
     //-- Switches
-    input logic D0,
-    input logic D1,
+    input logic D13,
+    input logic D12,
 
     //-- SERIAL PORT
-    output logic TX
+    output logic TX,
+    input  logic RX,
+
+    //-- AUX
+    output logic D7,
+    output logic D6,
+    output logic D5,
+    output logic D4,
+    output logic D3,
+    output logic D2,
+    output logic D1,
+    output logic D0
+
 );
 
 //-- Parametros del reloj
@@ -50,6 +62,8 @@ assign buttons[4:2] = 3'b0;
 logic [7:0] switches;
 assign switches[7:2] = 6'b0;
 
+//-- Cable de recepcion serie
+logic rx_serial_in;
 
 //-- Reloj del sistema
 logic clk;
@@ -157,14 +171,20 @@ synchronizer u_sync2 (
 
 synchronizer u_sync3 (
     .clk(clk),
-    .async_in(D0),
+    .async_in(D13),
     .sync_out(switches[0])
 );
 
 synchronizer u_sync4 (
     .clk(clk),
-    .async_in(D1),
+    .async_in(D12),
     .sync_out(switches[1])
+);
+
+synchronizer u_sync5 (
+    .clk(clk),
+    .async_in(RX),
+    .sync_out(rx_serial_in)
 );
 
 //----------------------------------------------------------------------
@@ -292,6 +312,34 @@ assign tx_start = 1;
 
 //-- Drive the serial tx pin
 assign TX = tx_serial_out;
+
+
+//------------- Instanciar el receptor de la UART
+logic [7:0] rx_byte;
+logic rx_done;
+logic rx_error;
+
+uart_rx #(
+    .CLKS_PER_BIT(CLKS_PER_BIT)
+) u_rx (
+    .clk(clk),
+    .rst(rst),
+
+    // Serial input
+    .rx_serial_in(rx_serial_in),
+
+    // Output signals
+    .rx_byte_out(rx_byte),
+    .rx_done_out(rx_done),
+    .rx_error_out(rx_error)
+);
+
+//-- Capturar el dato recibido y sacarlo por los leds directamente
+always_ff @( posedge(clk) ) begin
+    if (rx_done)
+        {D7, D6, D5, D4, D3, D2, D1, D0} = rx_byte;
+end
+
 
 
 endmodule

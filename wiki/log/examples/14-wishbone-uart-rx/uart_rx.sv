@@ -22,6 +22,10 @@ module uart_rx #(
     // |                                      State Machine                                       |
     // --------------------------------------------------------------------------------------------
 
+    // error reg
+    logic rx_err_reg;
+
+
     logic  [7:0] rx_byte_reg;
     logic [31:0] clk_count;
     logic  [3:0] bit_idx;
@@ -92,9 +96,7 @@ module uart_rx #(
     end
 
     // --------------------------------------------------------------------------------------------
-    // error reg
-    logic rx_err_reg;
-
+    
     always_ff @(posedge clk) begin
         if (rst) begin
             rx_err_reg <= 0;
