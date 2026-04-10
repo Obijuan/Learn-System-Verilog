@@ -22,7 +22,9 @@ assign {LED7, LED6, LED5, LED4,
         LED3, LED2, LED1, LED0} = leds;
 
 logic [4:0] buttons;
-assign buttons = {3'b0, SW1, SW2};
+
+//-- 4-2: empty bottons. Not available in Alhambra-II
+assign buttons[4:2] = 3'b0;
 
 //-- Reloj del sistema
 logic clk;
@@ -92,6 +94,21 @@ wishbone_buttons #(
 
     .wishbone(mem_bus_slaves[1])
 );
+
+
+//-- Instanciar el sincronizador para los pulsadores
+synchronizer u_sync1 (
+    .clk(clk),
+    .async_in(SW1),
+    .sync_out(buttons[0])
+);
+
+synchronizer u_sync2 (
+    .clk(clk),
+    .async_in(SW2),
+    .sync_out(buttons[1])
+);
+
 
 
 //----------------------------------------------------------------------

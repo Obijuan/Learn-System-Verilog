@@ -6,6 +6,7 @@ mkdir -p _build/default
 #-- Sintesis con Yosys
 apio raw -- yosys -m slang -p "read_slang wishbone_interface.sv \
 wishbone_interconnect.sv wishbone_leds.sv wishbone_buttons.sv top.sv \
+synchronizer.sv \
 ; synth_ice40 -top top -json _build/default/hardware.json" -q -DSYNTHESIZE
 
 #-- Place and Route con nextpnr
