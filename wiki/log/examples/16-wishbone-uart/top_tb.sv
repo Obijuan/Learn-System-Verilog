@@ -168,13 +168,256 @@ wishbone_ram #(
     //.port_b(mem_bus_slaves[4])
 );
 
+//----------------------------------------------
+//-- AUTOMATA DE CONTROL
+//----------------------------------------------
+logic E0 = 1;  //-- READ RX_STATUS
+logic E1 = 0;  //-- Check RX_FULL (¿Caracter recibido?)
+logic E2 = 0;  //-- Write leds
+logic E3 = 0;  //-- Transmit
+logic E4 = 0;  //-- READ TX_STATUS
+logic E5 = 0;  //-- Check Tx_EMPTY
+logic E6 = 0;  //-- Read buttons
+logic E7 = 0;  //-- Read switches
+
+
+logic next;
+
+logic E10; //-- cable del estado 1 al 0
+logic E12; //-- cable del estado 1 al 2
+logic E56; //-- Cable del estado 5 al 6
+logic E54; //-- Cable del estado 5 al 4
+
+//-- Evolucion del Estado del automata
+always_ff @( posedge(clk) ) begin
+    if (next) begin
+        E0 <= E10  || E7;
+        E1 <= E0;
+        E2 <= E12; 
+        E3 <= E2;
+        E4 <= E3 || E54;
+        E5 <= E4;
+        E6 <= E56;
+        E7 <= E6;
+    end
+end
+
+//-- Transiciones
+logic T01;
+assign T01 = E0 && mem_bus.ack;
+
+logic T10;
+assign T10 = E1 && (rx_full==0); 
+
+logic T12;
+assign T12 = E1 && (rx_full);
+
+logic T23;
+assign T23 = E2 && mem_bus.ack;
+
+logic T34;
+assign T34 = E3 && mem_bus.ack;
+
+logic T45;
+assign T45 = E4 && mem_bus.ack;
+
+logic T54;
+assign T54 = E5 && (tx_empty==0);
+
+logic T56;
+assign T56 = E5 && (tx_empty);
+
+logic T67;
+assign T67 = E6 && mem_bus.ack;
+
+logic T70;
+assign T70 = E7 && mem_bus.ack;
+
+//-- Pasar al siguiente estado
+assign next = T01 || T10 || T12 || T23  || T34 || T45 ||
+              T54 || T56 || T67 || T70;
+
+//-- Leer el registro de stado del receptor
+logic rx_full;
+logic [7:0] rx_byte;
+always_ff @( posedge(clk) ) begin
+    if (T01) begin
+        rx_full <= mem_bus.dat_miso[18];
+
+        //-- Este valor solo es valido cuando rx_full==1
+        rx_byte <= mem_bus.dat_miso[7:0];
+    end
+end
+
+//-- Leer registro de estado del transmisor
+logic tx_empty;
+always_ff @( posedge(clk) ) begin
+    if (T45) begin
+        tx_empty <= mem_bus.dat_miso[26];
+    end
+end
+
+//-- Leer los pulsadores
+logic [4:0] read_buttons;
+always_ff @( posedge(clk) ) begin
+    if (T67)
+        read_buttons <= mem_bus.dat_miso[4:0];
+end
+
+//-- Leer los switches
+logic [7:0] read_switches;
+always_ff @( posedge(clk) ) begin
+    if (T70)
+        read_switches <= mem_bus.dat_miso[7:0];
+end
+
+//-- Demultiplexor de salida del estado E1
 always_comb begin
-    //-- Lectura de la memoria
-    fetch_bus.cyc = 1;
-    fetch_bus.stb = 1;
+    if (rx_full) begin
+        E12 = E1;
+        E10 = 0;
+    end
+    else begin
+        E12 = 0;
+        E10 = E1;
+    end
+end
+
+//-- Demultiplexor de salida del estado E4
+always_comb begin
+    if (tx_empty) begin
+        E56 = E5;
+        E54 = 0;
+    end 
+    else begin
+        E56 = 0;
+        E54 = E5;
+    end
+end
+
+//--- Generar las señales del estado actual
+always_comb begin
+
+    //-- Señales por defecto
+    mem_bus.cyc = 0;
+    mem_bus.stb = 0;
+    mem_bus.adr = 32'h0;
+    mem_bus.we = 0;
+    mem_bus.sel = 4'b1111;
+    mem_bus.dat_mosi = 32'h0;
+
+    //-- Lectura del registro de estado RX de la uart
+    if (E0) begin
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 0;
+        mem_bus.adr = UART_START;
+    end
+
+    //-- Check RX_FULL
+    else if (E1) begin
+        //-- rx_full esta disponible
+
+    end
+
+    //-- Write Leds
+    else if (E2) begin
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 1;
+        mem_bus.adr = LEDS_START;
+        mem_bus.dat_mosi = {24'b0, rx_byte};
+    end
+
+    //-- Transmit! (eco)
+    else if (E3) begin
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 1;
+        mem_bus.adr = UART_START;
+        mem_bus.dat_mosi = {24'b0, rx_byte};
+    end
+
+    //-- Lectura de TX_EMPTY para saber cuando se ha completado
+    //-- la transmision
+    else if (E4) begin
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 0;
+        mem_bus.adr = UART_START;
+    end
+    else if (E5) begin
+        //-- tx_empy esta disponible
+    end
+
+    //-- Lectura de los pulsadores
+    else if (E6) begin
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 0;
+        mem_bus.adr = BUTTONS_START;
+    end
+
+    //-- Lectura de los switches
+    else if (E7) begin
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 0;
+        mem_bus.adr = SWITCHES_START;
+    end
+end
+
+//--------- AUTOMATA DE ACCESO A FETCH
+
+//-- Estado
+logic EE0 = 1;  //-- Lectura de la memoria
+logic EE1 = 0;  //-- STOP!
+
+logic nnext;
+
+//-- Evolucion del estado
+always_ff @( posedge(clk) ) begin
+    if (nnext) begin
+        EE0 <= 0;
+        EE1 <= EE0;
+    end
+    
+end
+
+//-- Transiciones
+logic TT01;
+assign TT01 = EE0 && fetch_bus.ack;
+
+assign nnext = TT01;
+
+//-- Capturar la lectura de memoria
+logic [31:0] read_mem;
+always_ff @( posedge(clk) ) begin
+    if (TT01)
+        read_mem <= fetch_bus.dat_miso;
+    
+end
+
+
+always_comb begin
+    //-- Valores por defecto
+    fetch_bus.cyc = 0;
+    fetch_bus.stb = 0;
     fetch_bus.we = 0;
-    fetch_bus.sel = 4'b1111;
-    fetch_bus.adr = MEMORY_START;
+    fetch_bus.sel = 4'b0;
+    fetch_bus.adr = 32'b0;
+    fetch_bus.dat_mosi = 32'b0;
+    
+    if (EE0) begin
+        fetch_bus.cyc = 1;
+        fetch_bus.stb = 1;
+        fetch_bus.we = 0;
+        fetch_bus.sel = 4'b1111;
+        fetch_bus.adr = MEMORY_START;
+    end
+    else if (EE1) begin
+        //-- STOP. Dato guardado en un registro
+    end
 end
 
 

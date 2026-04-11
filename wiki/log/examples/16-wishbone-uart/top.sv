@@ -75,15 +75,24 @@ assign rst = 0;
 logic rx_full;
 logic tx_empty;
 
+//-- Reloj para la memoria
+logic clk_mem;
+assign clk_mem = ~clk;
+
 //----------- Conexion de perifericos a traves del wishbone
 
 //-- Bus de acceso a perifericos
+wishbone_interface fetch_bus();
 wishbone_interface mem_bus();
 
 //------------- PERIFERICOS
 
 //-- Buses para los esclavos
 wishbone_interface mem_bus_slaves[4]();
+
+//-- Memoria RAM
+localparam bit [31:0] MEMORY_START = 32'h0001_0000;
+localparam bit [31:0] MEMORY_SIZE  = 32'h0000_2000;
 
 //-- Puerto de LEDs
 localparam bit [31:0] LEDS_START = 32'h0008_0000;
@@ -183,7 +192,16 @@ wishbone_uart #(
     .wishbone(mem_bus_slaves[3])
 );
 
-
+//-- MEMORIA RAM
+wishbone_ram #(
+    .ADDRESS(MEMORY_START),
+    .SIZE(MEMORY_SIZE)
+) ram (
+    .clk(clk_mem),
+    .rst(rst),
+    .port_a(fetch_bus.slave)
+    //.port_b(mem_bus_slaves[4])
+);
 
 
 
@@ -217,11 +235,6 @@ synchronizer u_sync5 (
     .async_in(RX),
     .sync_out(rx_serial_in)
 );
-
-
-
-
-
 
 //----------------------------------------------
 //-- AUTOMATA DE CONTROL
@@ -420,10 +433,30 @@ always_comb begin
     end
 end
 
+
+
+
+
+
+always_comb begin
+    //-- Lectura de la memoria
+    fetch_bus.cyc = 1;
+    fetch_bus.stb = 1;
+    fetch_bus.we = 0;
+    fetch_bus.dat_mosi = 32'h0;
+    fetch_bus.sel = 4'b1111;
+    fetch_bus.adr = MEMORY_START;
+end
+
+
+
+
+
+
 //-- Mostrar DIRECTAMENTE en los LEDs que son del wishbone
 //-- El estado de los botones y switches, como debug
 
-assign {D7, D6, D5, D4} = {read_buttons[1:0], read_switches[1:0]};
+assign {D7, D6, D5, D4, D3, D2, D1, D0} = fetch_bus.dat_miso[7:0];
 
 
 endmodule
