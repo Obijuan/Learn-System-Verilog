@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="164.86423mm"
+   height="71.677864mm"
+   viewBox="0 0 164.86422 71.677861"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (6280b1d633, 2026-04-07)"
+   sodipodi:docname="2026-04-11-img02-cto.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4117024"
+     inkscape:cx="301.40913"
+     inkscape:cy="222.0723"
+     inkscape:window-width="1866"
+     inkscape:window-height="1011"
+     inkscape:window-x="54"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2"
+     showguides="true" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Back"
+     transform="translate(-43.528172,-33.112946)">
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.529166;stroke-dasharray:none"
+       id="rect15"
+       width="164.86423"
+       height="71.677864"
+       x="43.528172"
+       y="33.112946" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.188888;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="rect149"
+       width="161.82256"
+       height="66.812004"
+       x="44.877064"
+       y="35.726151" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-43.528172,-33.112946)">
+    <path
+       id="path6945"
+       style="display:inline;fill:#ffcc00;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 81.37137,60.927116 h 5.48157 l 1.63749,1.827804 -1.63749,1.827778 h -5.48157 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="82.459923"
+       y="63.588406"
+       id="text6949"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="82.459923"
+         y="63.588406"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan6947">Clk</tspan></text>
+    <g
+       id="g6959"
+       transform="matrix(0.25779298,0,0,0.25779298,16.24047,383.88867)"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       style="display:inline">
+      <g
+         id="g6957"
+         transform="translate(0,-1.8948795)">
+        <path
+           id="path6951"
+           style="display:inline;fill:#eeaaff;stroke:#000000;stroke-width:0.79375;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 245.84472,-1174.1908 h 26.04824 l 7.78127,7.0902 -7.78127,7.0901 h -26.04824 z"
+           sodipodi:nodetypes="cccccc"
+           inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="248.21971"
+           y="-1164.3767"
+           id="text6955"
+           inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96"><tspan
+             sodipodi:role="line"
+             x="248.21971"
+             y="-1164.3767"
+             style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.264583"
+             id="tspan6953">Next</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="display:inline;fill:#f2f2f2;stroke:#000000;stroke-width:0.166548;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6961"
+       width="10.281301"
+       height="12.095273"
+       x="92.439018"
+       y="66.345261"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.38375,67.126723 1.56209,1.251069 -1.56209,1.266658"
+       id="path6963"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="92.554558"
+       y="72.976135"
+       id="text6967"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="92.554558"
+         y="72.976135"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan6965">d</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.24814px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.16861"
+       x="95.98439"
+       y="74.822517"
+       id="text6971"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="95.98439"
+         y="74.822517"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#008000;stroke-width:0.16861"
+         id="tspan6969">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="92.663383"
+       y="77.336632"
+       id="text6975"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="92.663383"
+         y="77.336632"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan6973">load</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.84316px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0990051"
+       x="95.075233"
+       y="63.400349"
+       id="text6971-3"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="95.075233"
+         y="63.400349"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#000000;stroke-width:0.0990051"
+         id="tspan6969-6">E0</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-dasharray:none;stroke-opacity:1"
+       d="m 88.49043,62.75492 h 1.5511 l -10e-4,5.515692 v 0 h 2.31522"
+       id="path6979" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.140502;stroke-opacity:1"
+       d="m 92.35574,76.947039 h -1.62087 l 0.001,5.602808 v 0 h -2.41935"
+       id="path6981" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-opacity:1"
+       d="m 102.72032,72.392905 h 25.21387"
+       id="path6987"
+       sodipodi:nodetypes="cc" />
+    <path
+       id="path4"
+       style="display:inline;fill:#0066ff;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 113.61738,60.927121 h -5.0008 l -2.00596,1.827804 2.00596,1.827778 h 5.0008 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="109.23765"
+       y="63.701649"
+       id="text4-6"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="109.23765"
+         y="63.701649"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.0682076"
+         id="tspan4-2">E0</tspan></text>
+    <path
+       style="display:inline;fill:#000000;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 104.74685,72.392905 v -9.63798"
+       id="path7-6" />
+    <path
+       style="display:inline;fill:#000000;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 104.74685,62.754925 h 1.86377"
+       id="path8-1" />
+    <circle
+       style="display:inline;fill:#000000;stroke:none;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="path9"
+       cx="104.74683"
+       cy="72.392906"
+       r="0.39215526" />
+    <path
+       id="path29"
+       style="display:inline;fill:#ffcc00;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 116.86655,60.927114 h 5.48157 l 1.63749,1.827804 -1.63749,1.827778 h -5.48157 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="117.9551"
+       y="63.588406"
+       id="text29"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="117.9551"
+         y="63.588406"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan29">Clk</tspan></text>
+    <g
+       id="g31"
+       transform="matrix(0.25779298,0,0,0.25779298,51.735659,383.88867)"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       style="display:inline">
+      <g
+         id="g30"
+         transform="translate(0,-1.8948795)">
+        <path
+           id="path30"
+           style="display:inline;fill:#eeaaff;stroke:#000000;stroke-width:0.79375;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 245.84472,-1174.1908 h 26.04824 l 7.78127,7.0902 -7.78127,7.0901 h -26.04824 z"
+           sodipodi:nodetypes="cccccc"
+           inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="248.21971"
+           y="-1164.3767"
+           id="text30"
+           inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96"><tspan
+             sodipodi:role="line"
+             x="248.21971"
+             y="-1164.3767"
+             style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.264583"
+             id="tspan30">Next</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="display:inline;fill:#f2f2f2;stroke:#000000;stroke-width:0.166548;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect32"
+       width="10.281301"
+       height="12.095273"
+       x="127.9342"
+       y="66.345261"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 127.87893,67.126721 1.56209,1.251069 -1.56209,1.266658"
+       id="path36"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="128.04973"
+       y="72.976135"
+       id="text37"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="128.04973"
+         y="72.976135"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan37">d</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.24814px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.16861"
+       x="131.47955"
+       y="74.822517"
+       id="text38"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="131.47955"
+         y="74.822517"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#008000;stroke-width:0.16861"
+         id="tspan38">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="128.15855"
+       y="77.336632"
+       id="text39"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="128.15855"
+         y="77.336632"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan39">load</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-dasharray:none;stroke-opacity:1"
+       d="m 123.98561,62.754918 h 1.5511 l -0.001,5.515692 v 0 h 2.31521"
+       id="path39" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.140502;stroke-opacity:1"
+       d="m 127.85092,76.947037 h -1.62087 l 10e-4,5.602808 v 0 h -2.41934"
+       id="path40" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-opacity:1"
+       d="m 138.21549,72.392903 h 4.76741"
+       id="path41" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.84316px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0990051"
+       x="130.59029"
+       y="63.321095"
+       id="text57"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="130.59029"
+         y="63.321095"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#000000;stroke-width:0.0990051"
+         id="tspan57">E1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:5.22072px;line-height:1;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';letter-spacing:0px;writing-mode:lr-tb;direction:ltr;fill:#000000;stroke:none;stroke-width:0.264583"
+       x="100.96121"
+       y="52.231617"
+       id="text63"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:ubuntu;-inkscape-font-specification:'ubuntu Bold';fill:#000000;stroke:none;stroke-width:0.264583"
+         x="100.96121"
+         y="52.231617"
+         id="tspan63">Estado</tspan></text>
+    <path
+       id="path90"
+       style="display:inline;fill:#ffe6d5;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round"
+       d="m 143.05111,69.498592 2.79202,-1.539727 v 8.868075 l -2.79202,-1.539725 z"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="143.92966"
+       y="70.640205"
+       id="text91"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="143.92966"
+         y="70.640205"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan91">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="143.95804"
+       y="75.697456"
+       id="text92"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="143.95804"
+         y="75.697456"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan92">0</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-opacity:1"
+       d="m 145.91134,69.820796 h 23.07325"
+       id="path92"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-opacity:1"
+       d="m 145.91134,75.148117 h 3.26007"
+       id="path93"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:#ffe6d5;stroke:#000000;stroke-width:0.204623;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       id="path150"
+       d="m 80.586637,76.528885 h -4.19766 c 0,0 1.39923,-1.91652 1.43339,-4.236495 0.0343,-2.319804 -1.46731,-4.068154 -1.46731,-4.068154 l 4.2569,-0.01771 c 2.14165,0.08776 4.79092,2.40774 5.67388,4.220623 -1.5033,3.041336 -4.24955,4.045446 -5.69921,4.101786 z" />
+    <path
+       id="path151"
+       d="m 72.678357,69.863805 h 4.59293"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none" />
+    <path
+       id="path152"
+       d="m 72.678357,74.939855 h 4.56302"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none" />
+    <path
+       id="path153"
+       d="m 86.258817,72.481734 h 6.16962"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
+       sodipodi:nodetypes="cc" />
+    <text
+       id="text153"
+       line-height="125%"
+       x="77.652733"
+       y="74.347511"
+       font-style="normal"
+       font-size="17.5px"
+       xml:space="preserve"
+       font-weight="normal"
+       style="font-style:normal;font-weight:normal;font-size:3.02275px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#0000ff;stroke-width:0.0682076"
+       transform="scale(1.0116616,0.98847282)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;stroke-width:0.0682076"
+         id="tspan153"
+         x="77.652733"
+         y="74.347511"
+         font-variant="normal"
+         font-stretch="normal"
+         font-style="normal"
+         font-weight="bold">OR</tspan></text>
+    <path
+       style="display:inline;fill:#ffe6d5;stroke:#000000;stroke-width:0.204623;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       id="path154"
+       d="m 80.586637,76.528885 h -4.19766 c 0,0 1.39923,-1.91652 1.43339,-4.236495 0.0343,-2.319804 -1.46731,-4.068154 -1.46731,-4.068154 l 4.2569,-0.01771 c 2.14165,0.08776 4.79092,2.40774 5.67388,4.220623 -1.5033,3.041336 -4.24955,4.045446 -5.69921,4.101786 z" />
+    <path
+       id="path155"
+       d="m 72.678357,69.863805 h 4.59293"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none" />
+    <path
+       id="path156"
+       d="m 72.678357,74.939855 h 4.56302"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none" />
+    <text
+       id="text156"
+       line-height="125%"
+       x="77.652733"
+       y="74.347511"
+       font-style="normal"
+       font-size="17.5px"
+       xml:space="preserve"
+       font-weight="normal"
+       style="font-style:normal;font-weight:normal;font-size:3.02275px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#0000ff;stroke-width:0.0682076"
+       transform="scale(1.0116616,0.98847282)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;stroke-width:0.0682076"
+         id="tspan156"
+         x="77.652733"
+         y="74.347511"
+         font-variant="normal"
+         font-stretch="normal"
+         font-style="normal"
+         font-weight="bold">OR</tspan></text>
+    <g
+       id="g214"
+       transform="translate(0,5.07605)">
+      <path
+         id="path160"
+         style="display:inline;fill:#0066ff;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.671597,68.036001 h 5.00081 l 2.00595,1.827804 -2.00595,1.827778 h -5.00081 z"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+         x="66.382545"
+         y="70.810524"
+         id="text160"
+         inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96"><tspan
+           sodipodi:role="line"
+           x="66.382545"
+           y="70.810524"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.0682076"
+           id="tspan160">E10</tspan></text>
+    </g>
+    <g
+       id="g215"
+       transform="translate(0,-5.07605)">
+      <path
+         id="path161"
+         style="display:inline;fill:#0066ff;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.671597,73.112056 h 5.00081 l 2.00595,1.827799 -2.00595,1.82778 h -5.00081 z"
+         sodipodi:nodetypes="cccccc"
+         inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+         x="66.71386"
+         y="75.886581"
+         id="text161"
+         inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96"><tspan
+           sodipodi:role="line"
+           x="66.71386"
+           y="75.886581"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.0682076"
+           id="tspan161">E7</tspan></text>
+    </g>
+    <path
+       id="path203"
+       style="display:inline;fill:#ffcc00;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 157.91695,58.423199 h 5.48157 l 1.63749,1.827804 -1.63749,1.827778 h -5.48157 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="159.06441"
+       y="61.084492"
+       id="text203"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="159.06441"
+         y="61.084492"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan203">Clk</tspan></text>
+    <g
+       id="g205"
+       transform="matrix(0.25779298,0,0,0.25779298,92.786061,381.38475)"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       style="display:inline">
+      <g
+         id="g204"
+         transform="translate(0,-1.8948795)">
+        <path
+           id="path204"
+           style="display:inline;fill:#eeaaff;stroke:#000000;stroke-width:0.79375;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 245.84472,-1174.1908 h 26.04824 l 7.78127,7.0902 -7.78127,7.0901 h -26.04824 z"
+           sodipodi:nodetypes="cccccc"
+           inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="248.21971"
+           y="-1164.3767"
+           id="text204"
+           inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96"><tspan
+             sodipodi:role="line"
+             x="248.21971"
+             y="-1164.3767"
+             style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.264583"
+             id="tspan204">Next</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="display:inline;fill:#f2f2f2;stroke:#000000;stroke-width:0.166548;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect205"
+       width="10.281301"
+       height="12.095273"
+       x="168.98459"
+       y="63.841347"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 168.92933,64.622806 1.56209,1.251069 -1.56209,1.266658"
+       id="path205"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="169.10013"
+       y="70.472221"
+       id="text205"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="169.10013"
+         y="70.472221"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan205">d</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.24814px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.16861"
+       x="172.52995"
+       y="72.318604"
+       id="text206"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="172.52995"
+         y="72.318604"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#008000;stroke-width:0.16861"
+         id="tspan206">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.16803px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="169.20895"
+       y="74.832718"
+       id="text207"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="169.20895"
+         y="74.832718"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.0682076"
+         id="tspan207">load</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-dasharray:none;stroke-opacity:1"
+       d="m 165.03601,60.251003 h 1.5511 l -0.001,5.515692 v 0 h 2.31521"
+       id="path207" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.140502;stroke-opacity:1"
+       d="m 168.90132,74.443122 h -1.62087 l 0.001,5.602808 v 0 h -2.41934"
+       id="path208" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136372;stroke-opacity:1"
+       d="m 179.26589,69.888988 h 4.76741"
+       id="path209" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.84316px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0990051"
+       x="171.64069"
+       y="60.817181"
+       id="text209"
+       inkscape:export-filename="/home/obijuan/Develop/Arq-computadores-01/wiki/S05/contador-1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="171.64069"
+         y="60.817181"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#000000;stroke-width:0.0990051"
+         id="tspan209">E2</tspan></text>
+    <path
+       id="path210"
+       style="display:inline;fill:#0066ff;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 149.43952,60.927121 h -5.0008 l -2.00596,1.827804 2.00596,1.827778 h 5.0008 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 140.56899,72.392905 v -9.63798 h 1.86377"
+       id="path211" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="144.92307"
+       y="63.701649"
+       id="text211"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="144.92307"
+         y="63.701649"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.0682076"
+         id="tspan211">E1</tspan></text>
+    <circle
+       style="display:inline;fill:#000000;stroke:none;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle211"
+       cx="140.56898"
+       cy="72.392906"
+       r="0.39215526" />
+    <path
+       id="path212"
+       style="display:inline;fill:#0066ff;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 156.17817,73.320313 h -5.0008 l -2.00596,1.827804 2.00596,1.827778 h 5.0008 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="150.75143"
+       y="76.094841"
+       id="text212"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="150.75143"
+         y="76.094841"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.0682076"
+         id="tspan212">E10</tspan></text>
+    <path
+       id="path213"
+       style="display:inline;fill:#0066ff;stroke:#000000;stroke-width:0.204623;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 161.82247,64.00571 h -5.0008 l -2.00596,1.827804 2.00596,1.827778 h 5.0008 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.7283px;line-height:1.25;font-family:sans-serif;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0682076"
+       x="156.58794"
+       y="66.780235"
+       id="text213"
+       inkscape:export-filename="/home/obijuan/Develop/myTeachingURJC/Arq-computadores-01/wiki/S05/nanoRISC-v-computer-2.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         x="156.58794"
+         y="66.780235"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';stroke-width:0.0682076"
+         id="tspan213">E12</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 152.95194,69.820796 v -3.987282 h 1.86377"
+       id="path214"
+       sodipodi:nodetypes="ccc" />
+    <circle
+       style="display:inline;fill:#000000;stroke:none;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle214"
+       cx="152.95193"
+       cy="69.820793"
+       r="0.39215526" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-dasharray:1.05833, 1.05833;stroke-dashoffset:0;marker-end:url(#Triangle)"
+       d="M 153.80979,76.767632 V 90.629658 L 68.854016,90.755993 V 77.81929"
+       id="path215"
+       sodipodi:nodetypes="cccc" />
+    <circle
+       style="display:inline;fill:#000000;stroke:none;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle215"
+       cx="186.45158"
+       cy="69.820793"
+       r="0.39215526" />
+    <circle
+       style="display:inline;fill:#000000;stroke:none;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle216"
+       cx="188.70454"
+       cy="69.820793"
+       r="0.39215526" />
+    <circle
+       style="display:inline;fill:#000000;stroke:none;stroke-width:0.136416;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle217"
+       cx="190.9575"
+       cy="69.820793"
+       r="0.39215526" />
+  </g>
+</svg>
