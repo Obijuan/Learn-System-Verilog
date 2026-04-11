@@ -1,0 +1,48 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Sat Apr 11 16:47:40 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/17-wishbone-uart/sim.fst"
+[dumpfile_mtime] "Sat Apr 11 16:47:26 2026"
+[dumpfile_size] 9895
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/17-wishbone-uart/sim.gtkw"
+[timestart] 2034000
+[size] 1866 1001
+[pos] -1 -1
+*-17.633429 2666624 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.TB.
+[treeopen] TOP.TB.ram.
+[sst_width] 278
+[signals_width] 230
+[sst_expanded] 1
+[sst_vpaned_height] 341
+@28
+TOP.TB.clk
+TOP.TB.clk_mem
+TOP.TB.rst
+@200
+-WISHBONE
+@28
+TOP.TB.fetch_bus.cyc
+TOP.TB.fetch_bus.stb
+@22
+TOP.TB.fetch_bus.sel[3:0]
+@28
+TOP.TB.fetch_bus.we
+@22
+TOP.TB.fetch_bus.adr[31:0]
+TOP.TB.fetch_bus.dat_mosi[31:0]
+TOP.TB.fetch_bus.dat_miso[31:0]
+@28
+TOP.TB.fetch_bus.ack
+TOP.TB.fetch_bus.err
+@22
+TOP.TB.read_mem[31:0]
+@23
+TOP.TB.ram.u_mem.mem[0][31:0]
+@22
+TOP.TB.ram.u_mem.mem[1][31:0]
+TOP.TB.rst_cnt[6:0]
+[pattern_trace] 1
+[pattern_trace] 0
