@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Fri Apr 10 12:08:51 2026
+[*] Sat Apr 11 09:27:59 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/15-wishbone-uart/sim.fst"
-[dumpfile_mtime] "Fri Apr 10 12:07:58 2026"
-[dumpfile_size] 9142
+[dumpfile_mtime] "Sat Apr 11 09:27:41 2026"
+[dumpfile_size] 9873
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/15-wishbone-uart/sim.gtkw"
-[timestart] 83069000
+[timestart] 83727000
 [size] 1866 1001
 [pos] -1 -1
-*-17.633429 83623662 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.633429 84818000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.TB.
 [sst_width] 278
 [signals_width] 230
 [sst_expanded] 1
-[sst_vpaned_height] 242
+[sst_vpaned_height] 355
 @28
 TOP.TB.clk
 TOP.TB.rst
@@ -42,16 +42,29 @@ TOP.TB.switches[7:0]
 @28
 TOP.TB.E0
 TOP.TB.E1
+TOP.TB.E2
+TOP.TB.E3
+TOP.TB.E4
+TOP.TB.E5
+TOP.TB.E6
+@29
+TOP.TB.E7
+@28
+TOP.TB.T56
+TOP.TB.E56
+TOP.TB.tx_empty
+TOP.TB.uart_tx
 TOP.TB.rx_full
 @22
 TOP.TB.rx_byte[7:0]
 @28
 TOP.TB.T12
-@29
-TOP.TB.E2
-@28
 TOP.TB.E10
 TOP.TB.E12
 TOP.TB.T10
+@22
+TOP.TB.leds[7:0]
+TOP.TB.read_buttons[4:0]
+TOP.TB.read_switches[7:0]
 [pattern_trace] 1
 [pattern_trace] 0
