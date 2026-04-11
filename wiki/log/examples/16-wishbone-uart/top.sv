@@ -68,9 +68,6 @@ logic rx_serial_in;
 logic clk;
 assign clk = CLK;
 
-//-- Pulsador de reset
-logic rst;
-assign rst = 0;
 
 logic rx_full;
 logic tx_empty;
@@ -78,6 +75,17 @@ logic tx_empty;
 //-- Reloj para la memoria
 logic clk_mem;
 assign clk_mem = ~clk;
+
+//-- Pulsador de reset
+logic rst;
+logic [6:0] rst_cnt = 7'b0;
+
+assign rst = ~rst_cnt[5];
+
+always_ff @( posedge(clk) ) begin
+    if (rst_cnt[5]==0)
+        rst_cnt <= rst_cnt + 1;
+end
 
 //----------- Conexion de perifericos a traves del wishbone
 
@@ -258,7 +266,17 @@ logic E54; //-- Cable del estado 5 al 4
 
 //-- Evolucion del Estado del automata
 always_ff @( posedge(clk) ) begin
-    if (next) begin
+    if (rst) begin
+        E0 <= 1;
+        E1 <= 0;
+        E2 <= 0;
+        E3 <= 0;
+        E4 <= 0;
+        E5 <= 0;
+        E6 <= 0;
+        E7 <= 0;
+    end
+    else if (next) begin
         E0 <= E10  || E7;
         E1 <= E0;
         E2 <= E12; 
@@ -435,28 +453,69 @@ end
 
 
 
+//--------- AUTOMATA DE ACCESO A FETCH
 
+//-- Estado
+logic EE0 = 1;  //-- Lectura de la memoria
+logic EE1 = 0;  //-- STOP!
 
+logic nnext;
 
-always_comb begin
-    //-- Lectura de la memoria
-    fetch_bus.cyc = 1;
-    fetch_bus.stb = 1;
-    fetch_bus.we = 0;
-    fetch_bus.dat_mosi = 32'h0;
-    fetch_bus.sel = 4'b1111;
-    fetch_bus.adr = MEMORY_START;
+//-- Evolucion del estado
+always_ff @( posedge(clk) ) begin
+    if (rst) begin
+        EE0 <= 1;
+        EE1 <= 0;
+    end
+    else if (nnext) begin
+        EE0 <= 0;
+        EE1 <= EE0;
+    end
+    
+end
+
+//-- Transiciones
+logic TT01;
+assign TT01 = EE0 && fetch_bus.ack;
+
+assign nnext = TT01;
+
+//-- Capturar la lectura de memoria
+logic [31:0] read_mem;
+always_ff @( posedge(clk) ) begin
+    if (TT01)
+        read_mem <= fetch_bus.dat_miso;
+    
 end
 
 
+always_comb begin
+    //-- Valores por defecto
+    fetch_bus.cyc = 0;
+    fetch_bus.stb = 0;
+    fetch_bus.we = 0;
+    fetch_bus.sel = 4'b0;
+    fetch_bus.adr = 32'b0;
+    fetch_bus.dat_mosi = 32'b0;
+    
+    if (rst) begin
+        //-- Do nothing... reset....
+    end
+    else if (EE0) begin
+        fetch_bus.cyc = 1;
+        fetch_bus.stb = 1;
+        fetch_bus.we = 0;
+        fetch_bus.sel = 4'b1111;
+        fetch_bus.adr = MEMORY_START;
+    end
+    else if (EE1) begin
+        //-- STOP. Dato guardado en un registro
+    end
+end
 
 
-
-
-//-- Mostrar DIRECTAMENTE en los LEDs que son del wishbone
-//-- El estado de los botones y switches, como debug
-
-assign {D7, D6, D5, D4, D3, D2, D1, D0} = fetch_bus.dat_miso[7:0];
+//-- Mostrar el valor leido de la memoria en los LEDs
+assign {D7, D6, D5, D4, D3, D2, D1, D0} = read_mem[7:0];
 
 
 endmodule

@@ -34,7 +34,12 @@ module wishbone_ram #(
     (* ram_decomp = "power" *)
     logic [31:0] memory [SIZE];
 
-    initial $readmemh("init.mem", memory);
+    // Inicialización
+    initial begin
+        for (int i = 0; i < 100; i++) begin
+             memory[i] = 'hF7 + i;
+        end
+    end
 
     // --------------------------------------------------------------------------------------------
     // |                                          Port A                                          |
