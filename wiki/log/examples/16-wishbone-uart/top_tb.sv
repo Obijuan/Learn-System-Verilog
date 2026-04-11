@@ -23,18 +23,28 @@ initial begin
     end
 end
 
-//-- Proceso de reset
-logic rst;
-initial begin
-    rst = 1;
-    @(posedge clk);
-    #(SIM_CLK_PERIOD/8);
-    rst = 0;
-end
-
 //-- Reloj para la memoria
 logic clk_mem;
 assign clk_mem = ~clk;
+
+//-- Proceso de reset
+// logic rst;
+// initial begin
+//     rst = 1;
+//     @(posedge clk);
+//     #(SIM_CLK_PERIOD/8);
+//     rst = 0;
+// end
+
+logic rst;
+logic [6:0] rst_cnt = 7'b0;
+
+assign rst = ~rst_cnt[5];
+
+always_ff @( posedge(clk) ) begin
+    if (rst_cnt[5]==0)
+        rst_cnt <= rst_cnt + 1;
+end
 
 //----------- Conexion de perifericos a traves del wishbone
 
@@ -377,11 +387,14 @@ logic nnext;
 
 //-- Evolucion del estado
 always_ff @( posedge(clk) ) begin
-    if (nnext) begin
+    if (rst) begin
+        EE0 <= 1;
+        EE1 <= 0;
+    end
+    else if (nnext) begin
         EE0 <= 0;
         EE1 <= EE0;
     end
-    
 end
 
 //-- Transiciones
@@ -408,7 +421,11 @@ always_comb begin
     fetch_bus.adr = 32'b0;
     fetch_bus.dat_mosi = 32'b0;
     
-    if (EE0) begin
+    if (rst) begin
+        //-- Do nothing... reset....
+    end
+
+    else if (EE0) begin
         fetch_bus.cyc = 1;
         fetch_bus.stb = 1;
         fetch_bus.we = 0;
