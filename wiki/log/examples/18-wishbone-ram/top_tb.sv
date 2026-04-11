@@ -27,15 +27,6 @@ end
 logic clk_mem;
 assign clk_mem = ~clk;
 
-//-- Proceso de reset
-// logic rst;
-// initial begin
-//     rst = 1;
-//     @(posedge clk);
-//     #(SIM_CLK_PERIOD/8);
-//     rst = 0;
-// end
-
 logic rst;
 logic [6:0] rst_cnt = 7'b0;
 
@@ -191,6 +182,7 @@ logic E4 = 0;  //-- READ TX_STATUS
 logic E5 = 0;  //-- Check Tx_EMPTY
 logic E6 = 0;  //-- Read buttons
 logic E7 = 0;  //-- Read switches
+logic E8 = 0;  //-- Leer memoria
 
 
 logic next;
@@ -211,9 +203,10 @@ always_ff @( posedge(clk) ) begin
         E5 <= 0;
         E6 <= 0;
         E7 <= 0;
+        E8 <= 0;
     end
     else if (next) begin
-        E0 <= E10  || E7;
+        E0 <= E10  || E8;
         E1 <= E0;
         E2 <= E12; 
         E3 <= E2;
@@ -221,6 +214,7 @@ always_ff @( posedge(clk) ) begin
         E5 <= E4;
         E6 <= E56;
         E7 <= E6;
+        E8 <= E7;
     end
 end
 
@@ -252,12 +246,15 @@ assign T56 = E5 && (tx_empty);
 logic T67;
 assign T67 = E6 && mem_bus.ack;
 
-logic T70;
-assign T70 = E7 && mem_bus.ack;
+logic T78;
+assign T78 = E7 && mem_bus.ack;
+
+logic T80;
+assign T80 = E8 && fetch_bus.ack;
 
 //-- Pasar al siguiente estado
 assign next = T01 || T10 || T12 || T23  || T34 || T45 ||
-              T54 || T56 || T67 || T70;
+              T54 || T56 || T67 || T78 || T80;
 
 //-- Leer el registro de stado del receptor
 logic rx_full;
@@ -289,7 +286,7 @@ end
 //-- Leer los switches
 logic [7:0] read_switches;
 always_ff @( posedge(clk) ) begin
-    if (T70)
+    if (T78)
         read_switches <= mem_bus.dat_miso[7:0];
 end
 
@@ -317,6 +314,15 @@ always_comb begin
     end
 end
 
+//-- Capturar la lectura de memoria
+logic [31:0] read_mem;
+always_ff @( posedge(clk) ) begin
+    if (T80)
+        read_mem <= fetch_bus.dat_miso;
+    
+end
+
+
 //--- Generar las señales del estado actual
 always_comb begin
 
@@ -327,6 +333,14 @@ always_comb begin
     mem_bus.we = 0;
     mem_bus.sel = 4'b1111;
     mem_bus.dat_mosi = 32'h0;
+
+    //-- Valores por defecto
+    fetch_bus.cyc = 0;
+    fetch_bus.stb = 0;
+    fetch_bus.we = 0;
+    fetch_bus.sel = 4'b0;
+    fetch_bus.adr = 32'b0;
+    fetch_bus.dat_mosi = 32'b0;
 
     //-- Lectura del registro de estado RX de la uart
     if (E0) begin
@@ -387,69 +401,25 @@ always_comb begin
         mem_bus.we = 0;
         mem_bus.adr = SWITCHES_START;
     end
-end
 
-//--------- AUTOMATA DE ACCESO A FETCH
-
-//-- Estado
-logic EE0 = 1;  //-- Lectura de la memoria
-logic EE1 = 0;  //-- STOP!
-
-logic nnext;
-
-//-- Evolucion del estado
-always_ff @( posedge(clk) ) begin
-    if (rst) begin
-        EE0 <= 1;
-        EE1 <= 0;
-    end
-    else if (nnext) begin
-        EE0 <= 0;
-        EE1 <= EE0;
-    end
-end
-
-//-- Transiciones
-logic TT01;
-assign TT01 = EE0 && fetch_bus.ack;
-
-assign nnext = TT01;
-
-//-- Capturar la lectura de memoria
-logic [31:0] read_mem;
-always_ff @( posedge(clk) ) begin
-    if (TT01)
-        read_mem <= fetch_bus.dat_miso;
-    
-end
-
-
-always_comb begin
-    //-- Valores por defecto
-    fetch_bus.cyc = 0;
-    fetch_bus.stb = 0;
-    fetch_bus.we = 0;
-    fetch_bus.sel = 4'b0;
-    fetch_bus.adr = 32'b0;
-    fetch_bus.dat_mosi = 32'b0;
-    
-    if (rst) begin
-        //-- Do nothing... reset....
-    end
-
-    else if (EE0) begin
+    //-- Lectura de memoria
+    else if (E8) begin
         fetch_bus.cyc = 1;
         fetch_bus.stb = 1;
         fetch_bus.we = 0;
         fetch_bus.sel = 4'b1111;
-        fetch_bus.adr = MEMORY_START;
-    end
-    else if (EE1) begin
-        //-- STOP. Dato guardado en un registro
+        fetch_bus.adr = adr_cnt;
     end
 end
 
-
+//-- Contador de direcciones
+logic [31:0] adr_cnt;
+always_ff @( posedge(clk) ) begin
+    if (rst)
+        adr_cnt <= MEMORY_START;
+    else if (T80)
+        adr_cnt <= adr_cnt + 1;
+end
 
 
 //-- Proceso de simulacion
@@ -461,17 +431,21 @@ initial begin
     //-- Indicar comienzo simmulacion
     $display("Inicio: %t", $time);
 
-    buttons = 5'b00001;
-    switches = 8'h1;
-    uart_rx = 0;  //-- START BIT
-    
-    //-- Esperar al bit de START
-    repeat (CLKS_PER_BIT) @(posedge clk);
+    repeat (2) begin
+        buttons = 5'b00001;
+        switches = 8'h1;
+        uart_rx = 0;  //-- START BIT
+        
+        //-- Esperar al bit de START
+        repeat (CLKS_PER_BIT) @(posedge clk);
 
-    //-- BIT 0
-    uart_rx = 1;
+        //-- BIT 0
+        uart_rx = 1;
 
-    repeat (CLKS_PER_BIT*9) @(posedge clk);
+        repeat (CLKS_PER_BIT*9) @(posedge clk);
+
+        repeat (20) @(posedge clk);
+    end
 
     //-- Indicar fin simulacion
     $display("Fin: %t", $time);
