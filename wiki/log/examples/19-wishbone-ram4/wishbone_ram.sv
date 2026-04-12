@@ -42,6 +42,8 @@ module wishbone_ram #(
     logic [3:0] portb_sel;
     logic portb_wen;
     logic porta_read_ok;
+    logic portb_access;
+
     memory u_mem (
         .clk(clk),
 
@@ -60,10 +62,11 @@ module wishbone_ram #(
     assign port_a.dat_miso = porta_read_ok ? porta_data : 32'h0;
 
     //-- Conexion al puerto B
-    assign portb_wen = port_b.we;
+    assign portb_wen = port_b.we & portb_access;
     assign port_b.dat_miso = portb_data_out;
     assign portb_data_in = port_b.dat_mosi;
     assign portb_adr = port_b.adr;
+    assign portb_sel = port_b.sel;
 
     // --------------------------------------------------------------------------------------------
     // |                                          Port A                                          |
@@ -104,17 +107,20 @@ module wishbone_ram #(
         if (rst) begin
             port_b.ack      <= 0;
             port_b.err      <= 0;
+            portb_access <= 0;
         end
         else begin
             // default output
             port_b.ack      <= 0;
             port_b.err      <= 0;
+            portb_access <= 0;
             // wishbone access
             if (port_b.cyc && port_b.stb) begin
                 // check address space
                 if (port_b.adr >= ADDRESS && port_b.adr < ADDRESS + SIZE) begin
                     port_b.ack <= 1;
                     port_b.err <= 0;
+                    portb_access <= 1;
                 end
                 else begin
                     port_b.ack <= 0;

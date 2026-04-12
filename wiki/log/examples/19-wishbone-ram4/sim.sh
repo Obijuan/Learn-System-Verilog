@@ -8,5 +8,5 @@
 verilator --binary  --trace-fst -sv --top-module TB \
 wishbone_interface.sv top_tb.sv wishbone_leds.sv \
 wishbone_buttons.sv wishbone_switches.sv uart_tx uart_rx \
-wishbone_ram.sv &&
+memory.sv wishbone_ram.sv  &&
  ./obj_dir/VTB

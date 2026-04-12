@@ -97,7 +97,7 @@ wishbone_interface mem_bus();
 //------------- PERIFERICOS
 
 //-- Buses para los esclavos
-wishbone_interface mem_bus_slaves[4]();
+wishbone_interface mem_bus_slaves[5]();
 
 //-- Memoria RAM
 localparam bit [31:0] MEMORY_START = 32'h0001_0000;
@@ -121,18 +121,20 @@ localparam bit [31:0] UART_SIZE  = 32'h0000_0001;
 
 
 wishbone_interconnect #(
-        .NUM_SLAVES(4),
+        .NUM_SLAVES(5),
         .SLAVE_ADDRESS({
             LEDS_START,
             BUTTONS_START,
             SWITCHES_START,
-            UART_START
+            UART_START,
+            MEMORY_START
         }),
         .SLAVE_SIZE({
             LEDS_SIZE,
             BUTTONS_SIZE,
             SWITCHES_SIZE,
-            UART_SIZE
+            UART_SIZE,
+            MEMORY_SIZE
         })
     ) peripheral_bus_interconnect (
         .clk(clk),
@@ -205,11 +207,11 @@ wishbone_uart #(
 wishbone_ram #(
     .ADDRESS(MEMORY_START),
     .SIZE(MEMORY_SIZE)
-) ram (
+) u_whisbone_ram (
     .clk(clk_mem),
     .rst(rst),
-    .port_a(fetch_bus.slave)
-    //.port_b(mem_bus_slaves[4])
+    .port_a(fetch_bus.slave),
+    .port_b(mem_bus_slaves[4])
 );
 
 
@@ -391,7 +393,8 @@ end
 logic [31:0] read_mem;
 always_ff @( posedge(clk) ) begin
     if (T80)
-        read_mem <= fetch_bus.dat_miso;
+        read_mem <= mem_bus.dat_miso;
+        //read_mem <= fetch_bus.dat_miso;
 end
 
 
@@ -486,11 +489,17 @@ always_comb begin
 
     //-- Lectura de memoria
     else if (E8) begin
-        fetch_bus.cyc = 1;
-        fetch_bus.stb = 1;
-        fetch_bus.we = 0;
-        fetch_bus.sel = 4'b1111;
-        fetch_bus.adr = adr_cnt;
+        //fetch_bus.cyc = 1;
+        //fetch_bus.stb = 1;
+        //fetch_bus.we = 0;
+        //fetch_bus.sel = 4'b1111;
+        //fetch_bus.adr = adr_cnt;
+
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 0;
+        mem_bus.sel = 4'b1111;
+        mem_bus.adr = adr_cnt;
     end
 end
 

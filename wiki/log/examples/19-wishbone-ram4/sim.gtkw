@@ -1,9 +1,9 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Sun Apr 12 10:25:12 2026
+[*] Sun Apr 12 11:12:38 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/19-wishbone-ram4/sim.fst"
-[dumpfile_mtime] "Sun Apr 12 10:23:14 2026"
+[dumpfile_mtime] "Sun Apr 12 11:11:57 2026"
 [dumpfile_size] 12063
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/19-wishbone-ram4/sim.gtkw"
 [timestart] 174484000
@@ -16,7 +16,7 @@
 [sst_width] 278
 [signals_width] 230
 [sst_expanded] 1
-[sst_vpaned_height] 411
+[sst_vpaned_height] 412
 @28
 TOP.TB.clk
 TOP.TB.clk_mem
@@ -47,5 +47,17 @@ TOP.TB.E7
 TOP.TB.E8
 @22
 TOP.TB.u_whisbone_ram.u_mem.portb_adr[12:0]
+@28
+TOP.TB.u_whisbone_ram.u_mem.portb_wen
+@22
+TOP.TB.u_whisbone_ram.u_mem.portb_data_out[31:0]
+TOP.TB.u_whisbone_ram.u_mem.portb_adr[12:0]
+@28
+TOP.TB.u_whisbone_ram.u_mem.portb_wen
+@22
+TOP.TB.u_whisbone_ram.u_mem.portb_sel[3:0]
+@420
+TOP.TB.u_whisbone_ram.u_mem.SIZE
+TOP.TB.u_whisbone_ram.u_mem.ADDR_WIDTH
 [pattern_trace] 1
 [pattern_trace] 0

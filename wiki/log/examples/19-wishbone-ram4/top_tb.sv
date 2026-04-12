@@ -323,6 +323,15 @@ always_ff @( posedge(clk) ) begin
     end
 end
 
+//-- Contador de direcciones
+logic [31:0] adr_cnt;
+always_ff @( posedge(clk) ) begin
+    if (rst)
+        adr_cnt <= (MEMORY_START);
+    else if (T80)
+        adr_cnt <= adr_cnt + 1;
+end
+
 
 //--- Generar las señales del estado actual
 always_comb begin
@@ -417,15 +426,6 @@ always_comb begin
         mem_bus.sel = 4'b1111;
         mem_bus.adr = adr_cnt;
     end
-end
-
-//-- Contador de direcciones
-logic [31:0] adr_cnt;
-always_ff @( posedge(clk) ) begin
-    if (rst)
-        adr_cnt <= (MEMORY_START);
-    else if (T80)
-        adr_cnt <= adr_cnt + 1;
 end
 
 
