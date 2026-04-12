@@ -32,7 +32,7 @@ module wishbone_ram #(
 
     // Note: ram_decomp attribute ensures Vivado specifies as a Byte Wide Write Enable RAM
     //(* ram_decomp = "power" *)
-    logic [31:0] memory [SIZE];
+    //logic [31:0] memory [SIZE];
 
     //-- Instanciar la memoria
     logic [31:0] adr;
@@ -43,7 +43,7 @@ module wishbone_ram #(
     logic read_ok;
     memory u_mem (
         .clk(clk),
-        .adr(adr[6:0]),
+        .adr(adr[11:0]),
         .data_o(data)
     );
 

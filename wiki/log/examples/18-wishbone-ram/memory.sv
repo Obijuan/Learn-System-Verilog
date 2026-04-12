@@ -3,12 +3,12 @@
 
 module memory(
     input logic clk,
-    input logic [6:0] adr,
+    input logic [11:0] adr,
     output logic [31:0] data_o
 );
 
 //-- Address with
-localparam ADDR_WIDTH = 7;
+localparam ADDR_WIDTH = 12;
 
 //-- Size of the memory
 localparam SIZE = 1 << ADDR_WIDTH;
@@ -29,7 +29,7 @@ initial begin
     // for (int i = 0; i < 128; i++) begin
     //     mem[i] = 'hF0 + i;
     // end
-    $readmemh("init.mem", mem);
+    $readmemh("init.mem", mem, 0, SIZE-1);
 end
 
 endmodule
