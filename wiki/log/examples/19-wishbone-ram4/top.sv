@@ -46,27 +46,36 @@ localparam int UART_BAUD_RATE = 115200;
 localparam int CLKS_PER_BIT =
     int'(CLK_FREQUENCY_MHZ*1_000_000.0/UART_BAUD_RATE);
 
-
+//-- Cables para los perifericos
 logic [7:0] leds;
+logic [4:0] buttons;
+logic [7:0] switches;
 
 assign {LED7, LED6, LED5, LED4, 
         LED3, LED2, LED1, LED0} = leds;
-
-logic [4:0] buttons;
 
 //-- 4-2: empty bottons. Not available in Alhambra-II
 assign buttons[4:2] = 3'b0;
 
 //-- 7-2: Empty switches. Not used
-logic [7:0] switches;
 assign switches[7:2] = 6'b0;
-
-//-- Cable de recepcion serie
-logic rx_serial_in;
 
 //-- Reloj del sistema
 logic clk;
 assign clk = CLK;
+
+//-- Pines de la UART
+logic uart_rx;
+logic uart_tx;
+logic uart_interrupt;
+
+
+
+//-----------------------------------------------------------
+//---------- COMUN SINTESIS - SIMULACION --------------------
+//-----------------------------------------------------------
+
+
 
 //-- Reloj para la memoria
 logic clk_mem;
@@ -197,7 +206,7 @@ wishbone_uart #(
 ) wb_uart (
     .clk(clk),
     .rst(rst),
-    .rx_serial_in(rx_serial_in),
+    .rx_serial_in(uart_rx),
     .tx_serial_out(TX),
     .interrupt(uart_interrupt),
     .wishbone(mem_bus_slaves[3])
@@ -244,7 +253,7 @@ synchronizer u_sync4 (
 synchronizer u_sync5 (
     .clk(clk),
     .async_in(RX),
-    .sync_out(rx_serial_in)
+    .sync_out(uart_rx)
 );
 
 //----------------------------------------------
@@ -503,8 +512,14 @@ always_comb begin
     end
 end
 
+
+//--------------- SOLO SINTESIS -----------------------
+
 //-- Mostrar el valor leido de la memoria en los LEDs
 assign {D7, D6, D5, D4, D3, D2, D1, D0} = read_mem[7:0];
+
+assign sw1 = SW1;
+assign sw2 = SW2;
 
 
 endmodule
