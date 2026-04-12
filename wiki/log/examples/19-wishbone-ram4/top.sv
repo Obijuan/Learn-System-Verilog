@@ -46,36 +46,32 @@ localparam int UART_BAUD_RATE = 115200;
 localparam int CLKS_PER_BIT =
     int'(CLK_FREQUENCY_MHZ*1_000_000.0/UART_BAUD_RATE);
 
-//-- Cables para los perifericos
-logic [7:0] leds;
-logic [4:0] buttons;
-logic [7:0] switches;
-
-assign {LED7, LED6, LED5, LED4, 
-        LED3, LED2, LED1, LED0} = leds;
-
-//-- 4-2: empty bottons. Not available in Alhambra-II
-assign buttons[4:2] = 3'b0;
-
-//-- 7-2: Empty switches. Not used
-assign switches[7:2] = 6'b0;
-
 //-- Reloj del sistema
 logic clk;
-assign clk = CLK;
-
-//-- Pines de la UART
-logic uart_rx;
-logic uart_tx;
-logic uart_interrupt;
-
 
 
 //-----------------------------------------------------------
 //---------- COMUN SINTESIS - SIMULACION --------------------
 //-----------------------------------------------------------
 
+//-- Cables para los perifericos
+logic [7:0] leds;
+logic [4:0] buttons;
+logic [7:0] switches;
 
+//-- PINES
+logic sw1;
+logic sw2;
+logic d13;
+logic d12;
+logic rx;
+logic tx;
+
+logic sw1_sync;
+logic sw2_sync;
+logic d13_sync;
+logic d12_sync;
+logic rx_sync;
 
 //-- Reloj para la memoria
 logic clk_mem;
@@ -94,7 +90,7 @@ end
 
 logic rx_full;
 logic tx_empty;
-
+logic uart_interrupt;
 
 
 //----------- Conexion de perifericos a traves del wishbone
@@ -129,6 +125,39 @@ localparam bit [31:0] UART_START = 32'h0008_4000;
 localparam bit [31:0] UART_SIZE  = 32'h0000_0001;
 
 
+//-- Instanciar los sincronizadores
+synchronizer u_sync1 (
+    .clk(clk),
+    .async_in(sw1),
+    .sync_out(buttons[0])
+);
+
+synchronizer u_sync2 (
+    .clk(clk),
+    .async_in(sw2),
+    .sync_out(buttons[1])
+);
+
+synchronizer u_sync3 (
+    .clk(clk),
+    .async_in(d13),
+    .sync_out(switches[0])
+);
+
+synchronizer u_sync4 (
+    .clk(clk),
+    .async_in(d12),
+    .sync_out(switches[1])
+);
+
+synchronizer u_sync5 (
+    .clk(clk),
+    .async_in(rx),
+    .sync_out(rx_sync)
+);
+
+
+
 wishbone_interconnect #(
         .NUM_SLAVES(5),
         .SLAVE_ADDRESS({
@@ -153,8 +182,6 @@ wishbone_interconnect #(
 );
 
 
-//----------------------- Instanciar los perifericos de LEDs
-
 //-- Instanciar modulo de LEDs
 wishbone_leds #(
     .ADDRESS(LEDS_START),
@@ -162,9 +189,7 @@ wishbone_leds #(
 ) u_wishbone_leds (
     .clk(clk),
     .rst(rst),
-
     .leds(leds),
-
     .wishbone(mem_bus_slaves[0])
 );
 
@@ -175,9 +200,7 @@ wishbone_buttons #(
 ) u_wishbone_buttons (
     .clk(clk),
     .rst(rst),
-
     .buttons(buttons),
-
     .wishbone(mem_bus_slaves[1])
 );
 
@@ -188,16 +211,11 @@ wishbone_switches #(
 ) u_wishbone_switches (
     .clk(clk),
     .rst(rst),
-
     .switches(switches),
-
     .wishbone(mem_bus_slaves[2])
 );
 
-//-- Pines de la UART
-logic uart_interrupt;
-
-
+//-- Modulo de la UART
 wishbone_uart #(
     .ADDRESS(UART_START),
     .SIZE(UART_SIZE),
@@ -206,8 +224,8 @@ wishbone_uart #(
 ) wb_uart (
     .clk(clk),
     .rst(rst),
-    .rx_serial_in(uart_rx),
-    .tx_serial_out(TX),
+    .rx_serial_in(rx_sync),
+    .tx_serial_out(tx),
     .interrupt(uart_interrupt),
     .wishbone(mem_bus_slaves[3])
 );
@@ -225,37 +243,6 @@ wishbone_ram #(
 
 
 
-//-- Instanciar los sincronizadores
-synchronizer u_sync1 (
-    .clk(clk),
-    .async_in(SW1),
-    .sync_out(buttons[0])
-);
-
-synchronizer u_sync2 (
-    .clk(clk),
-    .async_in(SW2),
-    .sync_out(buttons[1])
-);
-
-synchronizer u_sync3 (
-    .clk(clk),
-    .async_in(D13),
-    .sync_out(switches[0])
-);
-
-synchronizer u_sync4 (
-    .clk(clk),
-    .async_in(D12),
-    .sync_out(switches[1])
-);
-
-synchronizer u_sync5 (
-    .clk(clk),
-    .async_in(RX),
-    .sync_out(uart_rx)
-);
-
 //----------------------------------------------
 //-- AUTOMATA DE CONTROL
 //----------------------------------------------
@@ -268,7 +255,6 @@ logic E5 = 0;  //-- Check Tx_EMPTY
 logic E6 = 0;  //-- Read buttons
 logic E7 = 0;  //-- Read switches
 logic E8 = 0;  //-- Leer memoria
-
 
 
 logic next;
@@ -336,7 +322,7 @@ logic T78;
 assign T78 = E7 && mem_bus.ack;
 
 logic T80;
-assign T80 = E8 && fetch_bus.ack;
+assign T80 = E8 && mem_bus.ack; //fetch_bus.ack;
 
 //-- Pasar al siguiente estado
 assign next = T01 || T10 || T12 || T23  || T34 || T45 ||
@@ -401,17 +387,17 @@ end
 //-- Capturar la lectura de memoria
 logic [31:0] read_mem;
 always_ff @( posedge(clk) ) begin
-    if (T80)
+    if (T80) begin
         read_mem <= mem_bus.dat_miso;
         //read_mem <= fetch_bus.dat_miso;
+    end
 end
-
 
 //-- Contador de direcciones
 logic [31:0] adr_cnt;
 always_ff @( posedge(clk) ) begin
     if (rst)
-        adr_cnt <= MEMORY_START;
+        adr_cnt <= (MEMORY_START);
     else if (T80)
         adr_cnt <= adr_cnt + 1;
 end
@@ -514,13 +500,26 @@ end
 
 
 //--------------- SOLO SINTESIS -----------------------
+assign clk = CLK;
 
 //-- Mostrar el valor leido de la memoria en los LEDs
 assign {D7, D6, D5, D4, D3, D2, D1, D0} = read_mem[7:0];
 
 assign sw1 = SW1;
 assign sw2 = SW2;
+assign d13 = D13;
+assign d12 = D12;
+assign rx = RX;
+assign tx = TX;
 
+assign {LED7, LED6, LED5, LED4, 
+        LED3, LED2, LED1, LED0} = leds;
+
+//-- 4-2: empty bottons. Not available in Alhambra-II
+assign buttons[4:2] = 3'b0;
+
+//-- 7-2: Empty switches. Not used
+assign switches[7:2] = 6'b0;
 
 endmodule
 

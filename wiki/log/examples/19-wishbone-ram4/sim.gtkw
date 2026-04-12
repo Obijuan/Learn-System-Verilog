@@ -1,9 +1,9 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Sun Apr 12 16:26:45 2026
+[*] Sun Apr 12 16:39:04 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/19-wishbone-ram4/sim.fst"
-[dumpfile_mtime] "Sun Apr 12 16:26:30 2026"
+[dumpfile_mtime] "Sun Apr 12 16:38:11 2026"
 [dumpfile_size] 12251
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/19-wishbone-ram4/sim.gtkw"
 [timestart] 174484000
@@ -16,7 +16,7 @@
 [sst_width] 278
 [signals_width] 230
 [sst_expanded] 1
-[sst_vpaned_height] 475
+[sst_vpaned_height] 448
 @28
 TOP.TB.clk
 TOP.TB.clk_mem
