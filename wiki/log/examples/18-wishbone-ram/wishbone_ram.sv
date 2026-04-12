@@ -43,7 +43,7 @@ module wishbone_ram #(
     logic read_ok;
     memory u_mem (
         .clk(clk),
-        .adr(adr[13:0]),
+        .adr(adr[12:0]),
         .data_o(data)
     );
 

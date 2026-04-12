@@ -3,12 +3,12 @@
 
 module memory(
     input logic clk,
-    input logic [13:0] adr,
+    input logic [12:0] adr,
     output logic [31:0] data_o
 );
 
 //-- Address with
-localparam ADDR_WIDTH = 14;
+localparam ADDR_WIDTH = 13;
 
 //-- Size of the memory
 localparam SIZE = 1 << ADDR_WIDTH;

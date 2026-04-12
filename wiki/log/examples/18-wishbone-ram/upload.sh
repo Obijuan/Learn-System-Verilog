@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 apio raw -- openFPGALoader --verify -b ice40_generic \
---vid 0403 --pid 6010 --busdev-num 1:20 _build/default/hardware.bin
+--vid 0403 --pid 6010 --busdev-num 1:23 _build/default/hardware.bin
 
