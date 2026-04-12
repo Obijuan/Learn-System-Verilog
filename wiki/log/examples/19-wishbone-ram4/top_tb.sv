@@ -164,7 +164,7 @@ wishbone_uart #(
 wishbone_ram #(
     .ADDRESS(MEMORY_START),
     .SIZE(MEMORY_SIZE)
-) ram (
+) u_whisbone_ram (
     .clk(clk_mem),
     .rst(rst),
     .port_a(fetch_bus.slave),
@@ -250,7 +250,7 @@ logic T78;
 assign T78 = E7 && mem_bus.ack;
 
 logic T80;
-assign T80 = E8 && fetch_bus.ack;
+assign T80 = E8 && mem_bus.ack; //fetch_bus.ack;
 
 //-- Pasar al siguiente estado
 assign next = T01 || T10 || T12 || T23  || T34 || T45 ||
@@ -317,9 +317,10 @@ end
 //-- Capturar la lectura de memoria
 logic [31:0] read_mem;
 always_ff @( posedge(clk) ) begin
-    if (T80)
-        read_mem <= fetch_bus.dat_miso;
-    
+    if (T80) begin
+        read_mem <= mem_bus.dat_miso;
+        //read_mem <= fetch_bus.dat_miso;
+    end
 end
 
 
@@ -404,11 +405,17 @@ always_comb begin
 
     //-- Lectura de memoria
     else if (E8) begin
-        fetch_bus.cyc = 1;
-        fetch_bus.stb = 1;
-        fetch_bus.we = 0;
-        fetch_bus.sel = 4'b1111;
-        fetch_bus.adr = adr_cnt;
+        //fetch_bus.cyc = 1;
+        //fetch_bus.stb = 1;
+        //fetch_bus.we = 0;
+        //fetch_bus.sel = 4'b1111;
+        //fetch_bus.adr = adr_cnt;
+
+        mem_bus.cyc = 1;
+        mem_bus.stb = 1;
+        mem_bus.we = 0;
+        mem_bus.sel = 4'b1111;
+        mem_bus.adr = adr_cnt;
     end
 end
 
@@ -416,7 +423,7 @@ end
 logic [31:0] adr_cnt;
 always_ff @( posedge(clk) ) begin
     if (rst)
-        adr_cnt <= MEMORY_START;
+        adr_cnt <= (MEMORY_START);
     else if (T80)
         adr_cnt <= adr_cnt + 1;
 end

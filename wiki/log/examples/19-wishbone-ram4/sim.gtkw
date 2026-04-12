@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Sat Apr 11 18:04:36 2026
+[*] Sun Apr 12 10:25:12 2026
 [*]
-[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/18-wishbone-ram/sim.fst"
-[dumpfile_mtime] "Sat Apr 11 18:04:24 2026"
-[dumpfile_size] 11854
-[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/18-wishbone-ram/sim.gtkw"
-[timestart] 174823000
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/19-wishbone-ram4/sim.fst"
+[dumpfile_mtime] "Sun Apr 12 10:23:14 2026"
+[dumpfile_size] 12063
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/19-wishbone-ram4/sim.gtkw"
+[timestart] 174484000
 [size] 1866 1001
 [pos] -1 -1
 *-17.633429 175163864 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.TB.
-[treeopen] TOP.TB.ram.
+[treeopen] TOP.TB.u_whisbone_ram.
 [sst_width] 278
 [signals_width] 230
 [sst_expanded] 1
-[sst_vpaned_height] 431
+[sst_vpaned_height] 411
 @28
 TOP.TB.clk
 TOP.TB.clk_mem
@@ -24,19 +24,13 @@ TOP.TB.rst
 @200
 -WISHBONE-RAM
 @28
-TOP.TB.fetch_bus.cyc
-TOP.TB.fetch_bus.stb
+TOP.TB.mem_bus.cyc
+TOP.TB.mem_bus.stb
+TOP.TB.mem_bus.we
 @22
-TOP.TB.fetch_bus.sel[3:0]
-@28
-TOP.TB.fetch_bus.we
-@22
-TOP.TB.fetch_bus.adr[31:0]
-TOP.TB.fetch_bus.dat_mosi[31:0]
-TOP.TB.fetch_bus.dat_miso[31:0]
-@28
-TOP.TB.fetch_bus.ack
-TOP.TB.fetch_bus.err
+TOP.TB.mem_bus.sel[3:0]
+TOP.TB.mem_bus.adr[31:0]
+TOP.TB.mem_bus.dat_miso[31:0]
 @23
 TOP.TB.read_mem[31:0]
 @22
@@ -51,5 +45,7 @@ TOP.TB.E5
 TOP.TB.E6
 TOP.TB.E7
 TOP.TB.E8
+@22
+TOP.TB.u_whisbone_ram.u_mem.portb_adr[12:0]
 [pattern_trace] 1
 [pattern_trace] 0

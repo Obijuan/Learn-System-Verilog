@@ -63,6 +63,7 @@ module wishbone_ram #(
     assign portb_wen = port_b.we;
     assign port_b.dat_miso = portb_data_out;
     assign portb_data_in = port_b.dat_mosi;
+    assign portb_adr = port_b.adr;
 
     // --------------------------------------------------------------------------------------------
     // |                                          Port A                                          |
