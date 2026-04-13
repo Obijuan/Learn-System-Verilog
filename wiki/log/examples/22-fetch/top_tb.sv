@@ -19,7 +19,6 @@ end
 //---------- COMUN SINTESIS - SIMULACION --------------------
 //-----------------------------------------------------------
 
-
 //-- Reloj para la memoria
 logic clk_mem;
 assign clk_mem = ~clk;
@@ -39,9 +38,44 @@ always_ff @( posedge(clk) ) begin
         rst_cnt <= rst_cnt + 1;
 end
 
-//--------------------------------------
-//--- MEMORIA ROM
-//--------------------------------------
+//-- Acceso a la memoria
+wishbone_interface fetch_bus();
+wishbone_interface mem_bus();
+
+//------------------------------------------
+//-- PERIFERICOS
+//------------------------------------------
+import constants::MEMORY_START;
+import constants::MEMORY_SIZE;
+
+wishbone_interface mem_bus_slaves[1]();
+wishbone_interconnect #(
+    .NUM_SLAVES(1),
+    .SLAVE_ADDRESS({
+        MEMORY_START
+    }),
+    .SLAVE_SIZE({
+        MEMORY_SIZE
+    })
+) peripheral_bus_interconnect (
+    .clk(clk),
+    .rst(rst),
+    .master(mem_bus),
+    .slaves(mem_bus_slaves)
+);
+
+//-- MEMORIA RAM
+wishbone_ram #(
+        .ADDRESS(MEMORY_START),
+        .SIZE(MEMORY_SIZE)
+    ) ram (
+        .clk(clk_mem),
+        .rst(rst),
+        .port_a(fetch_bus.slave),
+        .port_b(mem_bus_slaves[0])
+    );
+
+
 
 
 //----------------------------
