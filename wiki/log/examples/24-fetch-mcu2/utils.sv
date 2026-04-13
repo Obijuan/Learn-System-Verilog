@@ -23,6 +23,30 @@ assign edges = value ^ value_r;
 
 endmodule
 
+//----------------------------------------
+//-- Detector de flancos de subida
+//----------------------------------------
+module posedge_detector (
+    input logic clk,
+
+    //-- Valor de entrad
+    input logic value,
+
+    //-- Flanco detectado
+    output logic pos_edge
+);
+
+//-- Valor en el siguiente ciclo
+logic value_r;
+always_ff @( posedge clk ) begin
+    value_r <= value;
+end
+
+assign pos_edge = ~value_r & value;
+
+endmodule
+
+
 
 //------------------------------------------------
 //-- Antirrebotes
@@ -39,6 +63,9 @@ module debounce #(
     output logic value_out
 );
 
+logic timeout;
+logic bounce_cnt_state;
+logic edges;
 
 always_ff @( posedge clk ) begin
     if (timeout)
@@ -46,7 +73,7 @@ always_ff @( posedge clk ) begin
 end
 
 logic [SIZE-1:0] bounce_cnt;
-logic timeout;
+
 always_ff @( posedge clk ) begin
     if (bounce_cnt_state==0)
         bounce_cnt <= 0;
@@ -55,7 +82,7 @@ end
 
 assign timeout = bounce_cnt[SIZE-1];
 
-logic bounce_cnt_state;
+
 logic start_cnt;
 logic stop_cnt;
 always_ff @( posedge clk ) begin
@@ -67,7 +94,7 @@ end
 assign stop_cnt = timeout;
 assign start_cnt = edges;
 
-logic edges;
+
 edge_detector u_sw1_edges (
     .clk(clk),
     .value(value_in),

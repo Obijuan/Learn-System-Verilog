@@ -25,6 +25,6 @@ localparam bit [31:0] RESET_ADDRESS = MEMORY_START << 2;
 localparam int DEBOUNCER_SIZE = 17;
 
 //-- Tamñao antirrebotes para la simulacion
-localparam int DEBOUNCER_SIZE_SIM = 4;
+localparam int DEBOUNCER_SIZE_SIM = 3;
 
 endpackage

@@ -32,6 +32,7 @@ module top(
 //--------------------------------
 import constants::SYS_CLK_FREQ_MHZ;
 import constants::UART_BAUD_RATE;
+import constants::DEBOUNCER_SIZE;
 
 //-- Leds
 logic [15:0] leds;
@@ -44,7 +45,8 @@ assign leds1 = leds[15:8];
 
 mcu #(
     .CLK_FREQUENCY_MHZ(SYS_CLK_FREQ_MHZ),
-    .UART_BAUD_RATE(UART_BAUD_RATE)
+    .UART_BAUD_RATE(UART_BAUD_RATE),
+    .DEBOUNCER_SIZE(DEBOUNCER_SIZE)
 ) u_mcu (
     //-- Main system clk
     .clk(CLK),

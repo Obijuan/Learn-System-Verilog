@@ -180,8 +180,9 @@ end
 
 logic [7:0] leds0;
 logic [7:0] leds1;
+logic [3:0] cnt_test;
 
-assign leds0 = {sw1_sync, sw2_sync, 1'b0, 1'b0, pc[3:0]};
+assign leds0 = {cnt_test, pc[3:0]};
 assign leds1 = inst;
 assign leds = {leds1, leds0};
 
@@ -189,6 +190,25 @@ assign leds = {leds1, leds0};
 //---------------------------
 //-- Pruebas de pulsadores
 //---------------------------
+
+//-- Detector de flanco de subida en sw1
+logic sw1_click;
+posedge_detector u_sw1_click (
+    .clk(clk),
+    .value(sw1_rdy),
+    .pos_edge(sw1_click)
+);
+
+
+//-- Contador
+
+always_ff @( posedge clk ) begin
+    if (rst)
+        cnt_test <= 0;
+    else if (sw1_click)
+        cnt_test <= cnt_test + 1;
+end
+
 
 
 endmodule
