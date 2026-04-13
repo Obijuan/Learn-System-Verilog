@@ -73,13 +73,9 @@ initial begin
 
     sw1 = 1;
 
-    repeat (2) @(posedge clk);
+    repeat (7) @(posedge clk);
 
     sw1 = 0;
-    sw2 = 1;
-
-    repeat (2) @(posedge clk);
-    sw2 = 0;
 
     //-- Ciclos de ejecucion
     repeat (10) @(posedge clk);
