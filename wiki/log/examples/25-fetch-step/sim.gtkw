@@ -1,0 +1,49 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Mon Apr 13 12:00:00 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/25-fetch-step/sim.fst"
+[dumpfile_mtime] "Mon Apr 13 11:53:10 2026"
+[dumpfile_size] 2957
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/25-fetch-step/sim.gtkw"
+[timestart] 2361300
+[size] 1866 1001
+[pos] -1 -1
+*-17.034029 2666624 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.TB.
+[treeopen] TOP.TB.u_mcu.
+[sst_width] 302
+[signals_width] 262
+[sst_expanded] 1
+[sst_vpaned_height] 472
+@28
+TOP.TB.clk
+TOP.TB.u_mcu.rst
+@200
+-FETCH
+@22
++{pc} TOP.TB.u_mcu.u_fetch.program_counter_reg_out[31:0]
++{inst} TOP.TB.u_mcu.u_fetch.instruction_reg_out[31:0]
+@100000028
++{status_fw} TOP.TB.u_mcu.u_fetch.status_forwards_out[3:0]
++{status_bw} TOP.TB.u_mcu.u_fetch.status_backwards_in[1:0]
+@200
+-USER
+@22
+TOP.TB.buttons[4:0]
+TOP.TB.leds0[7:0]
+TOP.TB.leds1[7:0]
+@28
+TOP.TB.sw1
+TOP.TB.u_mcu.sw1_sync
+TOP.TB.u_mcu.sw1_rdy
+TOP.TB.u_mcu.start
+@29
+TOP.TB.u_mcu.INIT
+@28
+TOP.TB.u_mcu.sw1_click
+TOP.TB.u_mcu.E0
+TOP.TB.u_mcu.E1
+[pattern_trace] 1
+[pattern_trace] 0
