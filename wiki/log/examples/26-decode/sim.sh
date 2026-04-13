@@ -8,7 +8,7 @@
 verilator --binary  --trace-fst --trace-structs -sv --top-module TB \
 constants.sv synchronizer.sv utils.sv pipeline_status.sv fetch_stage.sv \
 forwarding.sv op.sv csr.sv instruction.sv  decode_stage.sv \
-register_file.sv \
+instruction_decoder.sv \
 wishbone_interface.sv top_tb.sv wishbone_leds.sv \
 wishbone_buttons.sv wishbone_switches.sv uart_tx uart_rx \
 memory.sv wishbone_ram.sv mcu.sv   &&

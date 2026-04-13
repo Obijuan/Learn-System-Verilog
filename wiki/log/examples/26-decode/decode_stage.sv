@@ -59,6 +59,13 @@ module decode_stage (
      assign is_instruction_valid = 
              status_forwards_in == pipeline_status::VALID;
 
+     //-- Forwarding the operands
+     logic [31:0] rs1_data_fw;
+     logic [31:0] rs2_data_fw;
+
+     //-- Pipeline control signals
+     pipeline_status::forwards_t status_fw_wire;
+
     //-------------------------------------------
     // STAGE REGISTERS
     //-------------------------------------------
@@ -166,9 +173,6 @@ module decode_stage (
     //--   v v v v
 
      //--- Combinational logic for Forwarding the operands
-     logic [31:0] rs1_data_fw;
-     logic [31:0] rs2_data_fw;
-
       assign rs1_data_fw = forward_operand(instruction.rs1_address, rs1_data);
       assign rs2_data_fw = forward_operand(instruction.rs2_address, rs2_data);
 
@@ -269,9 +273,9 @@ module decode_stage (
         logic rs_in_wb;
 
         //-- Get the forwared register address from all the stages
-        assign rs_in_exe = (rs == exe_forwarding_in.address);
-        assign rs_in_mem = (rs == mem_forwarding_in.address);
-        assign rs_in_wb =  (rs == wb_forwarding_in.address);
+        rs_in_exe = (rs == exe_forwarding_in.address);
+        rs_in_mem = (rs == mem_forwarding_in.address);
+        rs_in_wb =  (rs == wb_forwarding_in.address);
 
         //-- Default value: no STALL
         stall_rs = 1'b0;
@@ -355,7 +359,6 @@ module decode_stage (
                           is_instruction_valid;
 
      //-- COMBINATIONAL logic for calculating the status_forwards_out signal
-     pipeline_status::forwards_t status_fw_wire;
      always_comb begin: u_status_forwards
 
         //--Default values
