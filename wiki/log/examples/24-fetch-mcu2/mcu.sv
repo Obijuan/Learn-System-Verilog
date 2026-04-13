@@ -1,6 +1,7 @@
 module mcu #(
     parameter real CLK_FREQUENCY_MHZ,
-    parameter int  UART_BAUD_RATE
+    parameter int  UART_BAUD_RATE,
+    parameter int DEBOUNCER_SIZE
 ) (
     //-- Main system clk
     input logic clk,
@@ -48,42 +49,19 @@ synchronizer u_sw2 (
 );
 
 
-//---- Detector de flancos para sw1_sync
-//-- Salida: sw1_rdy: Señal lista para usarse
+//--------------------------------------------------
+//-- ANTIRREBOTES
+//--------------------------------------------------
+
+//-- Antirrebotes para sw1
 logic sw1_rdy;
-
-always_ff @( posedge clk ) begin
-    if (timeout)
-        sw1_rdy <= sw1_sync;
-end
-
-logic [2:0] bounce_cnt;
-logic timeout;
-always_ff @( posedge clk ) begin
-    if (bounce_cnt_state==0)
-        bounce_cnt <= 3'b0;
-    else bounce_cnt <= bounce_cnt + 1;
-end
-
-assign timeout = bounce_cnt[2];
-
-logic bounce_cnt_state;
-logic start_cnt;
-logic stop_cnt;
-always_ff @( posedge clk ) begin
-    if (start_cnt)
-        bounce_cnt_state = 1;
-    else if (stop_cnt)
-        bounce_cnt_state = 0;
-end
-assign stop_cnt = timeout;
-assign start_cnt = edges;
-
-logic edges;
-edge_detector u_sw1_edges (
+debounce #(
+    .SIZE(DEBOUNCER_SIZE)
+) u_debouncer1 (
     .clk(clk),
-    .value(sw1_sync),
-    .edges(edges)
+
+    .value_in(sw1_sync),
+    .value_out(sw1_rdy)
 );
 
 

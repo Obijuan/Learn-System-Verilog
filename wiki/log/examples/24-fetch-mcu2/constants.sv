@@ -20,5 +20,11 @@ localparam bit [31:0] MEMORY_SIZE  = 32'h0000_2000;
 //-- Valor por defecto: 0x0004_0000
 localparam bit [31:0] RESET_ADDRESS = MEMORY_START << 2;
 
+//-- ANTIRREBOTES
+//-- Tamaño del antirrebotes para sintesis
+localparam int DEBOUNCER_SIZE = 17;
+
+//-- Tamñao antirrebotes para la simulacion
+localparam int DEBOUNCER_SIZE_SIM = 4;
 
 endpackage
