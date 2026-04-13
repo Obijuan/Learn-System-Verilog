@@ -125,16 +125,42 @@ assign decode_status_backwards = pipeline_status::READY;
 //-- No hay salto en las etapas posteriores
 assign decode_jump_address_backwards = 32'h0;
 
+//-- Señal de comienzo
+logic start;
+assign start = rst_cnt[5];
 
-//-- Valores para las pruebas
-localparam bit [7:0] VALUE0 = 8'hAA;
-localparam bit [7:0] VALUE1 = 8'hBB;
+//-- Contador unario
+logic [7:0] unary_cnt;
+always_ff @(posedge clk) begin
+    if (rst)
+        unary_cnt <= 0;
+    else begin
+        unary_cnt <= {start, unary_cnt[7:1]};
+    end
+end
 
+logic capture;
+assign capture = ~unary_cnt[6];
+
+//-- Captura de datos en los leds
 logic [7:0] leds0;
 logic [7:0] leds1;
 
-assign leds0 = fetch_program_counter_reg[7:0]; //VALUE0;
-assign leds1 = fetch_instruction_reg[7:0]; //VALUE1;
+always_ff @( posedge clk ) begin
+    if (capture) begin
+        leds0 <= fetch_program_counter_reg[7:0];
+        leds1 <= fetch_instruction_reg[7:0];
+    end
+
+end
+
+//-- Valores para las pruebas
+//localparam bit [7:0] VALUE0 = 8'hAA;
+//localparam bit [7:0] VALUE1 = 8'hBB;
+
+
+//assign leds0 = fetch_program_counter_reg[7:0]; //VALUE0;
+//assign leds1 = fetch_instruction_reg[7:0]; //VALUE1;
 
 
 
