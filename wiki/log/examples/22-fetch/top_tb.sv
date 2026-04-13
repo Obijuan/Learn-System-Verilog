@@ -66,21 +66,57 @@ wishbone_interconnect #(
 
 //-- MEMORIA RAM
 wishbone_ram #(
-        .ADDRESS(MEMORY_START),
-        .SIZE(MEMORY_SIZE)
-    ) ram (
-        .clk(clk_mem),
-        .rst(rst),
-        .port_a(fetch_bus.slave),
-        .port_b(mem_bus_slaves[0])
-    );
+    .ADDRESS(MEMORY_START),
+    .SIZE(MEMORY_SIZE)
+) ram (
+    .clk(clk_mem),
+    .rst(rst),
+    .port_a(fetch_bus.slave),
+    .port_b(mem_bus_slaves[0])
+);
 
 
+//------------------------------------
+//-- FETCH STAGE
+//------------------------------------
 
+//-- Output signals
+logic [31:0] fetch_instruction_reg;
+logic [31:0] fetch_program_counter_reg;
+
+//-- Pipeline control signal
+pipeline_status::forwards_t fetch_status_forwards;
+pipeline_status::backwards_t decode_status_backwards;
+logic [31:0] decode_jump_address_backwards;
+
+fetch_stage u_fetch (
+    .clk(clk), 
+    .rst(rst),
+
+    //-- Memory interface
+    .wb(fetch_bus.master),
+
+    //-- Output data
+    .instruction_reg_out(fetch_instruction_reg),
+    .program_counter_reg_out(fetch_program_counter_reg),
+
+    //-- Pipeline control
+    .status_forwards_out(fetch_status_forwards),
+    .status_backwards_in(decode_status_backwards),
+    .jump_address_backwards_in(decode_jump_address_backwards)
+);
 
 //----------------------------
 //-- TEST
 //-----------------------------
+
+//-- La etapa de decodificación está lista
+assign decode_status_backwards = pipeline_status::READY;
+
+//-- No hay salto en las etapas posteriores
+assign decode_jump_address_backwards = 32'h0;
+
+
 //-- Valores para las pruebas
 localparam bit [7:0] VALUE0 = 8'hAA;
 localparam bit [7:0] VALUE1 = 8'hBB;

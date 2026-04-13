@@ -12,8 +12,13 @@ localparam int UART_BAUD_RATE = 115200;
 localparam int CLKS_PER_BIT =
     int'(CLK_FREQUENCY_MHZ*1_000_000.0/UART_BAUD_RATE);
 
-//-- Memoria RAM
+//-- Memoria RAM. Direcciones de palabra
 localparam bit [31:0] MEMORY_START = 32'h0001_0000;
 localparam bit [31:0] MEMORY_SIZE  = 32'h0000_2000;
+
+//-- Direccion de ARRANQUE tras el RESET. Direccion de bytes
+//-- Valor por defecto: 0x0004_0000
+localparam bit [31:0] RESET_ADDRESS = MEMORY_START << 2;
+
 
 endpackage
