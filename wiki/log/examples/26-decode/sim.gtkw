@@ -1,0 +1,58 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Mon Apr 13 18:07:33 2026
+[*]
+[dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/26-decode/sim.fst"
+[dumpfile_mtime] "Mon Apr 13 18:06:24 2026"
+[dumpfile_size] 6125
+[savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/26-decode/sim.gtkw"
+[timestart] 2646000
+[size] 1866 1001
+[pos] -1 -1
+*-18.034029 3416612 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.TB.
+[treeopen] TOP.TB.u_mcu.
+[treeopen] TOP.TB.u_mcu.u_decode.
+[sst_width] 302
+[signals_width] 226
+[sst_expanded] 1
+[sst_vpaned_height] 421
+@28
+TOP.TB.clk
+TOP.TB.u_mcu.rst
+@200
+-FETCH
+@22
++{pc} TOP.TB.u_mcu.u_fetch.program_counter_reg_out[31:0]
++{inst} TOP.TB.u_mcu.u_fetch.instruction_reg_out[31:0]
+@100000028
++{status_fw} TOP.TB.u_mcu.u_fetch.status_forwards_out[3:0]
++{status_bw} TOP.TB.u_mcu.u_fetch.status_backwards_in[1:0]
+@200
+-DECODE
+@22
++{PC} TOP.TB.u_mcu.u_decode.program_counter_reg_out[31:0]
+@100000028
+TOP.TB.u_mcu.u_decode.instruction_reg_out.op[5:0]
+@22
++{imm} TOP.TB.u_mcu.u_decode.instruction_reg_out.immediate[31:0]
++{rd} TOP.TB.u_mcu.u_decode.instruction_reg_out.rd_address[4:0]
++{rs1} TOP.TB.u_mcu.u_decode.instruction_reg_out.rs1_address[4:0]
++{rs2} TOP.TB.u_mcu.u_decode.instruction_reg_out.rs2_address[4:0]
+@100000028
++{status_fw} TOP.TB.u_mcu.u_decode.status_forwards_out[3:0]
++{status_bw} TOP.TB.u_mcu.u_decode.status_backwards_in[1:0]
+@200
+-USER
+@28
+TOP.TB.u_mcu.start
+@22
+TOP.TB.buttons[4:0]
+TOP.TB.leds0[7:0]
+TOP.TB.leds1[7:0]
+@28
+TOP.TB.sw1
+TOP.TB.u_mcu.sw1_click
+[pattern_trace] 1
+[pattern_trace] 0
