@@ -79,21 +79,66 @@ wishbone_interconnect #(
 
 //-- MEMORIA RAM
 wishbone_ram #(
-        .ADDRESS(MEMORY_START),
-        .SIZE(MEMORY_SIZE)
-    ) ram (
-        .clk(clk_mem),
-        .rst(rst),
-        .port_a(fetch_bus.slave),
-        .port_b(mem_bus_slaves[0])
-    );
+    .ADDRESS(MEMORY_START),
+    .SIZE(MEMORY_SIZE)
+) ram (
+    .clk(clk_mem),
+    .rst(rst),
+    .port_a(fetch_bus.slave),
+    .port_b(mem_bus_slaves[0])
+);
 
 
+//------------------------------------
+//-- FETCH STAGE
+//------------------------------------
 
+//-- Output signals
+logic [31:0] fetch_instruction_reg;
+logic [31:0] fetch_program_counter_reg;
+
+//-- Pipeline control signal
+pipeline_status::forwards_t fetch_status_forwards;
+pipeline_status::backwards_t decode_status_backwards;
+logic [31:0] decode_jump_address_backwards;
+
+fetch_stage u_fetch (
+    .clk(clk), 
+    .rst(rst),
+
+    //-- Memory interface
+    .wb(fetch_bus),
+
+    //-- Output data
+    .instruction_reg_out(fetch_instruction_reg),
+    .program_counter_reg_out(fetch_program_counter_reg),
+
+    //-- Pipeline control
+    .status_forwards_out(fetch_status_forwards),
+    .status_backwards_in(decode_status_backwards),
+    .jump_address_backwards_in(decode_jump_address_backwards)
+);
+
+//---------------------------------------
+//-- Conexiones para eliminar warnings
+//---------------------------------------
+assign mem_bus.cyc = 0;
+assign mem_bus.stb = 0;
+assign mem_bus.sel = 4'b1111;
+assign mem_bus.we = 0;
+assign mem_bus.adr = 32'h0;
 
 //----------------------------
 //-- TEST
 //-----------------------------
+
+//-- La etapa de decodificación está lista
+assign decode_status_backwards = pipeline_status::READY;
+
+//-- No hay salto en las etapas posteriores
+assign decode_jump_address_backwards = 32'h0;
+
+
 //-- Valores para las pruebas
 localparam bit [7:0] VALUE0 = 8'hAA;
 localparam bit [7:0] VALUE1 = 8'hBB;
@@ -101,18 +146,19 @@ localparam bit [7:0] VALUE1 = 8'hBB;
 logic [7:0] leds0;
 logic [7:0] leds1;
 
-assign leds0 = VALUE0;
-assign leds1 = VALUE1;
+assign leds0 = fetch_program_counter_reg[7:0]; //VALUE0;
+assign leds1 = fetch_instruction_reg[7:0]; //VALUE1;
+
 
 //-----------------------------------------------------
 //--------------- SOLO SINTESIS -----------------------
 //-----------------------------------------------------
 
 //-- Mostrar el valor leido de la memoria en los LEDs
-assign {D7, D6, D5, D4, D3, D2, D1, D0} = VALUE0;
+assign {D7, D6, D5, D4, D3, D2, D1, D0} = leds1;
 
 assign {LED7, LED6, LED5, LED4, 
-        LED3, LED2, LED1, LED0} = VALUE1;
+        LED3, LED2, LED1, LED0} = leds0;
 
 
 

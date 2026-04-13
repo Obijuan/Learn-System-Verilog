@@ -94,7 +94,7 @@ fetch_stage u_fetch (
     .rst(rst),
 
     //-- Memory interface
-    .wb(fetch_bus.master),
+    .wb(fetch_bus),
 
     //-- Output data
     .instruction_reg_out(fetch_instruction_reg),
@@ -105,6 +105,15 @@ fetch_stage u_fetch (
     .status_backwards_in(decode_status_backwards),
     .jump_address_backwards_in(decode_jump_address_backwards)
 );
+
+//---------------------------------------
+//-- Conexiones para eliminar warnings
+//---------------------------------------
+assign mem_bus.cyc = 0;
+assign mem_bus.stb = 0;
+assign mem_bus.sel = 4'b1111;
+assign mem_bus.we = 0;
+assign mem_bus.adr = 32'h0;
 
 //----------------------------
 //-- TEST
@@ -124,8 +133,8 @@ localparam bit [7:0] VALUE1 = 8'hBB;
 logic [7:0] leds0;
 logic [7:0] leds1;
 
-assign leds0 = VALUE0;
-assign leds1 = VALUE1;
+assign leds0 = fetch_program_counter_reg[7:0]; //VALUE0;
+assign leds1 = fetch_instruction_reg[7:0]; //VALUE1;
 
 
 

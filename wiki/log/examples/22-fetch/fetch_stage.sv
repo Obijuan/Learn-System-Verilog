@@ -29,10 +29,10 @@ module fetch_stage (
     input  logic [31:0] jump_address_backwards_in
 );
 
-    //-- Reference implementation
-    //ref_fetch_stage golden(.*);
-
     import constants::RESET_ADDRESS;
+
+    //-- Program counter
+    logic [31:0] pc;
 
     //------- Signals for accessing the fetch wishbone
     //-- It is always reading from memory
@@ -52,7 +52,6 @@ module fetch_stage (
     assign wb.dat_mosi = 32'h0000_0000;
 
     //-------------- PROGRAM COUNTER (internal)
-    logic [31:0] pc;
     always_ff @(posedge clk ) begin : U_pc
         if (rst) begin
             //-- Reset the PC
