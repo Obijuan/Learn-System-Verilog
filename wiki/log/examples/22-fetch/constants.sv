@@ -1,8 +1,15 @@
 package constants;
 
-localparam bit [7:0] VALUE0 = 8'hAA;
-localparam bit [7:0] VALUE1 = 8'hBB;
 
+//-- Parametros del reloj
+localparam real SYS_CLK_FREQ_MHZ = 12;
+localparam real SYS_CLK_PERIOD_PS = (1 / SYS_CLK_FREQ_MHZ)*1000*1000;
+localparam int  SIM_CLK_PERIOD = int'(SYS_CLK_PERIOD_PS);
+localparam real CLK_FREQUENCY_MHZ = SYS_CLK_FREQ_MHZ;
 
+//-- Parametros para la UART
+localparam int UART_BAUD_RATE = 115200;
+localparam int CLKS_PER_BIT =
+    int'(CLK_FREQUENCY_MHZ*1_000_000.0/UART_BAUD_RATE);
 
 endpackage

@@ -1,19 +1,7 @@
 module TB;
 
-
-//-- Parametros del reloj
-localparam real SYS_CLK_FREQ_MHZ = 12;
-localparam real SYS_CLK_PERIOD_PS = (1 / SYS_CLK_FREQ_MHZ)*1000*1000;
-localparam int  SIM_CLK_PERIOD = int'(SYS_CLK_PERIOD_PS);
-localparam real CLK_FREQUENCY_MHZ = SYS_CLK_FREQ_MHZ;
-
-//-- Parametros para la UART
-localparam int UART_BAUD_RATE = 115200;
-localparam int CLKS_PER_BIT =
-    int'(CLK_FREQUENCY_MHZ*1_000_000.0/UART_BAUD_RATE);
-
-
 //------- SOLO SIMULACION -----------------------
+import constants::SIM_CLK_PERIOD;
 
 //-- Proceso de reloj
 logic clk;
@@ -24,21 +12,23 @@ initial begin
         clk = ~clk;
     end
 end
-//------------------------------------------------
+
 
 
 //-----------------------------------------------------------
 //---------- COMUN SINTESIS - SIMULACION --------------------
 //-----------------------------------------------------------
-import constants::VALUE0;
-import constants::VALUE1;
 
 
 //-- Reloj para la memoria
 logic clk_mem;
 assign clk_mem = ~clk;
 
-//-- Pulsador de reset
+//-----------------------------------------------------------------------
+//-- RESET: El reset se realiza tras 32 ciclos
+//-- En las FPGAs ICE40 la memoria tarda 32 ciclos en inicializarse tras
+//-- la carga del bitstream
+//-----------------------------------------------------------------------
 logic rst;
 logic [6:0] rst_cnt = 7'b0;
 
@@ -49,19 +39,23 @@ always_ff @( posedge(clk) ) begin
         rst_cnt <= rst_cnt + 1;
 end
 
-//----- Señales para Test
-logic [7:0] leds0;
-logic [7:0] leds1;
-
-assign leds0 = VALUE0;
-assign leds1 = VALUE1;
-
 //--------------------------------------
 //--- MEMORIA ROM
 //--------------------------------------
 
 
+//----------------------------
+//-- TEST
+//-----------------------------
+//-- Valores para las pruebas
+localparam bit [7:0] VALUE0 = 8'hAA;
+localparam bit [7:0] VALUE1 = 8'hBB;
 
+logic [7:0] leds0;
+logic [7:0] leds1;
+
+assign leds0 = VALUE0;
+assign leds1 = VALUE1;
 
 
 

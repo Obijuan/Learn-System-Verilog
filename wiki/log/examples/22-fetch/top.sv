@@ -11,7 +11,6 @@ module top(
     output logic LED1,
     output logic LED0,
 
-
     //-- AUX
     output logic D7,
     output logic D6,
@@ -24,32 +23,25 @@ module top(
 
 );
 
-//-- Parametros del reloj
-localparam real SYS_CLK_FREQ_MHZ = 12;
-localparam real SYS_CLK_PERIOD_PS = (1 / SYS_CLK_FREQ_MHZ)*1000*1000;
-localparam int  SIM_CLK_PERIOD = int'(SYS_CLK_PERIOD_PS);
-localparam real CLK_FREQUENCY_MHZ = SYS_CLK_FREQ_MHZ;
-
-//-- Parametros para la UART
-localparam int UART_BAUD_RATE = 115200;
-localparam int CLKS_PER_BIT =
-    int'(CLK_FREQUENCY_MHZ*1_000_000.0/UART_BAUD_RATE);
-
 //-- Reloj del sistema
-logic clk;
+logic  clk;
+assign clk = CLK;
 
 
 //-----------------------------------------------------------
 //---------- COMUN SINTESIS - SIMULACION --------------------
 //-----------------------------------------------------------
-import constants::VALUE0;
-import constants::VALUE1;
+
 
 //-- Reloj para la memoria
 logic clk_mem;
 assign clk_mem = ~clk;
 
-//-- Pulsador de reset
+//-----------------------------------------------------------------------
+//-- RESET: El reset se realiza tras 32 ciclos
+//-- En las FPGAs ICE40 la memoria tarda 32 ciclos en inicializarse tras
+//-- la carga del bitstream
+//-----------------------------------------------------------------------
 logic rst;
 logic [6:0] rst_cnt = 7'b0;
 
@@ -60,17 +52,27 @@ always_ff @( posedge(clk) ) begin
         rst_cnt <= rst_cnt + 1;
 end
 
-//----- Señales para Test
+//--------------------------------------
+//--- MEMORIA ROM
+//--------------------------------------
+
+
+//----------------------------
+//-- TEST
+//-----------------------------
+//-- Valores para las pruebas
+localparam bit [7:0] VALUE0 = 8'hAA;
+localparam bit [7:0] VALUE1 = 8'hBB;
+
 logic [7:0] leds0;
 logic [7:0] leds1;
 
-assign leds0 = 8'hAA;
-assign leds1 = 8'hBB;
+assign leds0 = VALUE0;
+assign leds1 = VALUE1;
 
 //-----------------------------------------------------
 //--------------- SOLO SINTESIS -----------------------
 //-----------------------------------------------------
-assign clk = CLK;
 
 //-- Mostrar el valor leido de la memoria en los LEDs
 assign {D7, D6, D5, D4, D3, D2, D1, D0} = VALUE0;
