@@ -1,10 +1,10 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Mon Apr 13 08:40:15 2026
+[*] Mon Apr 13 08:54:39 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/24-fetch-mcu2/sim.fst"
-[dumpfile_mtime] "Mon Apr 13 08:39:00 2026"
-[dumpfile_size] 2987
+[dumpfile_mtime] "Mon Apr 13 08:54:15 2026"
+[dumpfile_size] 3070
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/24-fetch-mcu2/sim.gtkw"
 [timestart] 2538800
 [size] 1866 1001
@@ -16,7 +16,7 @@
 [sst_width] 302
 [signals_width] 262
 [sst_expanded] 1
-[sst_vpaned_height] 225
+[sst_vpaned_height] 212
 @28
 TOP.TB.clk
 TOP.TB.u_mcu.rst

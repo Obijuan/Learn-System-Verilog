@@ -11,6 +11,10 @@ module top(
     output logic LED1,
     output logic LED0,
 
+    //-- Pulsadores
+    input logic SW1,
+    input logic SW2,
+
     //-- AUX
     output logic D7,
     output logic D6,
@@ -20,7 +24,6 @@ module top(
     output logic D2,
     output logic D1,
     output logic D0
-
 );
 
 
@@ -67,7 +70,8 @@ assign {D7, D6, D5, D4, D3, D2, D1, D0} = leds1;
 assign {LED7, LED6, LED5, LED4, 
         LED3, LED2, LED1, LED0} = leds0;
 
-assign buttons[4:2] = 3'b000;
+//-- Conectar los pulsadores
+assign buttons = {3'b000, SW1, SW2};
 
 
 endmodule

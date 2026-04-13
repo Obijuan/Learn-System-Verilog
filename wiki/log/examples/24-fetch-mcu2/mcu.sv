@@ -152,22 +152,22 @@ end
 logic capture;
 assign capture = ~unary_cnt[5];
 
-
+logic [7:0] inst;
+logic [7:0] pc;
 always_ff @( posedge clk ) begin
     if (capture) begin
-        leds[7:0] <= fetch_program_counter_reg[7:0];
-        leds[15:8] <= fetch_instruction_reg[7:0];
+        pc <= fetch_program_counter_reg[7:0];
+        inst <= fetch_instruction_reg[7:0];
     end
-
 end
 
-//-- Valores para las pruebas
-//localparam bit [7:0] VALUE0 = 8'hAA;
-//localparam bit [7:0] VALUE1 = 8'hBB;
+logic [7:0] leds0;
+logic [7:0] leds1;
 
+assign leds0 = {sw1_sync, sw2_sync, 1'b0, 1'b0, pc[3:0]};
+assign leds1 = inst;
+assign leds = {leds1, leds0};
 
-//assign leds0 = fetch_program_counter_reg[7:0]; //VALUE0;
-//assign leds1 = fetch_instruction_reg[7:0]; //VALUE1;
 
 //---------------------------
 //-- Pruebas de pulsadores
