@@ -214,10 +214,15 @@ assign mem_bus.adr = 32'h0;
 //-- No hay salto en las etapas posteriores
 assign exe_jump_address_backwards = 32'h0;
 
-//-- Señal de comienzo
+//-- Señal de comienzo. El micro ya NO está en reset
 logic start;
 assign start = rst_cnt[5];
 
+//-- Debug: Decod. Para la depuracion de la fase de decodificacion
+//-- se usa la señal start2 que arranca en cuanto la etapa
+//-- de decodificacion sale de la burbuja
+logic start2;
+assign start2 = start && (fetch_status_forwards==pipeline_status::VALID);
 
 logic [7:0] leds0;
 logic [7:0] leds1;
@@ -264,7 +269,7 @@ end
 
 //-- Transiciones
 logic T_INIT;
-assign T_INIT = INIT && start;
+assign T_INIT = INIT && start2;
 
 logic T01;
 assign T01 = E0 && sw1_click;
