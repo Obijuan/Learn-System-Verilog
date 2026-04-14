@@ -41,10 +41,14 @@ module wishbone_leds #(
 
     always_ff @(posedge clk) begin
         if (rst) begin
-            leds_reg <= 0;
+
+            //-- Encendidos por defecto
+            leds_reg <= 8'hFF;
         end
         else begin
-            if (wb_write_sel[0] == 1) begin leds_reg[ 7:0] <= wb_dat_mosi[ 7:0]; end
+            if (wb_write_sel[0] == 1) begin 
+                leds_reg[7:0] <= wb_dat_mosi[7:0]; 
+            end
             //if (wb_write_sel[1] == 1) begin leds_reg[15:8] <= wb_dat_mosi[15:8]; end
             //if (wb_write_sel[2] == 1) begin end
             //if (wb_write_sel[3] == 1) begin end

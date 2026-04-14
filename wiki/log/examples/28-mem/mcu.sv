@@ -70,19 +70,23 @@ debounce #(
 //------------------------------------------
 import constants::MEMORY_START;
 import constants::MEMORY_SIZE;
+import constants::LEDS_START;
+import constants::LEDS_SIZE;
 
 //-- Acceso a la memoria
 wishbone_interface fetch_bus();
 wishbone_interface mem_bus();
 
-wishbone_interface mem_bus_slaves[1]();
+wishbone_interface mem_bus_slaves[2]();
 wishbone_interconnect #(
-    .NUM_SLAVES(1),
+    .NUM_SLAVES(2),
     .SLAVE_ADDRESS({
-        MEMORY_START
+        MEMORY_START,
+        LEDS_START
     }),
     .SLAVE_SIZE({
-        MEMORY_SIZE
+        MEMORY_SIZE,
+        LEDS_SIZE
     })
 ) peripheral_bus_interconnect (
     .clk(clk),
@@ -100,6 +104,17 @@ wishbone_ram #(
     .rst(rst),
     .port_a(fetch_bus.slave),
     .port_b(mem_bus_slaves[0])
+);
+
+//-- PUERTO DE SALIDA CON LEDS
+wishbone_leds #(
+    .ADDRESS(LEDS_START),
+    .SIZE(LEDS_SIZE)
+) u_wishbone_leds (
+    .clk(clk),
+    .rst(rst),
+    .leds(leds[7:0]),
+    .wishbone(mem_bus_slaves[1])
 );
 
 
@@ -324,13 +339,15 @@ assign start4 = start3 && (mem_status_forwards==pipeline_status::VALID);
 
 logic [7:0] leds0;
 logic [7:0] leds1;
-assign leds = {leds1, leds0};
+//assign leds = {leds1, leds0};
+assign leds[15:8] = leds1;
+
 
 //-- Informacion a mostrar en los leds
 assign leds0 = mem_program_counter_reg[7:0];
 //assign leds1 = {2'b0, mem_instruction_reg.op};
-assign leds1 = {mem_rd_data_reg[7:0]};
-
+//assign leds1 = {mem_rd_data_reg[7:0]};
+assign leds1 = leds0;
 
 //---------------------------
 //-- Pruebas de pulsadores
