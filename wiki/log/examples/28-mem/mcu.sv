@@ -328,8 +328,8 @@ assign leds = {leds1, leds0};
 
 //-- Informacion a mostrar en los leds
 assign leds0 = mem_program_counter_reg[7:0];
-assign leds1 = {2'b0, mem_instruction_reg.op};
-//assign leds1 = {exe_rd_data_reg[7:0]};
+//assign leds1 = {2'b0, mem_instruction_reg.op};
+assign leds1 = {mem_rd_data_reg[7:0]};
 
 
 //---------------------------
@@ -369,7 +369,7 @@ end
 
 //-- Transiciones
 logic T_INIT;
-assign T_INIT = INIT && start3;
+assign T_INIT = INIT && start3; //=0
 
 logic T01;
 assign T01 = E0 && sw1_click;
