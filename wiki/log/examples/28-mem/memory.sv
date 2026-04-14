@@ -5,11 +5,11 @@ module memory(
     input logic clk,
 
     //-- Puerto a: Lectura
-    input logic [11:0] porta_adr,
+    input logic [10:0] porta_adr,
     output logic [31:0] porta_data_out,
 
     //-- Puerto b: Lectura/escritura
-    input logic [11:0] portb_adr,
+    input logic [10:0] portb_adr,
     input logic [31:0] portb_data_in,
     input logic portb_wen,
     input logic [3:0] portb_sel,
@@ -17,7 +17,7 @@ module memory(
 );
 
 //-- Address with
-localparam ADDR_WIDTH = 12;
+localparam ADDR_WIDTH = 11;
 
 //-- Size of the memory
 localparam SIZE = 1 << ADDR_WIDTH;

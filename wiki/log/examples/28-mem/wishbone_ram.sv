@@ -48,11 +48,11 @@ module wishbone_ram #(
         .clk(clk),
 
         //-- Puerto A
-        .porta_adr(porta_adr[11:0]),
+        .porta_adr(porta_adr[10:0]),
         .porta_data_out(porta_data),
 
         //-- Puerto B
-        .portb_adr(portb_adr[11:0]),
+        .portb_adr(portb_adr[10:0]),
         .portb_data_in(portb_data_in),
         .portb_wen(portb_wen),
         .portb_sel(portb_sel),
