@@ -40,6 +40,20 @@ module execute_stage (
     assign is_instruction_valid = 
              status_forwards_in == pipeline_status::VALID;
 
+    //-----------
+    //-- SIGNALS
+    //-----------
+    logic [31:0] rd_data;
+    logic [31:0] source_data;
+    logic [31:0] next_program_counter;
+
+    //-------- Control signals
+    logic ctrl_data_valid;
+    logic ctrl_is_misaligned;
+
+    //-- Pipeline control
+    pipeline_status::forwards_t status_fw_wire;
+
     //-------------------------------------------
     // STAGE REGISTERS
     //-------------------------------------------
@@ -243,14 +257,10 @@ module execute_stage (
     //---------------------------------
     //--- Execute the instructions
     //---------------------------------
-    logic [31:0] rd_data;
-    logic [31:0] source_data;
-    logic [31:0] next_program_counter;
 
     //-------- Control signals
     logic ctrl_jump;
-    logic ctrl_data_valid;
-    logic ctrl_is_misaligned;
+    
 
     always_comb begin : u_control
 
@@ -516,7 +526,6 @@ module execute_stage (
     //---------- GENERATE STATUS_FORWARDS
     //--   | | | |
     //--   v v v v
-    pipeline_status::forwards_t status_fw_wire;
 
     always_comb begin: u_exe_status_forwards
 

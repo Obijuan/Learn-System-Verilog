@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+#-- Colores
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+RESET='\033[0m'  #-- Color por defecto
+
 #-- Crear directorio de construccion de apio, si no lo está ya
 mkdir -p _build/default
 
@@ -12,11 +18,17 @@ apio raw -- yosys -m slang \
         wishbone_ram.sv fetch_stage.sv forwarding.sv \
         op.sv csr.sv instruction.sv register_file.sv \
         instruction_decoder.sv decode_stage.sv \
+        execute_stage.sv \
         wishbone_leds.sv wishbone_buttons.sv mcu.sv top.sv \
         wishbone_switches.sv uart_tx.sv uart_rx.sv \
         wishbone_uart.sv " \
     -p "synth_ice40 -top top -json _build/default/hardware.json"  \
     -DSYNTHESIZE -q #> log_yosys.txt
+
+if [ $? -ne 0 ]; then
+    echo -e $RED"> Abortando...\n"$RESET
+    exit 1
+fi
 
 #-- Place and Route con nextpnr
 apio raw -- nextpnr-ice40 --hx8k --package tq144:4k \
