@@ -65,7 +65,7 @@ initial begin
     $display("Inicio: %t", $time);
 
     //-- Valor inicial de los pulsadores
-    sw1 = 0; //1
+    sw1 = 0;
     sw2 = 0;
 
     //-- Esperar a que finalice el reset
@@ -73,7 +73,7 @@ initial begin
 
     @(posedge clk);
 
-    sw1 = 0;
+    sw1 = 1;
 
     repeat (7) @(posedge clk);
 
@@ -81,7 +81,7 @@ initial begin
 
     repeat (7) @(posedge clk);
 
-    sw1 = 0; //1
+    sw1 = 1; //1
 
     repeat (7) @(posedge clk);
 

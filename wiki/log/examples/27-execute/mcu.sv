@@ -267,16 +267,14 @@ assign start2 = start && (fetch_status_forwards==pipeline_status::VALID);
 //-- Debug: Exe
 //-- start3 arranca cuando la etapa exa sale de la burbuja
 logic start3;
-assign start3 = start2 && (exe_status_forwards==pipeline_status::VALID);
+assign start3 = start2 && (decode_status_forwards==pipeline_status::VALID);
 
 logic [7:0] leds0;
 logic [7:0] leds1;
 
 assign leds0 = exe_program_counter_reg[7:0];
-assign leds1 = {2'b00, exe_instruction_reg.op[5:0]};
+assign leds1 = {exe_rd_data_reg[7:0]};
 assign leds = {leds1, leds0};
-
-//-- Comprobar en leds: exe_rd_data_reg
 
 //---------------------------
 //-- Pruebas de pulsadores
@@ -315,7 +313,7 @@ end
 
 //-- Transiciones
 logic T_INIT;
-assign T_INIT = 0; //INIT && start3;
+assign T_INIT = INIT && start3;  //=0; para no esperar...
 
 logic T01;
 assign T01 = E0 && sw1_click;
