@@ -71,7 +71,7 @@ initial begin
     //-- Esperar a que finalice el reset
     repeat (32) @(posedge clk);
 
-    repeat (8) @(posedge clk);
+    repeat (9) @(posedge clk);
 
     sw1 = 1;
 

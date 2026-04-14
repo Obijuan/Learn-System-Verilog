@@ -369,7 +369,7 @@ end
 
 //-- Transiciones
 logic T_INIT;
-assign T_INIT = INIT && start4;  //=0; para no esperar...
+assign T_INIT = INIT && start3;
 
 logic T01;
 assign T01 = E0 && sw1_click;
