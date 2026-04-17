@@ -25,7 +25,7 @@ __reset:
     #-- s0: Direccion de los LEDs
     li s0, LEDS
 
-loop:
+ loop:
     #-- Encender led
     li t0, 1
     sw t0, (s0)
@@ -50,11 +50,11 @@ loop:
 delay:
 
     #-- Loop
-1:
+ 1:
     beq a0,zero, 2f
     addi a0, a0, -1
     j 1b
 
     #-- Condicion de salida
-2:
+ 2:
     ret
