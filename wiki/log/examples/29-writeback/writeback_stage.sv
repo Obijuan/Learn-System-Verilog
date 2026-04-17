@@ -34,7 +34,52 @@ module writeback_stage (
     output logic [31:0] jump_address_backwards_out
 );
 
-    //ref_writeback_stage golden(.*);
+    //-- Machine External Interrupt Enable
+    localparam MEIE = 11;
+    localparam MEIE_MASK = 1 << MEIE;
+
+    //-- Machine Timer Interrupt Enable
+    localparam MTIE = 7;
+    localparam MTIE_MASK = 1 << MTIE;
+
+    //-- Machine External Interrupt Pending
+    localparam MEIP = 11;
+    localparam MEIP_MASK = 1 << MEIP;
+
+    //-- Machine Timer Interrupt Pending
+    localparam MTIP = 7;
+    localparam MTIP_MASK = 1 << MTIP;
+
+    //-- Machine Previous Interrupt Enable
+    localparam MPIE = 7;
+    localparam MPIE_MASK = 1 << MPIE;
+
+    //-- Global Machine Interrupt Enable
+    localparam MIE = 3;
+    localparam MIE_MASK = 1 << MIE;
+
+    //--------------------------------------------
+    //-- CSR REGISTER BANK
+    //--------------------------------------------
+
+    //-- MSTATUS REGISTER
+    logic [31:0] mstatus;
+    logic [31:0] mstatus_data_write;
+    logic mstatus_wen;
+
+    //-- MCAUSE REGISTER
+    logic mcause_wen;
+    logic [31:0] mcause_data_write;
+
+    //-- MEPC REGISTER
+    logic [31:0] mepc;
+    logic [31:0] mepc_data_write;
+    logic mepc_wen;
+
+    //-- Other CSRs
+    logic [31:0] mie;
+    logic [31:0] mtvec;
+    logic [31:0] mip;
 
     //------------------------------------
     //-- CHECK THE INSTRUCTION
@@ -81,6 +126,40 @@ module writeback_stage (
         is_fetch_misaligned || is_fetch_fault || is_illegal_instruction ||
         is_load_misaligned  || is_load_fault  || is_store_misaligned ||
         is_store_fault      || is_ecall       || is_ebreak;
+
+    //-- CSR signals
+    logic [11:0] csr_adr;
+    logic [31:0] csr_data_read;
+    logic [31:0] csr_data_write;
+    logic csr_wen;
+
+    //------------------------------------
+    //-- AUXILIARY LOGIC
+    //------------------------------------
+
+    //-- Accessing MIE CSR
+    logic is_csr_MIE;
+    assign is_csr_MIE = (csr_adr==csr::MIE);
+
+    //-- Accessing MSTATUS CSR
+    logic is_csr_MSTATUS;
+    assign is_csr_MSTATUS = (csr_adr==csr::MSTATUS);
+
+    //-- Bit MIE.MEIE is being set
+    logic mie_meie;
+    assign mie_meie = (is_csr_MIE) && csr_wen &&
+                ((csr_data_write & MEIE_MASK)!=0);
+
+    //-- Bit MIE.MTIE is being set
+    logic mie_mtie;
+    assign mie_mtie = (is_csr_MIE) && csr_wen &&
+                ((csr_data_write & MTIE_MASK)!=0);
+
+    //-- Bit MSTATUS.MIE is being set
+    logic mstatus_mie;
+    assign mstatus_mie = (is_csr_MSTATUS) && csr_wen &&
+                    ((csr_data_write & MIE_MASK)!=0);
+
 
 
     //----------------------------------------
@@ -224,6 +303,7 @@ module writeback_stage (
     //-----------------------------------
     //--  | | | |
     //--  v v v v
+    logic [31:0] rd_data;
      always_comb begin : u_mem_fw
         
         //-------- Default values
@@ -244,38 +324,12 @@ module writeback_stage (
         end
      end
 
-    //------------------------------------
-    //-- AUXILIARY LOGIC
-    //------------------------------------
-
-    //-- Accessing MIE CSR
-    logic is_csr_MIE;
-    assign is_csr_MIE = (csr_adr==csr::MIE);
-
-    //-- Accessing MSTATUS CSR
-    logic is_csr_MSTATUS;
-    assign is_csr_MSTATUS = (csr_adr==csr::MSTATUS);
-
-    //-- Bit MIE.MEIE is being set
-    logic mie_meie;
-    assign mie_meie = (is_csr_MIE) && csr_wen &&
-                ((csr_data_write & MEIE_MASK)!=0);
-
-    //-- Bit MIE.MTIE is being set
-    logic mie_mtie;
-    assign mie_mtie = (is_csr_MIE) && csr_wen &&
-                ((csr_data_write & MTIE_MASK)!=0);
-
-    //-- Bit MSTATUS.MIE is being set
-    logic mstatus_mie;
-    assign mstatus_mie = (is_csr_MSTATUS) && csr_wen &&
-                    ((csr_data_write & MIE_MASK)!=0);
-
+    
 
     //----------------------------------------------------
     //-- Writeback control unit
     //----------------------------------------------------
-    logic [31:0] rd_data;
+    
     logic [31:0] jump_addr;
     pipeline_status::backwards_t status_bw_wire;
     
@@ -298,11 +352,7 @@ module writeback_stage (
     //-- The current instruction is FENCE.I
     logic is_fence_I;
 
-    //-- CSR signals
-    logic [11:0] csr_adr;
-    logic [31:0] csr_data_read;
-    logic [31:0] csr_data_write;
-    logic csr_wen;
+    
 
     //--------------------------------------
     //-- PROCESS CSR INSTRUCTIONS
@@ -459,54 +509,6 @@ module writeback_stage (
         end
     end
 
-
-    //--------------------------------------------
-    //-- CSR REGISTER BANK
-    //--------------------------------------------
-
-    //-- Machine External Interrupt Enable
-    localparam MEIE = 11;
-    localparam MEIE_MASK = 1 << MEIE;
-
-    //-- Machine Timer Interrupt Enable
-    localparam MTIE = 7;
-    localparam MTIE_MASK = 1 << MTIE;
-
-    //-- Machine External Interrupt Pending
-    localparam MEIP = 11;
-    localparam MEIP_MASK = 1 << MEIP;
-
-    //-- Machine Timer Interrupt Pending
-    localparam MTIP = 7;
-    localparam MTIP_MASK = 1 << MTIP;
-
-    //-- Machine Previous Interrupt Enable
-    localparam MPIE = 7;
-    localparam MPIE_MASK = 1 << MPIE;
-
-    //-- Global Machine Interrupt Enable
-    localparam MIE = 3;
-    localparam MIE_MASK = 1 << MIE;
-
-    //-- MSTATUS REGISTER
-    logic [31:0] mstatus;
-    logic [31:0] mstatus_data_write;
-    logic mstatus_wen;
-
-    //-- MCAUSE REGISTER
-    logic mcause_wen;
-    logic [31:0] mcause_data_write;
-
-    //-- MEPC REGISTER
-    logic [31:0] mepc;
-    logic [31:0] mepc_data_write;
-    logic mepc_wen;
-
-    //-- Other CSRs
-    logic [31:0] mie;
-    logic [31:0] mtvec;
-    logic [31:0] mip;
-   
     
     //------------------------------------------------
     //-- CSR FILE

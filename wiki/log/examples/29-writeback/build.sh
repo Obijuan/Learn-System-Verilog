@@ -19,6 +19,7 @@ apio raw -- yosys -m slang \
         op.sv csr.sv instruction.sv register_file.sv \
         instruction_decoder.sv decode_stage.sv \
         execute_stage.sv memory_stage.sv \
+        csr_file.sv writeback_stage.sv \
         wishbone_leds.sv wishbone_buttons.sv mcu.sv top.sv \
         wishbone_switches.sv uart_tx.sv uart_rx.sv \
         wishbone_uart.sv " \
