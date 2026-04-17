@@ -318,6 +318,6 @@ writeback_stage u_writeback(
 //-- TEST
 assign external_interrupt_in = sw1_sync;
 assign timer_interrupt_in = sw2_sync;
-assign leds[15:8] = 8'hFF;
+assign leds[15:8] = 8'h01;
 
 endmodule
