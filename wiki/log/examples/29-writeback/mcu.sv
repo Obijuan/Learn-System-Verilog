@@ -49,22 +49,6 @@ synchronizer u_sw2 (
 );
 
 
-//--------------------------------------------------
-//-- ANTIRREBOTES
-//--------------------------------------------------
-
-//-- Antirrebotes para sw1
-logic sw1_rdy;
-debounce #(
-    .SIZE(DEBOUNCER_SIZE)
-) u_debouncer1 (
-    .clk(clk),
-
-    .value_in(sw1_sync),
-    .value_out(sw1_rdy)
-);
-
-
 //------------------------------------------
 //-- PERIFERICOS
 //------------------------------------------
@@ -121,11 +105,6 @@ wishbone_leds #(
 //--- Interrupciones
 logic external_interrupt_in;
 logic timer_interrupt_in;
-
-assign external_interrupt_in = 0;
-assign timer_interrupt_in = 0;
-
-
 
 //------------------------------------
 //-- FETCH STAGE
@@ -335,5 +314,10 @@ writeback_stage u_writeback(
     .status_backwards_out(wb_status_backwards), // ✅
     .jump_address_backwards_out(wb_jump_address_backwards) // ✅
 );
+
+//-- TEST
+assign external_interrupt_in = sw1_sync;
+assign timer_interrupt_in = sw2_sync;
+assign leds[15:8] = 8'hFF;
 
 endmodule

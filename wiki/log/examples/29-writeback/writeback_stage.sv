@@ -105,19 +105,24 @@ module writeback_stage (
     assign is_load_misaligned =
         (status_forwards_in == pipeline_status::LOAD_MISALIGNED);
 
-    logic is_load_fault = 
+    logic is_load_fault;
+    assign is_load_fault = 
         (status_forwards_in == pipeline_status::LOAD_FAULT);
 
-    logic is_store_misaligned = 
+    logic is_store_misaligned;
+    assign is_store_misaligned = 
         (status_forwards_in == pipeline_status::STORE_MISALIGNED);
 
-    logic is_store_fault =
+    logic is_store_fault;
+    assign is_store_fault =
         (status_forwards_in == pipeline_status::STORE_FAULT);
 
-    logic is_ecall =
+    logic is_ecall;
+    assign is_ecall =
         (status_forwards_in == pipeline_status::ECALL);
 
-    logic is_ebreak = 
+    logic is_ebreak;
+    assign is_ebreak = 
         (status_forwards_in == pipeline_status::EBREAK);
 
     //-- The instruction generates an exception

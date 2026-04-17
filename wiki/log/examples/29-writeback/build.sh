@@ -13,7 +13,7 @@ mkdir -p _build/default
 apio raw -- yosys -m slang \
     -p "read -sv memory.sv" \
     -p "read_slang --ignore-unknown-modules constants.sv \
-        synchronizer.sv utils.sv pipeline_status.sv \
+        synchronizer.sv pipeline_status.sv \
         wishbone_interface.sv wishbone_interconnect.sv \
         wishbone_ram.sv fetch_stage.sv forwarding.sv \
         op.sv csr.sv instruction.sv register_file.sv \
