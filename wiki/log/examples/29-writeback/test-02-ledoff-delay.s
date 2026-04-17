@@ -12,5 +12,17 @@ __reset:
     li t0, 1
     sw t0, (s0)
 
-    #-- STOP
+    #-- Realizar una pausa
+    li t1, 0xFFFFF
+loop:
+    beq t1,zero, cont
+    addi t1, t1, -1
+    j loop
+
+
+    #-- Apagar LED
+cont:
+    sw zero, (s0)
+
+    #-- STOP!
 inf: j inf
