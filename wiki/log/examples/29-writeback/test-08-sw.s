@@ -16,7 +16,7 @@ __reset:
    la s1, var
 
    #-- Escribir valor en variable
-   li t0, 0x01
+   li t0, 0x05
    sw t0, (s1)
 
    #-- Leer variable

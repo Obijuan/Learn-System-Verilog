@@ -38,7 +38,7 @@ inf:    j inf
     sw t0, (s0)
 
     lw ra, 12(sp)
-    #addi sp, sp, 16
+    addi sp, sp, 16
     ret
 
  nivel2:
