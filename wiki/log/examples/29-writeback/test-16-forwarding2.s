@@ -224,8 +224,20 @@ test_fw_prev_instr_exe_exe_exe:
     flush_pipeline
     assert_value t6, (0xdb000000 + 1)
 
-
-
+test_fw_prev_instr_mem_exe_wb:
+    addi t2, zero, 30
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lw   t5, 0(t4)               #
+    sub  t5, t2, t5              #
+    csrw mscratch, t5            #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mscratch
+    flush_pipeline
+    assert_value t6, 0
 
 
 #------------------------------------
