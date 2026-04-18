@@ -72,7 +72,7 @@ initial begin
     repeat (32) @(posedge clk);
 
     //-- Ciclos de simulacion
-    repeat (20) @(posedge clk);
+    repeat (30) @(posedge clk);
 
     //-- Indicar fin simulacion
     $display("Fin: %t", $time);
