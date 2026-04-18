@@ -305,6 +305,15 @@ test_sll:
     sll s6, t6, t5
     assert_value s6, 0xffffb740 # -0x123 <<< 6
 
+test_slt:
+    addi t2, zero, 32
+    flush_pipeline
+    slt s6, t5, t6
+    assert_value s6, 0
+    slt s6, t6, t5
+    assert_value s6, 1
+
+
 
 
 
