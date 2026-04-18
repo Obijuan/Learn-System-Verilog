@@ -18,3 +18,12 @@
     mv a2, t2
 	jal assert_equal
 .endm
+
+.macro assert_value_adr reg:req, etiq:req
+	mv a0, \reg
+	la a1, \etiq
+    mv a2, t2
+	jal assert_equal
+.endm
+
+

@@ -159,7 +159,22 @@ test_csrri:
     csrrsi t6, mscratch, 0
     assert_value t6, 0x1e
 
+test_mtvec:
+    addi t2, zero, 48
+    flush_pipeline
+    lui   t6, %hi(test_mepc)
+    addi  t6, t6, %lo(test_mepc)
+    csrrw t6, mtvec, t6
+    csrrs t6, mtvec, zero
+    assert_value_adr t6, test_mepc
 
+test_ecall:
+    addi t2, zero, 49
+    flush_pipeline
+    ecall
+    fail
+
+test_mepc:
 
 
 
