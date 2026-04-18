@@ -12,3 +12,9 @@
 	jal assert_equal
 .endm
 
+.macro assert_value reg:req, val:req
+	mv a0, \reg
+	li a1, \val
+    mv a2, t2
+	jal assert_equal
+.endm
