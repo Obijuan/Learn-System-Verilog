@@ -208,7 +208,48 @@ add t6, t5, t5         #
 flush_pipeline
 assert_value t6, 0x444
 
+# -------------------------------
+# Override destination register
+# exe - exe
+addi t2, zero, 43
+flush_pipeline
+# ----------------------
+addi t5, zero, 0x111   #
+addi t5, zero, 0x333   #
+add t5, t5, t5         #
+#-----------------------
+flush_pipeline
+assert_value t5, 0x666
 
+# -------------------------------
+# Override destination register
+# exe - mem
+addi t2, zero, 44
+addi t5, zero, 1
+sw t5, 0(t4)
+flush_pipeline
+# ----------------------
+lw t6, 0(t4)           #
+addi t6, zero, 0x2     #
+add s0, t6, zero       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x2
+
+# -------------------------------
+# Override destination register
+# exe - mem
+addi t2, zero, 45
+addi t5, zero, 0x11
+sw t5, 0(t4)
+flush_pipeline
+# ----------------------
+lw t6, 0(t4)           #
+addi t6, zero, 0x22    #
+add s0, zero, t6       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x22
 
 #------------------------------------
 #-- TESTs pasado con exito
