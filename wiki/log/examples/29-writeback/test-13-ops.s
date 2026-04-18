@@ -113,9 +113,27 @@ test_bge: # ✅
     fail
     bge_target:
 
+test_bltu: # ✅
+    addi t2, zero, 10
+    li t1, 1
+    flush_pipeline
+    addi t6, zero, -1
+    bltu t6, zero, bltu_target_fail
+    bltu zero, t6, bltu_target
+    bltu_target_fail:
+    fail
+    bltu_target:
 
-
-
+test_bgeu: # ✅ 
+    addi t2, zero, 11
+    li t1, 1
+    flush_pipeline
+    addi t6, zero, -1
+    bgeu zero, t6, bgeu_target_fail
+    bgeu t6, zero, bgeu_target
+    bgeu_target_fail:
+    fail
+    bgeu_target:
 
 
 
