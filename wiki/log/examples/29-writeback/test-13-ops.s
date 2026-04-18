@@ -136,6 +136,149 @@ test_bgeu: # ✅
     bgeu_target:
 
 
+# -----------------------------------------------
+# LOAD
+test_lb:  # ✅
+    addi t2, zero, 12
+    la t4, var
+    flush_pipeline
+    lb   t6, 0(t4)
+    assert_value t6, 0xffffffbe
+    lb   t6, 1(t4)
+    assert_value t6, 0xffffffba
+    lb   t6, 2(t4)
+    assert_value t6, 0xfffffffe
+    lb   t6, 3(t4)
+    assert_value t6, 0xffffffca
+
+test_lh: # ✅
+    addi t2, zero, 13
+    flush_pipeline
+    lh   t6, 0(t4)
+    assert_value t6, 0xffffbabe
+    lh   t6, 2(t4)
+    assert_value t6, 0xffffcafe
+
+test_lw: # ✅
+    addi t2, zero, 14
+    flush_pipeline
+    lw   t6, 0(t4)
+    assert_value t6, 0xcafebabe
+
+test_lbu: # ✅
+    addi t2, zero, 15
+    flush_pipeline
+    lbu  t6, 0(t4)
+    assert_value t6, 0x000000be
+    lbu  t6, 1(t4)
+    assert_value t6, 0x000000ba
+    lbu  t6, 2(t4)
+    assert_value t6, 0x000000fe
+    lbu  t6, 3(t4)
+    assert_value t6, 0x000000ca
+
+test_lhu: # ✅
+    addi t2, zero, 16
+    flush_pipeline
+    lhu  t6, 0(t4)
+    assert_value t6, 0x0000babe
+    lhu  t6, 2(t4)
+    assert_value t6, 0x0000cafe
+
+
+# -----------------------------------------------
+# STORE
+test_sb: # ✅
+    addi t2, zero, 17
+    flush_pipeline
+    lui  t5,     %hi(0xdeadbeef)
+    addi t5, t5, %lo(0xdeadbeef)
+    sb   t5, 0(t4)
+    lw   t6, 0(t4)
+    assert_value t6, 0xcafebaef
+
+
+test_sh: # ✅
+    addi t2, zero, 18
+    flush_pipeline
+    sh   t5, 0(t4)
+    lw   t6, 0(t4)
+    assert_value t6, 0xcafebeef
+
+test_sw: # ✅
+    addi t2, zero, 19
+    flush_pipeline
+    sw   t5, 0(t4)
+    lw   t6, 0(t4)
+    assert_value t6, 0xdeadbeef
+
+# -----------------------------------------------
+# IMMEDIATE
+test_addi:  # ✅
+    addi t2, zero, 20
+    flush_pipeline
+    addi t6, zero, 0x123
+    addi t6, t6,   0x456
+    assert_value t6, (0x123 + 0x456)
+
+test_slti: # ✅
+    addi t2, zero, 21
+    flush_pipeline
+    slti t6, zero, -1
+    assert_value t6, 0
+    slti t6, zero, +1
+    assert_value t6, 1
+
+test_sltiu: # ⬅️
+    addi  t2, zero, 22
+    flush_pipeline
+    sltiu t6, zero, -1
+    assert_value t6, 1
+    sltiu t6, zero, +1
+    assert_value t6, 1
+
+test_xori:
+    addi t2, zero, 23
+    flush_pipeline
+    addi t6, zero, 0x321
+    xori t6, t6,   0x789
+    assert_value t6, (0x321 ^ 0x789)
+
+test_ori:
+    addi t2, zero, 24
+    flush_pipeline
+    addi t6, zero, 0x321
+    ori  t6, t6,   0x789
+    assert_value t6, (0x321 | 0x789)
+
+test_andi:
+    addi t2, zero, 25
+    flush_pipeline
+    addi t6, zero, 0x321
+    andi t6, t6,   0x789
+    assert_value t6, (0x321 & 0x789)
+
+test_slli:
+    addi t2, zero, 26
+    flush_pipeline
+    addi t6, zero, -16 # 0b1...10000
+    slli t6, t6,   4
+    assert_value t6, 0xffffff00
+
+test_srli:
+    addi t2, zero, 27
+    flush_pipeline
+    addi t6, zero, -16
+    srli t6, t6,   4
+    assert_value t6, 0x0fffffff
+
+test_srai:
+    addi t2, zero, 28
+    flush_pipeline
+    addi t6, zero, -16
+    srai t6, t6,   4
+    assert_value t6, 0xffffffff
+
 
 
 
@@ -155,6 +298,9 @@ test_bgeu: # ✅
     #-- STOP
     halt
 
+    .align 4
+var:
+    .word 0xcafebabe
 
 #----- Dependencias
 .include "assert.s"
