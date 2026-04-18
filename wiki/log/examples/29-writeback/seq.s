@@ -20,28 +20,28 @@ play_seq:
  next:
     #-- Mostrar byte 0 en los leds
     lw t0, (sp)
-    sw t0, (s0)
+    sw t0, (gp)
     lw a0, 4(sp)
     jal delay
 
     #-- Mostrar byte 1 en los leds
     lw t0, (sp)
     srli t0, t0, 8
-    sw t0, (s0)
+    sw t0, (gp)
     lw a0, 4(sp)
     jal delay
 
     #-- Mostrar byte 2 en los leds
     lw t0, (sp)
     srli t0, t0, 16
-    sw t0, (s0)
+    sw t0, (gp)
     lw a0, 4(sp)
     jal delay
 
     #-- Mostrar byte 3 en los leds
     lw t0, (sp)
     srli t0, t0, 24
-    sw t0, (s0)
+    sw t0, (gp)
     lw a0, 4(sp)
     jal delay
 

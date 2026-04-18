@@ -40,3 +40,22 @@
   addi sp, sp, 32
   ret
 .endm
+
+#----------------------------------------
+#-- Meter en la pila 2 registros
+#--   Offsets 0 y 4
+#----------------------------------------
+.macro PUSH2 reg0:req, reg1:req
+  sw \reg0, 0(sp)
+  sw \reg1, 4(sp)
+.endm
+
+#-----------------------------------------
+#-- Sacar de la pila 2 registros
+#-- Offsets 0 y 4
+#-----------------------------------------
+.macro POP2 reg0:req, reg1:req
+  lw \reg0, 0(sp)
+  lw \reg1, 4(sp)
+.endm
+
