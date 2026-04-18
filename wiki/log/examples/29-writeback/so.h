@@ -1,0 +1,4 @@
+.macro halt
+    j .
+.endm
+
