@@ -114,6 +114,104 @@ test_wb_exe_2_nop:
     flush_pipeline
     assert_value t6, (22 + 0x789)
 
+# -----------------------------------------------
+# forward from wb instr (wb followed by mem)
+test_wb_mem:
+    addi t2, zero, 23
+    flush_pipeline
+    csrw mscratch, t2
+    flush_pipeline
+    # ----------------------------
+    csrr t5, mscratch            #
+    sw   t5, 0(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, 23
+
+test_wb_mem_1_nop:
+    addi t2, zero, 24
+    flush_pipeline
+    csrw mscratch, t2
+    flush_pipeline
+    # ----------------------------
+    csrr t5, mscratch            #
+    nop                          #
+    sw   t5, 0(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, 24
+
+test_wb_mem_2_nop:
+    addi t2, zero, 25
+    flush_pipeline
+    csrw mscratch, t2
+    flush_pipeline
+    # ----------------------------
+    csrr t5, mscratch            #
+    nop                          #
+    nop                          #
+    sw   t5, 0(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, 25
+
+# -----------------------------------------------
+# forward from wb instr (wb followed by wb)
+test_wb_wb:
+    addi t2, zero, (26<<2) # mtvec[1:0] = 0b00
+    flush_pipeline
+    csrw mtvec,    zero
+    csrw mscratch, t2
+    flush_pipeline
+    # ----------------------------
+    csrr t5, mscratch            #
+    csrw mtvec, t5               #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mtvec
+    flush_pipeline
+    assert_value t6, (26<<2)
+
+test_wb_wb_1_nop:
+    addi t2, zero, (27<<2)
+    flush_pipeline
+    csrw mtvec,    zero
+    csrw mscratch, t2
+    flush_pipeline
+    # ----------------------------
+    csrr t5, mscratch            #
+    nop                          #
+    csrw mtvec, t5               #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mtvec
+    flush_pipeline
+    assert_value t6, (27<<2)
+
+test_wb_wb_2_nop:
+    addi t2, zero, (28<<2)
+    flush_pipeline
+    csrw mtvec,    zero
+    csrw mscratch, t2
+    flush_pipeline
+    # ----------------------------
+    csrr t5, mscratch            #
+    nop                          #
+    nop                          #
+    csrw mtvec, t5               #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mtvec
+    flush_pipeline
+    assert_value t6, (28<<2)
+
+
 
 
 #------------------------------------
