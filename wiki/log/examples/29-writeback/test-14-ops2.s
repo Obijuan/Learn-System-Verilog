@@ -175,12 +175,52 @@ test_ecall:
     fail
 
 test_mepc:
+    addi t2, zero, 50
+    flush_pipeline
+    lui   t6, %hi(test_interrupt)
+    addi  t6, t6, %lo(test_interrupt)
+    csrrw t6, mepc, t6
+    assert_value_adr t6, test_ecall + (6*4) # 6 instructions
 
+test_mcause:
+    addi t2, zero, 51
+    flush_pipeline
+    csrrs t6, mcause, zero
+    assert_value t6, 11 # because of previous ecall
 
+test_mret:
+    addi t2, zero, 52
+    flush_pipeline
+    mret
+    fail
 
+# -----------------------------------------------
+# INTERRUPT
+test_interrupt:
 
+#-- Not tested
 
+test_irq:
 
+#-- Not tested
+
+test_verify_interrupt:
+
+#-- Not tested
+
+test_ebreak:
+    addi t2, zero, 56
+    flush_pipeline
+    lui  t6, %hi(test_finish)
+    addi t6, t6, %lo(test_finish)
+    csrw mtvec, t6
+    ebreak
+    fail
+
+# ---------------------------------------------------------------
+# |                        Test done!                           |
+# ---------------------------------------------------------------
+test_finish:
 
 #------------------------------------
 #-- TESTs pasado con exito
