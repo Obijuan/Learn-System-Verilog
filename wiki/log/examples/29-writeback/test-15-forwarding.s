@@ -57,6 +57,88 @@ test_exe_exe_2_nop:
     flush_pipeline
     assert_value t6, 2
 
+# -----------------------------------------------
+# forward from exe instr (exe followed by mem)
+test_exe_mem:
+    addi t2, zero, 5
+    la t4, var
+    flush_pipeline
+    # ----------------------------
+    addi t5, zero, 0x123         #
+    sw   t5, 0(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, 0x123
+
+test_exe_mem_1_nop:
+    addi t2, zero, 6
+    flush_pipeline
+    # ----------------------------
+    addi t5, zero, 0x456         #
+    nop                          #
+    sw   t5, 0(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, 0x456
+
+test_exe_mem_2_nop:
+    addi t2, zero, 7
+    flush_pipeline
+    # ----------------------------
+    addi t5, zero, 0x789         #
+    nop                          #
+    nop                          #
+    sw   t5, 0(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, 0x789
+
+# -----------------------------------------------
+# forward from exe instr (exe followed by wb)
+test_exe_wb:
+    addi t2, zero, 8
+    flush_pipeline
+    # ----------------------------
+    addi t5, zero, 0x123         #
+    csrw mscratch, t5            #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mscratch
+    flush_pipeline
+    assert_value t6, 0x123
+
+test_exe_wb_1_nop:
+    addi t2, zero, 9
+    flush_pipeline
+    # ----------------------------
+    addi t5, zero, 0x456         #
+    nop                          #
+    csrw mscratch, t5            #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mscratch
+    flush_pipeline
+    assert_value t6, 0x456
+
+test_exe_wb_2_nop:
+    addi t2, zero, 10
+    flush_pipeline
+    # ----------------------------
+    addi t5, zero, 0x789         #
+    nop                          #
+    nop                          #
+    csrw mscratch, t5            #
+    # ----------------------------
+    flush_pipeline
+    csrr t6, mscratch
+    flush_pipeline
+    assert_value t6, 0x789
 
 
 
@@ -77,13 +159,12 @@ test_exe_exe_2_nop:
     #-- STOP
     halt
 
-    .align 4
-var:
-    .word 0xcafebabe
 
 #----- Dependencias
 .include "assert.s"
 .include "delay.s"
 .include "seq.s"
 
-
+   .align 4
+var:
+    .word 0xcafebabe
