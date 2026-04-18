@@ -211,6 +211,20 @@ test_wb_wb_2_nop:
     flush_pipeline
     assert_value t6, (28<<2)
 
+# -----------------------------------------------
+# forward from previous instructon
+test_fw_prev_instr_exe_exe_exe:
+    addi t2, zero, 29
+    flush_pipeline
+    # ----------------------------
+    lui  t5,     0xdeadb         #
+    slli t5, t5, 12              #
+    add  t6, t5, t1              #
+    # ----------------------------
+    flush_pipeline
+    assert_value t6, (0xdb000000 + 1)
+
+
 
 
 
