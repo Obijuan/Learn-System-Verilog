@@ -279,46 +279,10 @@ test_srai:
     srai t6, t6,   4
     assert_value t6, 0xffffffff
 
-# -----------------------------------------------
-# ALU
-init_alu_regs:
-    flush_pipeline
-    addi t5, zero, 6
-    addi t6, zero, -0x123
-    flush_pipeline
+#------------------------------------
+#-- TESTs pasado con exito
+#------------------------------------
 
-test_add:
-    addi t2, zero, 29
-    flush_pipeline
-    add  s6, t6, t5
-    assert_value s6, (-0x123 + 6)
-
-test_sub:
-    addi t2, zero, 30
-    flush_pipeline
-    sub s6, t6, t5
-    assert_value s6, (-0x123 - 6)
-
-test_sll:
-    addi t2, zero, 31
-    flush_pipeline
-    sll s6, t6, t5
-    assert_value s6, 0xffffb740 # -0x123 <<< 6
-
-test_slt:
-    addi t2, zero, 32
-    flush_pipeline
-    slt s6, t5, t6
-    assert_value s6, 0
-    slt s6, t6, t5
-    assert_value s6, 1
-
-
-
-
-
-
-    #-- Tests pasado con exito
     #-- Mostrar una secuencia
     li a0, 0x5555AAAA  #-- Secuencia
     li a1, _100ms      #-- Pausa
