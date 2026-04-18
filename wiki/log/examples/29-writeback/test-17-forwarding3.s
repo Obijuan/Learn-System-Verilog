@@ -155,6 +155,61 @@ test_fw_wb_mem_dummyExe:
     flush_pipeline
     assert_value t6, 38
 
+
+# ------------------------------
+# Override destination register
+# exe - exe
+addi t2, zero, 39
+flush_pipeline
+# ---------------------
+addi t5, zero, 5      #
+addi t5, x0, 6        #
+addi t6, t5, 0        #
+#----------------------
+flush_pipeline
+assert_value t6, 6
+
+# ------------------------------
+# Override destination register
+# exe - exe
+addi t2, zero, 40
+flush_pipeline
+# ---------------------
+addi t5, zero, 0x11   #
+addi t5, zero, 0x22   #
+add t6, t5, zero      #
+#----------------------
+flush_pipeline
+assert_value t6, 0x22
+
+# ------------------------------
+# Override destination register
+# exe - exe
+addi t2, zero, 41
+flush_pipeline
+# ----------------------
+addi t5, zero, 0x111   #
+addi t5, zero, 0x222   #
+add t6, zero, t5       #
+#-----------------------
+flush_pipeline
+assert_value t6, 0x222
+
+# -------------------------------
+# Override destination register
+# exe - exe
+addi t2, zero, 42
+flush_pipeline
+# ----------------------
+addi t5, zero, 0x111   #
+addi t5, zero, 0x222   #
+add t6, t5, t5         #
+#-----------------------
+flush_pipeline
+assert_value t6, 0x444
+
+
+
 #------------------------------------
 #-- TESTs pasado con exito
 #------------------------------------
