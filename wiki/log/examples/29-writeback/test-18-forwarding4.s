@@ -117,6 +117,245 @@ add t6, t6, t6         #
 flush_pipeline
 assert_value t6, 0x200
 
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 52
+addi t5, zero, 0x1
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+csrr t6, mscratch      #
+addi t6, zero, 0x2     #
+add s0, t6, zero       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x2
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 53
+addi t5, zero, 0x11
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+csrr t6, mscratch      #
+addi t6, zero, 0x22    #
+add s0, zero, t6       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x22
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 54
+addi t5, zero, 0x111
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+csrr t6, mscratch      #
+addi t6, zero, 0x222   #
+add s0, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x444
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 55
+addi t5, zero, 0x333
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+csrr t6, mscratch      #
+addi t6, zero, 0x444   #
+add t6, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value t6, 0x888
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 56
+addi t5, zero, 0x1
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x2     #
+csrr t6, mscratch      #
+add s0, t6, zero       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x1
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 57
+addi t5, zero, 0x11
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x22    #
+csrr t6, mscratch      #
+add s0, zero, t6       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x11
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 58
+addi t5, zero, 0x111
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x333   #
+csrr t6, mscratch      #
+add s0, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x222
+ 
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 59
+addi t5, zero, 0x100
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x444   #
+csrr t6, mscratch      #
+add t6, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value t6, 0x200
+
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 60
+addi t5, zero, 0x1
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x2     #
+csrr t6, mscratch      #
+nop                    #
+add s0, t6, zero       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x1
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 61
+addi t5, zero, 0x11
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x22    #
+csrr t6, mscratch      #
+nop                    #
+add s0, zero, t6       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x11
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 62
+addi t5, zero, 0x111
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x333   #
+csrr t6, mscratch      #
+nop                    #
+add s0, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x222
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 63
+addi t5, zero, 0x100
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x444   #
+csrr t6, mscratch      #
+nop
+add t6, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value t6, 0x200
+
+
+
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 64
+addi t5, zero, 0x1
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x2     #
+csrr t6, mscratch      #
+nop                    #
+nop                    #
+add s0, t6, zero       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x1
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 65
+addi t5, zero, 0x11
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x22    #
+csrr t6, mscratch      #
+nop                    #
+nop                    #
+add s0, zero, t6       #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x11
+
+# -------------------------------
+# Override destination register
+# exe - wb
+addi t2, zero, 66
+addi t5, zero, 0x111
+csrw mscratch, t5
+flush_pipeline
+# ----------------------
+addi t6, zero, 0x333   #
+csrr t6, mscratch      #
+nop                    #
+nop                    #
+add s0, t6, t6         #
+#-----------------------
+flush_pipeline
+assert_value s0, 0x222
+
 
 
 
