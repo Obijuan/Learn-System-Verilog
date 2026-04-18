@@ -140,6 +140,98 @@ test_exe_wb_2_nop:
     flush_pipeline
     assert_value t6, 0x789
 
+# -----------------------------------------------
+# forward from mem instr (mem followed by exe)
+test_mem_exe:
+    addi t2, zero, 11
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lw   t5, 0(t4)               #
+    addi t6, t5, 0x123           #
+    # ----------------------------
+    flush_pipeline
+    assert_value t6, (11 + 0x123)
+
+test_mem_exe_1_nop:
+    addi t2, zero, 12
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lw   t5, 0(t4)               #
+    nop                          #
+    addi t6, t5, 0x456           #
+    # ----------------------------
+    flush_pipeline
+    assert_value t6, (12 + 0x456)
+
+test_mem_exe_2_nop:
+    addi t2, zero, 13
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lw   t5, 0(t4)               #
+    nop                          #
+    nop                          #
+    addi t6, t5, 0x789           #
+    # ----------------------------
+    flush_pipeline
+    assert_value t6, (13 + 0x789)
+
+
+# -----------------------------------------------
+# forward from mem instr (mem followed by mem)
+test_mem_mem:
+    addi t2, zero, 14
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lb   t5, 0(t4)               #
+    sb   t5, 1(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, ((14<<8) + 14)
+
+test_mem_mem_1_nop:
+    addi t2, zero, 15
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lb   t5, 0(t4)               #
+    nop                          #
+    sb   t5, 1(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, ((15<<8) + 15)
+
+test_mem_mem_2_nop:
+    addi t2, zero, 16
+    flush_pipeline
+    sw   t2, 0(t4)
+    flush_pipeline
+    # ----------------------------
+    lb   t5, 0(t4)               #
+    nop                          #
+    nop                          #
+    sb   t5, 1(t4)               #
+    # ----------------------------
+    flush_pipeline
+    lw   t6, 0(t4)
+    flush_pipeline
+    assert_value t6, ((16<<8) + 16)
+
+
+
+
 
 
 #------------------------------------
