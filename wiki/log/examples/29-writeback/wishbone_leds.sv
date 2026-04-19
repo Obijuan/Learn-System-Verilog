@@ -38,6 +38,7 @@ module wishbone_leds #(
     /*verilator lint_on UNUSED*/
 
     logic [7:0] leds_reg;
+    logic leds_stb;
 
     always_ff @(posedge clk) begin
         if (rst) begin
@@ -47,7 +48,11 @@ module wishbone_leds #(
         end
         else begin
             if (wb_write_sel[0] == 1) begin 
-                leds_reg[7:0] <= wb_dat_mosi[7:0]; 
+                leds_reg[7:0] <= wb_dat_mosi[7:0];
+                leds_stb <= 1; 
+            end
+            else begin
+                leds_stb <= 0;
             end
             //if (wb_write_sel[1] == 1) begin leds_reg[15:8] <= wb_dat_mosi[15:8]; end
             //if (wb_write_sel[2] == 1) begin end

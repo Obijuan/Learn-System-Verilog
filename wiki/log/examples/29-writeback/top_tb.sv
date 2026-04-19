@@ -54,6 +54,31 @@ logic sw2;
 //-- Asignar valor a los pulsadores
 assign buttons = {3'b0, sw1, sw2};
 
+localparam RED = "\033[31m";
+localparam GREEN = "\033[32m";
+localparam YELLOW = "\033[33m";
+localparam BLUE = "\033[34m";
+localparam MAGENTA = "\033[35m";
+localparam CYAN = "\033[36m";
+localparam RESET = "\033[0m";
+
+//-- Comprobar errores
+always @(posedge clk) begin
+    if (u_mcu.u_wishbone_leds.leds_stb) begin
+        if (u_mcu.u_wishbone_leds.leds_reg < 8'h40) begin
+            $display("%s* Error! Falla Test %2d%s", 
+                      RED, u_mcu.u_wishbone_leds.leds_reg, RESET);
+        end
+        else begin
+            $display("%sTodos los tests pasados", GREEN);
+            $display("================================");
+            $display("=========== EXITO! =============");
+            $display("================================%s", RESET);
+        end
+        $finish();
+    end
+end
+
 
 //-- Proceso de simulacion
 initial begin
@@ -62,7 +87,7 @@ initial begin
     $dumpvars;
 
     //-- Indicar comienzo simmulacion
-    $display("Inicio: %t", $time);
+    $display("\n");
 
     //-- Valor inicial de los pulsadores
     sw1 = 0;
@@ -72,10 +97,11 @@ initial begin
     repeat (32) @(posedge clk);
 
     //-- Ciclos de simulacion
-    repeat (30) @(posedge clk);
+    repeat (10000) @(posedge clk);
 
     //-- Indicar fin simulacion
-    $display("Fin: %t", $time);
+    $display("Fin: %6d ps", $time);
+    $display("---------------------------------");
     $finish();
 end
 

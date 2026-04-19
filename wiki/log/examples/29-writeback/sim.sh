@@ -15,7 +15,7 @@ wishbone_buttons.sv wishbone_switches.sv uart_tx uart_rx \
 memory.sv wishbone_ram.sv mcu.sv   &&
  ./obj_dir/VTB
 
-
+echo ""
 #-- Otros flags para verilator
 #--timing --assert --main --exe 
 # --prefix top -Mdir $(BUILD_DIR)/$(SIM_DIR) --top-module top sim/top.sv
