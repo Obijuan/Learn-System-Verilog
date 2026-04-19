@@ -29,6 +29,12 @@ logic [4:0] buttons;
 assign leds0 = leds[7:0];
 assign leds1 = leds[15:8];
 
+logic TX;
+assign TX = 0;
+
+logic RX;
+assign RX = 1;
+
 mcu #(
     .CLK_FREQUENCY_MHZ(SYS_CLK_FREQ_MHZ),
     .UART_BAUD_RATE(UART_BAUD_RATE),
@@ -44,7 +50,11 @@ mcu #(
     .leds(leds),
 
     //-- Buttons 
-    .buttons_async(buttons)
+    .buttons_async(buttons),
+
+    //-- SERIAL PORT
+    .TX(TX),
+    .RX(RX)
 );
 
 //-- Valor de los pulsadores

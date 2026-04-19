@@ -13,7 +13,11 @@ module mcu #(
     output logic [15:0] leds,
 
     //-- Buttons (order: 4 - drluc- 0)
-    input  logic [4:0] buttons_async
+    input  logic [4:0] buttons_async,
+
+    //-- SERIAL PORT
+    output logic TX,
+    input  logic RX
 );
 
 //-----------------------------------------------------------------------
@@ -48,6 +52,13 @@ synchronizer u_sw2 (
     .sync_out(sw2_sync)
 );
 
+logic rx_serial_in;
+synchronizer u_sync5 (
+    .clk(clk),
+    .async_in(RX),
+    .sync_out(rx_serial_in)
+);
+
 
 //------------------------------------------
 //-- PERIFERICOS
@@ -56,21 +67,28 @@ import constants::MEMORY_START;
 import constants::MEMORY_SIZE;
 import constants::LEDS_START;
 import constants::LEDS_SIZE;
+import constants::UART_START;
+import constants::UART_SIZE;
+
 
 //-- Acceso a la memoria
 wishbone_interface fetch_bus();
 wishbone_interface mem_bus();
 
-wishbone_interface mem_bus_slaves[2]();
+logic uart_interrupt;
+
+wishbone_interface mem_bus_slaves[3]();
 wishbone_interconnect #(
-    .NUM_SLAVES(2),
+    .NUM_SLAVES(3),
     .SLAVE_ADDRESS({
         MEMORY_START,
-        LEDS_START
+        LEDS_START,
+        UART_START
     }),
     .SLAVE_SIZE({
         MEMORY_SIZE,
-        LEDS_SIZE
+        LEDS_SIZE,
+        UART_SIZE
     })
 ) peripheral_bus_interconnect (
     .clk(clk),
@@ -99,6 +117,21 @@ wishbone_leds #(
     .rst(rst),
     .leds(leds[7:0]),
     .wishbone(mem_bus_slaves[1])
+);
+
+//-- PUERTO SERIE (UART)
+wishbone_uart #(
+    .ADDRESS(UART_START),
+    .SIZE(UART_SIZE),
+    .BAUD_RATE(UART_BAUD_RATE),
+    .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
+) wb_uart (
+    .clk(clk),
+    .rst(rst),
+    .rx_serial_in(rx_serial_in),
+    .tx_serial_out(TX),
+    .interrupt(uart_interrupt),
+    .wishbone(mem_bus_slaves[2])
 );
 
 
@@ -316,7 +349,7 @@ writeback_stage u_writeback(
 );
 
 //-- TEST
-assign external_interrupt_in = sw1_sync;
+assign external_interrupt_in = sw1_sync | uart_interrupt;
 assign timer_interrupt_in = sw2_sync;
 assign leds[15:8] = 8'h01;
 

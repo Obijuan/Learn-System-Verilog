@@ -19,6 +19,10 @@ localparam bit [31:0] MEMORY_SIZE  = 32'h0000_2000;
 localparam bit [31:0] LEDS_START = 32'h0008_0000;
 localparam bit [31:0] LEDS_SIZE  = 32'h0000_0001;
 
+//-- UART
+localparam bit [31:0] UART_START = 32'h0008_4000;
+localparam bit [31:0] UART_SIZE  = 32'h0000_0001;
+
 //-- Direccion de ARRANQUE tras el RESET. Direccion de bytes
 //-- Valor por defecto: 0x0004_0000
 localparam bit [31:0] RESET_ADDRESS = MEMORY_START << 2;

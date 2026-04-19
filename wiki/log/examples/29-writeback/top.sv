@@ -23,7 +23,11 @@ module top(
     output logic D3,
     output logic D2,
     output logic D1,
-    output logic D0
+    output logic D0,
+
+    //-- SERIAL PORT
+    output logic TX,
+    input  logic RX
 );
 
 
@@ -58,7 +62,11 @@ mcu #(
     .leds(leds),
 
     //-- Buttons 
-    .buttons_async(buttons)
+    .buttons_async(buttons),
+
+    //-- SERIAL PORT
+    .TX(TX),
+    .RX(RX)
 );
 
 
