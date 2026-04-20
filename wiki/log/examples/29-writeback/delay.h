@@ -12,3 +12,7 @@
 #-- Pausa a realizar
 .equ PAUSA, _1s
 
+.macro DELAY1S
+    li a0, _1s
+    jal delay
+.endm
