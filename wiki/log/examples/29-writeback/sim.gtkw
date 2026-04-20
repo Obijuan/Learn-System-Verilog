@@ -1,24 +1,25 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Sun Apr 19 09:10:09 2026
+[*] Mon Apr 20 06:42:59 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/29-writeback/sim.fst"
-[dumpfile_mtime] "Sun Apr 19 09:09:10 2026"
-[dumpfile_size] 64974
+[dumpfile_mtime] "Mon Apr 20 06:42:21 2026"
+[dumpfile_size] 26330
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/29-writeback/sim.gtkw"
-[timestart] 50608700
+[timestart] 86024800
 [size] 1866 1001
 [pos] 25 22
-*-17.034029 51415844 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.034029 86665280 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.TB.
 [treeopen] TOP.TB.u_mcu.
+[treeopen] TOP.TB.u_mcu.u_decode.
 [treeopen] TOP.TB.u_mcu.u_wishbone_leds.
 [treeopen] TOP.TB.u_mcu.u_writeback.
 [sst_width] 278
 [signals_width] 239
 [sst_expanded] 1
-[sst_vpaned_height] 501
+[sst_vpaned_height] 533
 @28
 TOP.TB.clk
 TOP.TB.u_mcu.rst
@@ -37,14 +38,6 @@ TOP.TB.u_mcu.rst
 +{PC} TOP.TB.u_mcu.u_decode.program_counter_reg_out[31:0]
 @100000028
 TOP.TB.u_mcu.u_decode.instruction_reg_out.op[5:0]
-@22
-+{imm} TOP.TB.u_mcu.u_decode.instruction_reg_out.immediate[31:0]
-@24
-+{rd} TOP.TB.u_mcu.u_decode.instruction_reg_out.rd_address[4:0]
-@22
-+{rs1} TOP.TB.u_mcu.u_decode.instruction_reg_out.rs1_address[4:0]
-+{rs2} TOP.TB.u_mcu.u_decode.instruction_reg_out.rs2_address[4:0]
-@100000028
 +{status_fw} TOP.TB.u_mcu.u_decode.status_forwards_out[3:0]
 +{status_bw} TOP.TB.u_mcu.u_decode.status_backwards_in[1:0]
 @200
@@ -54,9 +47,6 @@ TOP.TB.u_mcu.u_decode.instruction_reg_out.op[5:0]
 +{pc} TOP.TB.u_mcu.u_execute.program_counter_reg_out[31:0]
 @100000028
 TOP.TB.u_mcu.u_execute.instruction_reg_out.op[5:0]
-@22
-+{rd_data} TOP.TB.u_mcu.u_execute.rd_data_reg_out[31:0]
-@100000028
 +{status_fw} TOP.TB.u_mcu.u_execute.status_forwards_in[3:0]
 +{status_bw} TOP.TB.u_mcu.u_execute.status_backwards_in[1:0]
 @200
@@ -66,31 +56,8 @@ TOP.TB.u_mcu.u_execute.instruction_reg_out.op[5:0]
 +{pc} TOP.TB.u_mcu.u_memory.program_counter_reg_out[31:0]
 @100000028
 TOP.TB.u_mcu.u_memory.instruction_reg_out.op[5:0]
-@22
-+{rd_data} TOP.TB.u_mcu.u_memory.rd_data_reg_out[31:0]
-+{src_data_in} TOP.TB.u_mcu.u_memory.source_data_in[31:0]
-@100000028
 +{status_fw_out} TOP.TB.u_mcu.u_memory.status_forwards_out[3:0]
 +{status_bw} TOP.TB.u_mcu.u_memory.status_backwards_in[1:0]
-@22
-TOP.TB.u_mcu.ram.port_b.adr[31:0]
-@28
-TOP.TB.u_mcu.ram.port_b.cyc
-TOP.TB.u_mcu.ram.port_b.stb
-TOP.TB.u_mcu.ram.port_b.we
-@22
-TOP.TB.u_mcu.ram.port_b.dat_mosi[31:0]
-TOP.TB.u_mcu.ram.port_b.sel[3:0]
-@28
-TOP.TB.u_mcu.ram.port_b.ack
-TOP.TB.u_mcu.clk
-@22
-TOP.TB.u_mcu.ram.u_mem.portb_adr[10:0]
-TOP.TB.u_mcu.ram.u_mem.portb_data_in[31:0]
-TOP.TB.u_mcu.ram.u_mem.portb_sel[3:0]
-@28
-TOP.TB.u_mcu.ram.u_mem.portb_wen
-TOP.TB.u_mcu.ram.u_mem.clk
 @200
 -
 -WRITEBACK
@@ -101,7 +68,7 @@ TOP.TB.u_mcu.ram.u_mem.clk
 -USER
 @22
 TOP.TB.leds0[7:0]
-@29
+@28
 TOP.TB.u_mcu.u_wishbone_leds.leds_stb
 @24
 TOP.TB.u_mcu.u_writeback.u_csr.mcycles[63:0]
@@ -109,5 +76,12 @@ TOP.TB.u_mcu.u_writeback.u_csr.mcycles[63:0]
 +{x1} TOP.TB.u_mcu.u_decode.u_reg_file.mem[1][31:0]
 +{x2} TOP.TB.u_mcu.u_decode.u_reg_file.mem[2][31:0]
 +{x3} TOP.TB.u_mcu.u_decode.u_reg_file.mem[3][31:0]
++{x4} TOP.TB.u_mcu.u_decode.u_reg_file.mem[4][31:0]
++{x5} TOP.TB.u_mcu.u_decode.u_reg_file.mem[5][31:0]
+@23
++{x6} TOP.TB.u_mcu.u_decode.u_reg_file.mem[6][31:0]
+@28
+TOP.TB.u_mcu.RX
+TOP.TB.u_mcu.rx_serial_in
 [pattern_trace] 1
 [pattern_trace] 0

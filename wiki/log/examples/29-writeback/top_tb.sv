@@ -19,6 +19,7 @@ end
 import constants::SYS_CLK_FREQ_MHZ;
 import constants::UART_BAUD_RATE;
 import constants::DEBOUNCER_SIZE_SIM;
+import constants::CLKS_PER_BIT;
 
 //-- Leds
 logic [15:0] leds;
@@ -33,7 +34,6 @@ logic TX;
 assign TX = 0;
 
 logic RX;
-assign RX = 1;
 
 mcu #(
     .CLK_FREQUENCY_MHZ(SYS_CLK_FREQ_MHZ),
@@ -105,6 +105,13 @@ initial begin
 
     //-- Esperar a que finalice el reset
     repeat (32) @(posedge clk);
+
+    //-- Comienzo de la transmisión de un dato por el puerto serie
+    RX = 0; // Start bit
+
+    //-- Esperar a que llegue el bit de START
+    repeat (CLKS_PER_BIT) @(posedge clk);
+    RX = 1; // Bit 0
 
     //-- Ciclos de simulacion
     repeat (10000) @(posedge clk);
