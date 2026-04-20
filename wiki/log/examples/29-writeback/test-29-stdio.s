@@ -3,6 +3,7 @@
 .include "delay.h"
 .include "assert.h"
 .include "io-uart.h"
+.include "stdio.h"
 
 #-- Direccion de los LEDs
 .equ LEDS, 0x200000
@@ -22,13 +23,9 @@ __reset:
 
 
     #-- Imprimir mensaje
-    la a0, msg1
-    jal puts
-
-    la a0, msg2
-    jal puts
+    PUTSI "Activando programa de eco...\n"
+    PUTSI "----------------------------\n"
     
-
 loop:
 
     #-- Esperar a que se reciba un caracter
@@ -47,6 +44,3 @@ loop:
 .include "io-uart.s"
 .include "stdio.s"
 
-.data
-msg1: .string "OK!\n"
-msg2: .string "Test...\n"
