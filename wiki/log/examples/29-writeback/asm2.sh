@@ -25,7 +25,7 @@ NAME="${NAME%.*}" #-- Quitar extension
 
 #-- Ensamblado
 echo -e $BLUE"\n• Ensamblando:"$RESET
-$GCC -nostdlib -nostartfiles  -T hades-v.ld -o $NAME.elf $NAME.s
+$GCC -nostdlib -nostartfiles -mno-relax -T hades-v.ld -o $NAME.elf $NAME.s
 
 if [ $? -ne 0 ]; then
     echo -e $RED"> Abortando...\n"$RESET
