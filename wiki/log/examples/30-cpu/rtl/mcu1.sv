@@ -8,7 +8,7 @@
 //-- * Timer
 //--------------------------------------------------
 
-module mcu #(
+module mcu1 #(
     parameter real CLK_FREQUENCY_MHZ,
 
     /* verilator lint_off UNUSEDPARAM */
