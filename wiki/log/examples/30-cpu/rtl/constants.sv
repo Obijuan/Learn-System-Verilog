@@ -16,12 +16,18 @@ localparam int CLKS_PER_BIT =
 localparam bit [31:0] MEMORY_START = 32'h0001_0000;
 localparam bit [31:0] MEMORY_SIZE  = 32'h0000_2000;
 
+//-- Puerto de LEDs
 localparam bit [31:0] LEDS_START = 32'h0008_0000;
 localparam bit [31:0] LEDS_SIZE  = 32'h0000_0001;
+
+//-- Puerto de botones
+localparam bit [31:0] BUTTONS_START = 32'h0008_1000;
+localparam bit [31:0] BUTTONS_SIZE  = 32'h0000_0001;
 
 //-- UART
 localparam bit [31:0] UART_START = 32'h0008_4000;
 localparam bit [31:0] UART_SIZE  = 32'h0000_0001;
+
 
 //-- Direccion de ARRANQUE tras el RESET. Direccion de bytes
 //-- Valor por defecto: 0x0004_0000

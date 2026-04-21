@@ -67,6 +67,8 @@ synchronizer u_sync5 (
     .sync_out(rx_serial_in)
 );
 
+logic [1:0]buttons;
+assign buttons = {sw1_sync, sw2_sync};
 
 //------------------------------------------
 //-- PERIFERICOS
@@ -77,6 +79,8 @@ import constants::LEDS_START;
 import constants::LEDS_SIZE;
 import constants::UART_START;
 import constants::UART_SIZE;
+import constants::BUTTONS_START;
+import constants::BUTTONS_SIZE;
 
 
 //-- Acceso a la memoria
@@ -85,18 +89,20 @@ wishbone_interface mem_bus();
 
 logic uart_interrupt;
 
-wishbone_interface mem_bus_slaves[3]();
+wishbone_interface mem_bus_slaves[4]();
 wishbone_interconnect #(
-    .NUM_SLAVES(3),
+    .NUM_SLAVES(4),
     .SLAVE_ADDRESS({
         MEMORY_START,
         LEDS_START,
-        UART_START
+        UART_START,
+        BUTTONS_START
     }),
     .SLAVE_SIZE({
         MEMORY_SIZE,
         LEDS_SIZE,
-        UART_SIZE
+        UART_SIZE,
+        BUTTONS_SIZE
     })
 ) peripheral_bus_interconnect (
     .clk(clk),
@@ -142,6 +148,17 @@ wishbone_uart #(
     .wishbone(mem_bus_slaves[2])
 );
 
+//-- PULSADORES
+wishbone_buttons #(
+        .ADDRESS(BUTTONS_START),
+        .SIZE(BUTTONS_SIZE)
+    ) wb_buttons (
+        .clk(clk),
+        .rst(rst),
+        .buttons(buttons),
+        .wishbone(mem_bus_slaves[3])
+    );
+
 
 //--- Interrupciones
 logic external_interrupt;
@@ -160,8 +177,8 @@ cpu cpu(
 
 
 //-- TEST
-assign external_interrupt = sw1_sync | uart_interrupt;
-assign timer_interrupt = sw2_sync;
+assign external_interrupt = uart_interrupt;
+assign timer_interrupt = 0;
 assign leds[15:8] = 8'h01;
 
 endmodule

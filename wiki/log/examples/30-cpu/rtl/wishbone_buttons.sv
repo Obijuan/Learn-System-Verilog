@@ -14,7 +14,7 @@ module wishbone_buttons #(
     input logic clk,
     input logic rst,
 
-    input logic [4:0] buttons,
+    input logic [1:0] buttons,
 
     wishbone_interface.slave wishbone
 );
@@ -55,7 +55,7 @@ module wishbone_buttons #(
                     wishbone.err <= 0;
                     if (wishbone.we == 0) begin
                         // read
-                        wishbone.dat_miso <= {27'b0, buttons}; // x|x|x|south|east|west|north|center
+                        wishbone.dat_miso <= {30'b0, buttons};
                     end
                 end
                 else begin
