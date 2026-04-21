@@ -26,9 +26,12 @@ __reset:
 
  loop:
     #-- Leer temporizador
-    lw t0, MTIME_STATUS(s0)
+    lw t0, MTIME(s0)
 
-    #-- Llevarlo a los LEDs
+    #-- Eliminar los 18 bits de menor peso
+    srli t0, t0, 18
+
+    #-- Observar los bits del 18 al 25
     sw t0, (gp)
 
     #-- Repetir
