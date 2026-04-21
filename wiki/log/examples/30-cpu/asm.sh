@@ -54,5 +54,9 @@ $OBJCOPY -I binary -O verilog --verilog-data-width 4 \
 
 #-- Es el nuevo init.mem
 cp _build/$NAME.mem _build/init.mem
+
+#-- Elimina las lineas que empiezan por @
+sed -i '/^@/d' _build/init.mem
+
 echo ""
 
