@@ -3,7 +3,8 @@
 //--
 //-- Perifericos:
 //-- * Memoria RAM (2K palabras)
-//-- * LEDs
+//-- * LEDs (8)
+//-- * Pulsadores (2)
 //-- * UART (115200 baudios)
 //--------------------------------------------------
 
