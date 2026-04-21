@@ -1,12 +1,3 @@
-//-------------------------------------------------
-//-- Configuracion inicial de HADES-V
-//--
-//-- Perifericos:
-//-- * Memoria RAM (2K palabras)
-//-- * LEDs
-//-- * UART (115200 baudios)
-//--------------------------------------------------
-
 module mcu #(
     parameter real CLK_FREQUENCY_MHZ,
     parameter int  UART_BAUD_RATE

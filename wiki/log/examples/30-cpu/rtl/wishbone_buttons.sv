@@ -19,23 +19,6 @@ module wishbone_buttons #(
     wishbone_interface.slave wishbone
 );
 
-    // --------------------------------------------------------------------------------------------
-    // |                                        Registers                                         |
-    // --------------------------------------------------------------------------------------------
-
-    // TODO: logic [15:0] buttons_reg;
-    // TODO: 
-    // TODO: always_ff @(posedge clk) begin
-    // TODO:     if (rst) begin
-    // TODO:         buttons_reg = 0;
-    // TODO:     end
-    // TODO:     else begin
-    // TODO:         if (wb_write_sel[0] == 1) begin buttons_reg[ 7: 0] <= wb_dat_mosi[ 7: 0]; end
-    // TODO:         if (wb_write_sel[1] == 1) begin buttons_reg[15: 8] <= wb_dat_mosi[15: 8]; end
-    // TODO:         if (wb_write_sel[2] == 1) begin buttons_reg[23:16] <= wb_dat_mosi[23:16]; end
-    // TODO:         if (wb_write_sel[3] == 1) begin buttons_reg[32:24] <= wb_dat_mosi[32:24]; end
-    // TODO:     end
-    // TODO: end
 
     // --------------------------------------------------------------------------------------------
     // |                                         Wishbone                                         |
