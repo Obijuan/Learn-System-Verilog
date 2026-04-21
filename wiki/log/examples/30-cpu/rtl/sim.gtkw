@@ -1,39 +1,92 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Tue Apr 21 06:37:46 2026
+[*] Tue Apr 21 10:36:09 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/30-cpu/_build/sim.fst"
-[dumpfile_mtime] "Tue Apr 21 06:36:42 2026"
-[dumpfile_size] 109723
+[dumpfile_mtime] "Tue Apr 21 10:34:56 2026"
+[dumpfile_size] 10558
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/30-cpu/rtl/sim.gtkw"
-[timestart] 2234000
+[timestart] 2679900
 [size] 1866 1001
 [pos] 25 22
-*-18.034029 2666624 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.034029 3083284 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.top_tb.
 [treeopen] TOP.top_tb.u_mcu.
 [treeopen] TOP.top_tb.u_mcu.cpu.
-[treeopen] TOP.top_tb.u_mcu.cpu.u_fetch.
 [sst_width] 360
-[signals_width] 196
+[signals_width] 262
 [sst_expanded] 1
-[sst_vpaned_height] 446
+[sst_vpaned_height] 452
 @28
 TOP.top_tb.clk
 TOP.top_tb.u_mcu.rst
-@22
-+{pc} TOP.top_tb.u_mcu.cpu.u_fetch.program_counter_reg_out[31:0]
 @200
 -FETCH
+@22
++{pc} TOP.top_tb.u_mcu.cpu.u_fetch.program_counter_reg_out[31:0]
++{mcode} TOP.top_tb.u_mcu.cpu.u_fetch.instruction_reg_out[31:0]
+@100c00028
++{status_fw_o} TOP.top_tb.u_mcu.cpu.u_fetch.status_forwards_out[3:0]
+@28
+(0)TOP.top_tb.u_mcu.cpu.u_fetch.status_forwards_out[3:0]
+(1)TOP.top_tb.u_mcu.cpu.u_fetch.status_forwards_out[3:0]
+(2)TOP.top_tb.u_mcu.cpu.u_fetch.status_forwards_out[3:0]
+(3)TOP.top_tb.u_mcu.cpu.u_fetch.status_forwards_out[3:0]
+@1401200
+-group_end
+@100000028
++{status_bw_in} TOP.top_tb.u_mcu.cpu.u_fetch.status_backwards_in[1:0]
+@200
 -
 -DECODE
+@22
++{pc} TOP.top_tb.u_mcu.cpu.u_decode.program_counter_reg_out[31:0]
+@100000028
+TOP.top_tb.u_mcu.cpu.u_decode.instruction_reg_out.op[5:0]
++{status_fw_o} TOP.top_tb.u_mcu.cpu.u_decode.status_forwards_out[3:0]
++{status_bw_in} TOP.top_tb.u_mcu.cpu.u_decode.status_backwards_in[1:0]
+@200
 -
 -EXE
+@22
++{pc} TOP.top_tb.u_mcu.cpu.u_execute.program_counter_reg_out[31:0]
+@100000028
++{op} TOP.top_tb.u_mcu.cpu.u_execute.instruction_reg_out.op[5:0]
++{status_fw_o} TOP.top_tb.u_mcu.cpu.u_execute.status_forwards_out[3:0]
++{status_fw_in} TOP.top_tb.u_mcu.cpu.u_execute.status_forwards_in[3:0]
+@200
 -
 -MEM
+@22
++{pc} TOP.top_tb.u_mcu.cpu.u_memory.program_counter_reg_out[31:0]
+@100000028
++{op} TOP.top_tb.u_mcu.cpu.u_memory.instruction_reg_out.op[5:0]
++{status_fw_o} TOP.top_tb.u_mcu.cpu.u_memory.status_forwards_out[3:0]
++{status_bw_in} TOP.top_tb.u_mcu.cpu.u_memory.status_backwards_in[1:0]
+@22
+TOP.top_tb.u_mcu.cpu.u_memory.wb.adr[31:0]
+@28
+TOP.top_tb.u_mcu.cpu.u_memory.wb.cyc
+@22
+TOP.top_tb.u_mcu.cpu.u_memory.wb.dat_miso[31:0]
+@28
+TOP.top_tb.u_mcu.cpu.u_memory.wb.err
+@22
+TOP.top_tb.u_mcu.cpu.u_memory.wb.sel[3:0]
+@28
+TOP.top_tb.u_mcu.cpu.u_memory.wb.stb
+TOP.top_tb.u_mcu.cpu.u_memory.wb.we
+@200
 -
 -WRITEBACK
 -USER
+@22
++{s0} TOP.top_tb.u_mcu.cpu.u_decode.u_reg_file.mem[8][31:0]
++{t0} TOP.top_tb.u_mcu.cpu.u_decode.u_reg_file.mem[5][31:0]
+TOP.top_tb.u_mcu.wb_timer.mtime[63:0]
+TOP.top_tb.u_mcu.wb_timer.mtime_status[31:0]
+@23
+TOP.top_tb.leds0[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

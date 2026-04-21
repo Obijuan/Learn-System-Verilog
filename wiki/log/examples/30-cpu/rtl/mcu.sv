@@ -10,7 +10,10 @@
 
 module mcu #(
     parameter real CLK_FREQUENCY_MHZ,
+
+    /* verilator lint_off UNUSEDPARAM */
     parameter int  UART_BAUD_RATE
+    /* verilator lint_on UNUSEDPARAM */
 ) (
     //-- Main system clk
     input logic clk,
@@ -61,7 +64,10 @@ synchronizer u_sw2 (
     .sync_out(sw2_sync)
 );
 
+/* verilator lint_off UNUSEDSIGNAL */
 logic rx_serial_in;
+/* verilator lint_off UNUSEDSIGNAL */
+
 synchronizer u_sync5 (
     .clk(clk),
     .async_in(RX),
@@ -74,6 +80,7 @@ assign buttons = {sw1_sync, sw2_sync};
 //------------------------------------------
 //-- PERIFERICOS
 //------------------------------------------
+/* verilator lint_off UNUSEDPARAM */
 import constants::MEMORY_START;
 import constants::MEMORY_SIZE;
 import constants::LEDS_START;
@@ -82,13 +89,19 @@ import constants::UART_START;
 import constants::UART_SIZE;
 import constants::BUTTONS_START;
 import constants::BUTTONS_SIZE;
+import constants::TIMER_START;
+import constants::TIMER_SIZE;
+/* verilator lint_on UNUSEDPARAM */
 
 
 //-- Acceso a la memoria
 wishbone_interface fetch_bus();
 wishbone_interface mem_bus();
 
+//--- Interrupciones
 logic uart_interrupt;
+logic external_interrupt;
+logic timer_interrupt;
 
 wishbone_interface mem_bus_slaves[4]();
 wishbone_interconnect #(
@@ -96,13 +109,13 @@ wishbone_interconnect #(
     .SLAVE_ADDRESS({
         MEMORY_START,
         LEDS_START,
-        UART_START,
+        TIMER_START, //-- PREV: UART
         BUTTONS_START
     }),
     .SLAVE_SIZE({
         MEMORY_SIZE,
         LEDS_SIZE,
-        UART_SIZE,
+        TIMER_SIZE,  //-- PREV: UART
         BUTTONS_SIZE
     })
 ) peripheral_bus_interconnect (
@@ -134,20 +147,37 @@ wishbone_leds #(
     .wishbone(mem_bus_slaves[1])
 );
 
+
 //-- PUERTO SERIE (UART)
-wishbone_uart #(
-    .ADDRESS(UART_START),
-    .SIZE(UART_SIZE),
-    .BAUD_RATE(UART_BAUD_RATE),
+// wishbone_uart #(
+//     .ADDRESS(UART_START),
+//     .SIZE(UART_SIZE),
+//     .BAUD_RATE(UART_BAUD_RATE),
+//     .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
+// ) wb_uart (
+//     .clk(clk),
+//     .rst(rst),
+//     .rx_serial_in(rx_serial_in),
+//     .tx_serial_out(TX),
+//     .interrupt(uart_interrupt),
+//     .wishbone(mem_bus_slaves[2])
+// );
+
+wishbone_timer #(
+    .ADDRESS(TIMER_START),
+    .SIZE(TIMER_SIZE),
     .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
-) wb_uart (
+) wb_timer (
     .clk(clk),
     .rst(rst),
-    .rx_serial_in(rx_serial_in),
-    .tx_serial_out(TX),
-    .interrupt(uart_interrupt),
+
+    .interrupt(timer_interrupt),
+
     .wishbone(mem_bus_slaves[2])
 );
+
+
+
 
 //-- PULSADORES
 wishbone_buttons #(
@@ -159,11 +189,6 @@ wishbone_buttons #(
         .buttons(buttons),
         .wishbone(mem_bus_slaves[3])
     );
-
-
-//--- Interrupciones
-logic external_interrupt;
-logic timer_interrupt;
 
 
 // Instantiate CPU
@@ -178,8 +203,8 @@ cpu cpu(
 
 
 //-- TEST
-assign external_interrupt = uart_interrupt;
-assign timer_interrupt = 0;
+assign external_interrupt = 0;
 assign leds[15:8] = 8'h01;
+assign TX = 0;
 
 endmodule

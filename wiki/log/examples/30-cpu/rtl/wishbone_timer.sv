@@ -6,7 +6,6 @@
  */
 
 
-
 module wishbone_timer #(
     parameter bit [31:0] ADDRESS,
     parameter bit [31:0] SIZE = 5,
@@ -20,52 +19,6 @@ module wishbone_timer #(
     wishbone_interface.slave wishbone
 );
 
-/*
-    // Count 100 cycles
-    logic [6:0] count_us;
-    always_ff @(posedge clk) begin
-        if (count_us >= 99) begin
-            count_us <= 0;
-        end
-        else begin
-            count_us <= count_us + 1;
-        end
-    end
-
-    // Generate pulse every microsecond
-    logic strobe_us;
-    assign strobe_us = count_us == 0;
-
-    // Count 1000 microseconds
-    logic [9:0] count_ms;
-    always_ff @(posedge clk) begin
-        if (count_ms >= 999) begin
-            count_ms <= 0;
-        end
-        else if (strobe_us) begin
-            count_ms <= count_ms + 1;
-        end
-    end
-
-    // Generate pulse every millisecond
-    logic strobe_ms;
-    assign strobe_ms = strobe_us && (count_ms == 0);
-
-    // Count 1000 milliseconds
-    logic [9:0] count_s;
-    always_ff @(posedge clk) begin
-        if (count_s >= 999) begin
-            count_s <= 0;
-        end
-        else if (strobe_ms) begin
-            count_s <= count_s + 1;
-        end
-    end
-
-    // Generate pulse every second
-    logic strobe_s;
-    assign strobe_s = strobe_ms && (count_s == 0);
-*/
 
     // --------------------------------------------------------------------------------------------
     // |                                         Registers                                        |

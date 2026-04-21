@@ -10,7 +10,7 @@ instruction_decoder.sv memory_stage.sv \
 csr_file writeback_stage.sv \
 wishbone_interface.sv top_tb.sv wishbone_leds.sv \
 wishbone_buttons.sv wishbone_switches.sv uart_tx uart_rx \
-memory.sv wishbone_ram.sv mcu.sv   &&
+memory.sv wishbone_ram.sv wishbone_timer.sv mcu.sv   &&
 cd _build && ../obj_dir/Vtop_tb
 
 echo ""

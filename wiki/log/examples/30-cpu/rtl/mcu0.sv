@@ -8,7 +8,7 @@
 //-- * UART (115200 baudios)
 //--------------------------------------------------
 
-module mcu #(
+module mcu0 #(
     parameter real CLK_FREQUENCY_MHZ,
     parameter int  UART_BAUD_RATE
 ) (
