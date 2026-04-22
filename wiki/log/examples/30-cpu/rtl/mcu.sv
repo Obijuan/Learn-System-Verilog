@@ -1,17 +1,16 @@
 //-------------------------------------------------
-//-- Configuracion 1:
+//-- Configuracion 2:
 //--
 //-- Perifericos:
 //-- * Memoria RAM (2K palabras)
 //-- * LEDs (8)
 //-- * Pulsadores (2)
-//-- * Timer
+//-- * Display 7 seg (2)
 //--------------------------------------------------
 
 module mcu #(
-    parameter real CLK_FREQUENCY_MHZ,
-
     /* verilator lint_off UNUSEDPARAM */
+    parameter real CLK_FREQUENCY_MHZ,
     parameter int  UART_BAUD_RATE
     /* verilator lint_on UNUSEDPARAM */
 ) (
@@ -91,6 +90,8 @@ import constants::BUTTONS_START;
 import constants::BUTTONS_SIZE;
 import constants::TIMER_START;
 import constants::TIMER_SIZE;
+import constants::SEGMENTS_START;
+import constants::SEGMENTS_SIZE;
 /* verilator lint_on UNUSEDPARAM */
 
 
@@ -99,7 +100,6 @@ wishbone_interface fetch_bus();
 wishbone_interface mem_bus();
 
 //--- Interrupciones
-logic uart_interrupt;
 logic external_interrupt;
 logic timer_interrupt;
 
@@ -109,13 +109,13 @@ wishbone_interconnect #(
     .SLAVE_ADDRESS({
         MEMORY_START,
         LEDS_START,
-        TIMER_START, //-- PREV: UART
+        SEGMENTS_START,
         BUTTONS_START
     }),
     .SLAVE_SIZE({
         MEMORY_SIZE,
         LEDS_SIZE,
-        TIMER_SIZE,  //-- PREV: UART
+        SEGMENTS_SIZE,
         BUTTONS_SIZE
     })
 ) peripheral_bus_interconnect (
@@ -149,6 +149,7 @@ wishbone_leds #(
 
 
 //-- PUERTO SERIE (UART)
+//logic uart_interrupt;
 // wishbone_uart #(
 //     .ADDRESS(UART_START),
 //     .SIZE(UART_SIZE),
@@ -163,20 +164,32 @@ wishbone_leds #(
 //     .wishbone(mem_bus_slaves[2])
 // );
 
-wishbone_timer #(
-    .ADDRESS(TIMER_START),
-    .SIZE(TIMER_SIZE),
-    .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
-) wb_timer (
+// wishbone_timer #(
+//     .ADDRESS(TIMER_START),
+//     .SIZE(TIMER_SIZE),
+//     .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
+// ) wb_timer (
+//     .clk(clk),
+//     .rst(rst),
+
+//     .interrupt(timer_interrupt),
+
+//     .wishbone(mem_bus_slaves[2])
+// );
+
+logic [6:0] segments;
+logic segments_select;
+
+wishbone_segments #(
+    .ADDRESS(SEGMENTS_START),
+    .SIZE(SEGMENTS_SIZE)
+) wishbone_segments (
     .clk(clk),
     .rst(rst),
-
-    .interrupt(timer_interrupt),
-
+    .segments(segments),
+    .segments_select(segments_select),
     .wishbone(mem_bus_slaves[2])
 );
-
-
 
 
 //-- PULSADORES
@@ -204,7 +217,8 @@ cpu cpu(
 
 //-- TEST
 assign external_interrupt = 0;
-assign leds[15:8] = 8'h01;
+assign timer_interrupt = 0;
+assign leds[15:8] = {segments_select, segments};
 assign TX = 0;
 
 endmodule

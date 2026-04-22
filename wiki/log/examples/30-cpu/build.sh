@@ -29,7 +29,8 @@ apio raw -- yosys -m slang \
         csr_file.sv writeback_stage.sv \
         wishbone_leds.sv wishbone_buttons.sv cpu.sv mcu.sv top.sv \
         wishbone_switches.sv uart_tx.sv uart_rx.sv \
-        wishbone_uart.sv wishbone_buttons.sv wishbone_timer.sv" \
+        wishbone_uart.sv wishbone_buttons.sv wishbone_timer.sv \
+        wishbone_segments.sv" \
     -p "synth_ice40 -top top -json ../$BUILD_DIR/hardware.json"  \
     -DSYNTHESIZE -q #> log_yosys.txt
 
