@@ -42,7 +42,7 @@ logic [15:0] leds;
 logic [7:0] leds0;
 logic [7:0] leds1;
 logic [1:0] buttons;
-logic [7:0] switches;
+logic [7:0] aux_port;
 
 assign leds0 = leds[7:0];
 assign leds1 = leds[15:8];
@@ -64,7 +64,7 @@ mcu #(
     .buttons_async(buttons),
 
     //-- Switches
-    .switches(switches),
+    .aux_port(aux_port),
 
     //-- SERIAL PORT
     .TX(TX),
@@ -77,7 +77,7 @@ mcu #(
 //-----------------------------------------------------
 
 //-- Lectura de los switches
-assign switches = {D7, D6, D5, D4, D3, D2, D1, D0};
+assign aux_port = {D7, D6, D5, D4, D3, D2, D1, D0};
 
 assign {LED7, LED6, LED5, LED4, 
         LED3, LED2, LED1, LED0} = leds0;

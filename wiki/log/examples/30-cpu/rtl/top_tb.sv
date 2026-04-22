@@ -34,24 +34,19 @@ import constants::SYS_CLK_FREQ_MHZ;
 import constants::UART_BAUD_RATE;
 import constants::CLKS_PER_BIT;
 
-//-- Leds
-logic [15:0] leds;
 
 /* verilator lint_off UNUSEDSIGNAL */
-logic [7:0] leds0;
-logic [7:0] leds1;
+//-- Leds
+logic [7:0] leds;
 logic TX;
 /* verilator lint_on UNUSEDSIGNAL */
+logic RX;
 
 logic [1:0] buttons;
 logic [7:0] switches;
 assign switches = 8'hAA;
-
-assign leds0 = leds[7:0];
-assign leds1 = leds[15:8];
 assign TX = 0;
 
-logic RX;
 
 mcu #(
     .CLK_FREQUENCY_MHZ(SYS_CLK_FREQ_MHZ),
@@ -70,7 +65,7 @@ mcu #(
     .buttons_async(buttons),
 
     //-- Switches
-    .switches(switches),
+    .aux_port(switches),
 
     //-- SERIAL PORT
     .TX(TX),

@@ -21,13 +21,13 @@ module mcu #(
     input logic clk_mem,
 
     //-- LEDs
-    output logic [15:0] leds,
+    output logic [7:0] leds,
 
     //-- Buttons 
     input  logic [1:0] buttons_async,
 
-    //-- Switches
-    input logic [7:0] switches,
+    //-- Puerto auxiliar: Switches
+    input logic [7:0] aux_port,
 
     //-- SERIAL PORT
     output logic TX,
@@ -148,65 +148,18 @@ wishbone_leds #(
 ) u_wishbone_leds (
     .clk(clk),
     .rst(rst),
-    .leds(leds[7:0]),
+    .leds(leds),
     .wishbone(mem_bus_slaves[1])
 );
 
-
-//-- PUERTO SERIE (UART)
-//logic uart_interrupt;
-// wishbone_uart #(
-//     .ADDRESS(UART_START),
-//     .SIZE(UART_SIZE),
-//     .BAUD_RATE(UART_BAUD_RATE),
-//     .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
-// ) wb_uart (
-//     .clk(clk),
-//     .rst(rst),
-//     .rx_serial_in(rx_serial_in),
-//     .tx_serial_out(TX),
-//     .interrupt(uart_interrupt),
-//     .wishbone(mem_bus_slaves[2])
-// );
-
-
-//-----  TIMER
-// wishbone_timer #(
-//     .ADDRESS(TIMER_START),
-//     .SIZE(TIMER_SIZE),
-//     .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
-// ) wb_timer (
-//     .clk(clk),
-//     .rst(rst),
-
-//     .interrupt(timer_interrupt),
-
-//     .wishbone(mem_bus_slaves[2])
-// );
-
-
-//---- DISPLAY DE 7 SEGMENTOS
-// logic [6:0] segments;
-// logic segments_select;
-
-// wishbone_segments #(
-//     .ADDRESS(SEGMENTS_START),
-//     .SIZE(SEGMENTS_SIZE)
-// ) wishbone_segments (
-//     .clk(clk),
-//     .rst(rst),
-//     .segments(segments),
-//     .segments_select(segments_select),
-//     .wishbone(mem_bus_slaves[2])
-// );
-
+//-- PUERTO AUXILIAR: Switches!
 wishbone_switches #(
         .ADDRESS(SWITCHES_START),
         .SIZE(SWITCHES_SIZE)
     ) wb_switches (
         .clk(clk),
         .rst(rst),
-        .switches(switches),
+        .switches(aux_port),
         .wishbone(mem_bus_slaves[2])
     );
 
@@ -223,7 +176,7 @@ wishbone_buttons #(
     );
 
 
-// Instantiate CPU
+//-- CPU
 cpu cpu(
     .clk(clk),
     .rst(rst),
@@ -234,10 +187,9 @@ cpu cpu(
 );
 
 
-//-- TEST
+//-- CONEXIONES
 assign external_interrupt = 0;
 assign timer_interrupt = 0;
-assign leds[15:8] = 8'b0;
 assign TX = 0;
 
 endmodule
