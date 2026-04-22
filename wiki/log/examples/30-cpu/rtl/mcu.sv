@@ -1,11 +1,11 @@
 //-------------------------------------------------
-//-- Configuracion 3:
+//-- Configuracion 0: conf. inicial de HADES-V
 //--
 //-- Perifericos:
 //-- * Memoria RAM (2K palabras)
 //-- * LEDs (8)
 //-- * Pulsadores (2)
-//-- * Switches (8)
+//-- * UART (115200 baudios)
 //--------------------------------------------------
 
 module mcu #(
@@ -26,13 +26,16 @@ module mcu #(
     //-- Buttons 
     input  logic [1:0] buttons_async,
 
-    //-- Puerto auxiliar: Switches
+    //-- Puerto auxiliar
+    /* verilator lint_off UNUSEDSIGNAL */
     input logic [7:0] aux_port,
+    /* verilator lint_on UNUSEDSIGNAL */
 
     //-- SERIAL PORT
     output logic TX,
     input  logic RX
 );
+
 
 //-----------------------------------------------------------------------
 //-- RESET: El reset se realiza tras 32 ciclos
@@ -69,7 +72,6 @@ synchronizer u_sw2 (
 /* verilator lint_off UNUSEDSIGNAL */
 logic rx_serial_in;
 /* verilator lint_off UNUSEDSIGNAL */
-
 synchronizer u_sync5 (
     .clk(clk),
     .async_in(RX),
@@ -114,13 +116,13 @@ wishbone_interconnect #(
     .SLAVE_ADDRESS({
         MEMORY_START,
         LEDS_START,
-        SWITCHES_START,
+        UART_START,
         BUTTONS_START
     }),
     .SLAVE_SIZE({
         MEMORY_SIZE,
         LEDS_SIZE,
-        SWITCHES_SIZE,
+        UART_SIZE,
         BUTTONS_SIZE
     })
 ) peripheral_bus_interconnect (
@@ -148,20 +150,35 @@ wishbone_leds #(
 ) u_wishbone_leds (
     .clk(clk),
     .rst(rst),
-    .leds(leds),
+    .leds(leds[7:0]),
     .wishbone(mem_bus_slaves[1])
 );
 
+//-- PUERTO SERIE (UART)
+wishbone_uart #(
+    .ADDRESS(UART_START),
+    .SIZE(UART_SIZE),
+    .BAUD_RATE(UART_BAUD_RATE),
+    .CLK_FREQUENCY_MHZ(CLK_FREQUENCY_MHZ)
+) wb_uart (
+    .clk(clk),
+    .rst(rst),
+    .rx_serial_in(rx_serial_in),
+    .tx_serial_out(TX),
+    .interrupt(external_interrupt),
+    .wishbone(mem_bus_slaves[2])
+);
+
 //-- PUERTO AUXILIAR: Switches!
-wishbone_switches #(
-        .ADDRESS(SWITCHES_START),
-        .SIZE(SWITCHES_SIZE)
-    ) wb_switches (
-        .clk(clk),
-        .rst(rst),
-        .switches(aux_port),
-        .wishbone(mem_bus_slaves[2])
-    );
+// wishbone_switches #(
+//     .ADDRESS(SWITCHES_START),
+//     .SIZE(SWITCHES_SIZE)
+// ) wb_switches (
+//     .clk(clk),
+//     .rst(rst),
+//     .switches(aux_port),
+//     .wishbone(mem_bus_slaves[2])
+// );
 
 
 //-- PULSADORES
@@ -187,9 +204,7 @@ cpu cpu(
 );
 
 
-//-- CONEXIONES
-assign external_interrupt = 0;
+//-- TEST
 assign timer_interrupt = 0;
-assign TX = 0;
 
 endmodule

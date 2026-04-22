@@ -1,5 +1,5 @@
 //-------------------------------------------------
-//-- Configuracion inicial de HADES-V
+//-- Configuracion 0: conf. inicial de HADES-V
 //--
 //-- Perifericos:
 //-- * Memoria RAM (2K palabras)
@@ -9,8 +9,10 @@
 //--------------------------------------------------
 
 module mcu0 #(
+    /* verilator lint_off UNUSEDPARAM */
     parameter real CLK_FREQUENCY_MHZ,
     parameter int  UART_BAUD_RATE
+    /* verilator lint_on UNUSEDPARAM */
 ) (
     //-- Main system clk
     input logic clk,
@@ -19,15 +21,19 @@ module mcu0 #(
     input logic clk_mem,
 
     //-- LEDs
-    output logic [15:0] leds,
+    output logic [7:0] leds,
 
     //-- Buttons 
     input  logic [1:0] buttons_async,
+
+    //-- Puerto auxiliar
+    input logic [7:0] aux_port,
 
     //-- SERIAL PORT
     output logic TX,
     input  logic RX
 );
+
 
 //-----------------------------------------------------------------------
 //-- RESET: El reset se realiza tras 32 ciclos
@@ -61,7 +67,9 @@ synchronizer u_sw2 (
     .sync_out(sw2_sync)
 );
 
+/* verilator lint_off UNUSEDSIGNAL */
 logic rx_serial_in;
+/* verilator lint_off UNUSEDSIGNAL */
 synchronizer u_sync5 (
     .clk(clk),
     .async_in(RX),
@@ -74,6 +82,7 @@ assign buttons = {sw1_sync, sw2_sync};
 //------------------------------------------
 //-- PERIFERICOS
 //------------------------------------------
+/* verilator lint_off UNUSEDPARAM */
 import constants::MEMORY_START;
 import constants::MEMORY_SIZE;
 import constants::LEDS_START;
@@ -82,13 +91,22 @@ import constants::UART_START;
 import constants::UART_SIZE;
 import constants::BUTTONS_START;
 import constants::BUTTONS_SIZE;
+import constants::TIMER_START;
+import constants::TIMER_SIZE;
+import constants::SEGMENTS_START;
+import constants::SEGMENTS_SIZE;
+import constants::SWITCHES_START;
+import constants::SWITCHES_SIZE;
+/* verilator lint_on UNUSEDPARAM */
 
 
 //-- Acceso a la memoria
 wishbone_interface fetch_bus();
 wishbone_interface mem_bus();
 
-logic uart_interrupt;
+//--- Interrupciones
+logic external_interrupt;
+logic timer_interrupt;
 
 wishbone_interface mem_bus_slaves[4]();
 wishbone_interconnect #(
@@ -145,9 +163,21 @@ wishbone_uart #(
     .rst(rst),
     .rx_serial_in(rx_serial_in),
     .tx_serial_out(TX),
-    .interrupt(uart_interrupt),
+    .interrupt(external_interrupt),
     .wishbone(mem_bus_slaves[2])
 );
+
+//-- PUERTO AUXILIAR: Switches!
+// wishbone_switches #(
+//     .ADDRESS(SWITCHES_START),
+//     .SIZE(SWITCHES_SIZE)
+// ) wb_switches (
+//     .clk(clk),
+//     .rst(rst),
+//     .switches(aux_port),
+//     .wishbone(mem_bus_slaves[2])
+// );
+
 
 //-- PULSADORES
 wishbone_buttons #(
@@ -161,12 +191,7 @@ wishbone_buttons #(
     );
 
 
-//--- Interrupciones
-logic external_interrupt;
-logic timer_interrupt;
-
-
-// Instantiate CPU
+//-- CPU
 cpu cpu(
     .clk(clk),
     .rst(rst),
@@ -178,8 +203,6 @@ cpu cpu(
 
 
 //-- TEST
-assign external_interrupt = uart_interrupt;
 assign timer_interrupt = 0;
-assign leds[15:8] = 8'h01;
 
 endmodule
