@@ -15,15 +15,15 @@ module top(
     input logic SW1,
     input logic SW2,
 
-    //-- AUX
-    output logic D7,
-    output logic D6,
-    output logic D5,
-    output logic D4,
-    output logic D3,
-    output logic D2,
-    output logic D1,
-    output logic D0,
+    //-- Puerto auxiliar
+    input logic D7,
+    input logic D6,
+    input logic D5,
+    input logic D4,
+    input logic D3,
+    input logic D2,
+    input logic D1,
+    input logic D0,
 
     //-- SERIAL PORT
     output logic TX,
@@ -42,6 +42,7 @@ logic [15:0] leds;
 logic [7:0] leds0;
 logic [7:0] leds1;
 logic [1:0] buttons;
+logic [7:0] switches;
 
 assign leds0 = leds[7:0];
 assign leds1 = leds[15:8];
@@ -62,6 +63,9 @@ mcu #(
     //-- Buttons 
     .buttons_async(buttons),
 
+    //-- Switches
+    .switches(switches),
+
     //-- SERIAL PORT
     .TX(TX),
     .RX(RX)
@@ -72,8 +76,8 @@ mcu #(
 //--------------- SOLO SINTESIS -----------------------
 //-----------------------------------------------------
 
-//-- Mostrar el valor leido de la memoria en los LEDs
-assign {D7, D6, D5, D4, D3, D2, D1, D0} = leds1;
+//-- Lectura de los switches
+assign switches = {D7, D6, D5, D4, D3, D2, D1, D0};
 
 assign {LED7, LED6, LED5, LED4, 
         LED3, LED2, LED1, LED0} = leds0;

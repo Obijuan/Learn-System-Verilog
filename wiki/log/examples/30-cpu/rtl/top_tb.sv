@@ -44,6 +44,8 @@ logic TX;
 /* verilator lint_on UNUSEDSIGNAL */
 
 logic [1:0] buttons;
+logic [7:0] switches;
+assign switches = 8'hAA;
 
 assign leds0 = leds[7:0];
 assign leds1 = leds[15:8];
@@ -66,6 +68,9 @@ mcu #(
 
     //-- Buttons 
     .buttons_async(buttons),
+
+    //-- Switches
+    .switches(switches),
 
     //-- SERIAL PORT
     .TX(TX),

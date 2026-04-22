@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Wed Apr 22 10:23:27 2026
+[*] Wed Apr 22 17:32:53 2026
 [*]
 [dumpfile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/30-cpu/_build/sim.fst"
-[dumpfile_mtime] "Wed Apr 22 10:22:21 2026"
-[dumpfile_size] 70414
+[dumpfile_mtime] "Wed Apr 22 17:32:18 2026"
+[dumpfile_size] 10479
 [savefile] "/home/obijuan/Develop/Learn-System-Verilog/wiki/log/examples/30-cpu/rtl/sim.gtkw"
-[timestart] 18849600
+[timestart] 2679900
 [size] 1866 1001
 [pos] 25 22
-*-17.034029 3249948 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.034029 2374000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.top_tb.
 [treeopen] TOP.top_tb.u_mcu.
@@ -17,7 +17,7 @@
 [sst_width] 360
 [signals_width] 262
 [sst_expanded] 1
-[sst_vpaned_height] 378
+[sst_vpaned_height] 356
 @28
 TOP.top_tb.clk
 TOP.top_tb.u_mcu.rst
@@ -85,7 +85,8 @@ TOP.top_tb.u_mcu.cpu.u_memory.wb.we
 +{s0} TOP.top_tb.u_mcu.cpu.u_decode.u_reg_file.mem[8][31:0]
 +{t0} TOP.top_tb.u_mcu.cpu.u_decode.u_reg_file.mem[5][31:0]
 TOP.top_tb.leds0[7:0]
-@23
 TOP.top_tb.leds1[7:0]
+@23
+TOP.top_tb.u_mcu.switches[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

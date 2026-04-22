@@ -26,6 +26,9 @@ module mcu #(
     //-- Buttons 
     input  logic [1:0] buttons_async,
 
+    //-- Switches
+    input logic [7:0] switches,
+
     //-- SERIAL PORT
     output logic TX,
     input  logic RX
@@ -92,6 +95,8 @@ import constants::TIMER_START;
 import constants::TIMER_SIZE;
 import constants::SEGMENTS_START;
 import constants::SEGMENTS_SIZE;
+import constants::SWITCHES_START;
+import constants::SWITCHES_SIZE;
 /* verilator lint_on UNUSEDPARAM */
 
 
@@ -109,13 +114,13 @@ wishbone_interconnect #(
     .SLAVE_ADDRESS({
         MEMORY_START,
         LEDS_START,
-        SEGMENTS_START,
+        SWITCHES_START,
         BUTTONS_START
     }),
     .SLAVE_SIZE({
         MEMORY_SIZE,
         LEDS_SIZE,
-        SEGMENTS_SIZE,
+        SWITCHES_SIZE,
         BUTTONS_SIZE
     })
 ) peripheral_bus_interconnect (
@@ -164,6 +169,8 @@ wishbone_leds #(
 //     .wishbone(mem_bus_slaves[2])
 // );
 
+
+//-----  TIMER
 // wishbone_timer #(
 //     .ADDRESS(TIMER_START),
 //     .SIZE(TIMER_SIZE),
@@ -177,19 +184,31 @@ wishbone_leds #(
 //     .wishbone(mem_bus_slaves[2])
 // );
 
-logic [6:0] segments;
-logic segments_select;
 
-wishbone_segments #(
-    .ADDRESS(SEGMENTS_START),
-    .SIZE(SEGMENTS_SIZE)
-) wishbone_segments (
-    .clk(clk),
-    .rst(rst),
-    .segments(segments),
-    .segments_select(segments_select),
-    .wishbone(mem_bus_slaves[2])
-);
+//---- DISPLAY DE 7 SEGMENTOS
+// logic [6:0] segments;
+// logic segments_select;
+
+// wishbone_segments #(
+//     .ADDRESS(SEGMENTS_START),
+//     .SIZE(SEGMENTS_SIZE)
+// ) wishbone_segments (
+//     .clk(clk),
+//     .rst(rst),
+//     .segments(segments),
+//     .segments_select(segments_select),
+//     .wishbone(mem_bus_slaves[2])
+// );
+
+wishbone_switches #(
+        .ADDRESS(SWITCHES_START),
+        .SIZE(SWITCHES_SIZE)
+    ) wb_switches (
+        .clk(clk),
+        .rst(rst),
+        .switches(switches),
+        .wishbone(mem_bus_slaves[2])
+    );
 
 
 //-- PULSADORES
@@ -218,7 +237,7 @@ cpu cpu(
 //-- TEST
 assign external_interrupt = 0;
 assign timer_interrupt = 0;
-assign leds[15:8] = {segments_select, segments};
+assign leds[15:8] = 8'b0;
 assign TX = 0;
 
 endmodule

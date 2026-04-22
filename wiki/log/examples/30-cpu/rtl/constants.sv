@@ -31,8 +31,10 @@ localparam bit [31:0] SWITCHES_SIZE  = 32'h0000_0001;
 /* verilator lint_on UNUSEDPARAM */
 
 //-- Seven segments display
+/* verilator lint_off UNUSEDPARAM */
 localparam bit [31:0] SEGMENTS_START = 32'h0008_3000;
 localparam bit [31:0] SEGMENTS_SIZE  = 32'h0000_0001;
+/* verilator lint_on UNUSEDPARAM */
 
 //-- UART
 /* verilator lint_off UNUSEDPARAM */
