@@ -1,11 +1,11 @@
 //-------------------------------------------------
-//-- Configuracion 2:
+//-- Configuracion 3:
 //--
 //-- Perifericos:
 //-- * Memoria RAM (2K palabras)
 //-- * LEDs (8)
 //-- * Pulsadores (2)
-//-- * Display 7 seg (2)
+//-- * Switches (8)
 //--------------------------------------------------
 
 module mcu #(

@@ -26,3 +26,8 @@
     li a0, _250ms
     jal delay
 .endm
+
+.macro DELAY500ms
+    li a0, _500ms
+    jal delay
+.endm
